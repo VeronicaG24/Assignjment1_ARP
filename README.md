@@ -19,7 +19,7 @@ The Command and Inspection processes depend on the ncurses library, which needs 
 	```
 2. for the **Command process**:
 	```console
-	gcc src/command_console.c -lncurses -o bin/comman
+	gcc src/command_console.c -lncurses -o bin/command
 	```
 3. for the **Master process**:
 	```console
@@ -27,9 +27,9 @@ The Command and Inspection processes depend on the ncurses library, which needs 
 	```
 	
 After compiling, **assuming you have Konsole installed in your system** as per the professor's indications, you can **simply run the Master executable**, which will be responsible of spawning the two GUIs:
-	```console
-	./bin/master
-	```
+```console
+./bin/master
+```
 
 ## Troubleshooting
 
