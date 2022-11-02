@@ -7,24 +7,34 @@ int BTN_SIZE_X = 7;
 int BTN_SIZE_Y = 3;
 
 // Ptrs to button windows
-WINDOW *vx_incr_btn, *vx_decr_btn, *vz_incr_btn, *vz_decr_btn;
+WINDOW *vx_incr_btn, *vx_decr_btn, *vx_stp_button, *vz_incr_btn, *vz_decr_btn, *vz_stp_button;
 // Mouse event var
 MEVENT event;
 
 // Create button windows
 void make_buttons() {
 
+    // Offsets
     int offset_x = 6;
     int offset_y = 2;
-    int decr_button_startx = (COLS - 2 * BTN_SIZE_X - offset_x) / 2;
-    int incr_button_startx = (COLS - BTN_SIZE_X + 2 * offset_x + 1) / 2;
+
+    // Horizontal displacements for aligning buttons
+    int decr_button_startx = (COLS - 3 * BTN_SIZE_X - offset_x) / 2;
+    int stp_button_startx = (COLS - 2 * BTN_SIZE_X + offset_x) / 2;
+    int incr_button_startx = (COLS - BTN_SIZE_X + 3 * offset_x + 1) / 2;
+
+    // Vertical displacements
     int vx_buttons_starty = (LINES - 2 * BTN_SIZE_Y - offset_y) / 2;
     int vz_buttons_starty = (LINES - BTN_SIZE_Y + 3 * offset_y) / 2;
 
+    // Horizontal velocity buttons
     vx_decr_btn = newwin(BTN_SIZE_Y, BTN_SIZE_X, vx_buttons_starty, decr_button_startx);
+    vx_stp_button = newwin(BTN_SIZE_Y, BTN_SIZE_X, vx_buttons_starty, stp_button_startx);
     vx_incr_btn = newwin(BTN_SIZE_Y, BTN_SIZE_X, vx_buttons_starty, incr_button_startx);
 
+    // Vertical velocity buttons
     vz_decr_btn = newwin(BTN_SIZE_Y, BTN_SIZE_X, vz_buttons_starty, decr_button_startx);
+    vz_stp_button = newwin(BTN_SIZE_Y, BTN_SIZE_X, vz_buttons_starty, stp_button_startx);
     vz_incr_btn = newwin(BTN_SIZE_Y, BTN_SIZE_X, vz_buttons_starty, incr_button_startx);
 }
 
@@ -45,15 +55,18 @@ void draw_btn(WINDOW *btn, char* msg, int color) {
 void draw_buttons() {
 
     char* msg = "Command Console Buttons";
-    move((LINES - 2 - BTN_SIZE_Y - 8) / 2, (COLS - strlen(msg) + 1) / 2);
+    move((LINES - 2 - BTN_SIZE_Y - 8) / 2, (COLS - strlen(msg)) / 2);
     attron(A_BOLD);
     printw(msg);
     attroff(A_BOLD);
 
     draw_btn(vx_decr_btn, "Vx-", 1);
-    draw_btn(vx_incr_btn, "Vx+", 2);
-    draw_btn(vz_decr_btn, "Vz-", 3);
-    draw_btn(vz_incr_btn, "Vz+", 4);
+    draw_btn(vx_stp_button, "STP", 2);
+    draw_btn(vx_incr_btn, "Vx+", 3);
+
+    draw_btn(vz_decr_btn, "Vz-", 1);
+    draw_btn(vz_stp_button, "STP", 2);
+    draw_btn(vz_incr_btn, "Vz+", 3);
 }
 
 // Utility method to check if button has been pressed
@@ -82,10 +95,9 @@ void init_console_ui() {
     nodelay(stdscr, TRUE);
     curs_set(0);
 
-    init_pair(1, COLOR_BLACK, COLOR_CYAN);
-    init_pair(2, COLOR_WHITE, COLOR_BLUE);
-    init_pair(3, COLOR_BLACK, COLOR_GREEN);
-    init_pair(4, COLOR_WHITE, COLOR_MAGENTA);
+    init_pair(1, COLOR_WHITE, COLOR_MAGENTA);
+    init_pair(2, COLOR_BLACK, COLOR_WHITE);
+    init_pair(3, COLOR_WHITE, COLOR_BLUE);
 
     // Initialize UI elements
     refresh();
