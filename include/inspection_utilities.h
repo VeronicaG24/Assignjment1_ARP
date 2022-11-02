@@ -2,6 +2,8 @@
 #include <string.h>
 #include <unistd.h> 
 #include <math.h>
+#include <time.h>
+#include <stdlib.h>
 
 typedef struct {
 	chtype 	ls, rs, ts, bs, 
@@ -14,6 +16,11 @@ typedef struct {
 	HOIST_BORDER border;
 }HOIST;
 
+typedef struct {
+    int x, y;
+    int is_set;
+}CONTAINER;
+
 int HOIST_X_LIM = 40;
 int HOIST_Y_LIM = 10;
 int BTN_SIZE = 7;
@@ -24,6 +31,8 @@ HOIST hoist;
 WINDOW *stp_button, *rst_button;
 // Mouse event var
 MEVENT event;
+// Container variable to draw random containers within the hoist's workspace
+CONTAINER container;
 
 // Initialize hoist structure and parameters
 void make_hoist() {
@@ -52,6 +61,15 @@ void make_buttons() {
 
     stp_button = newwin(BTN_SIZE / 2, BTN_SIZE, buttons_starty, stp_button_startx);
     rst_button = newwin(BTN_SIZE / 2, BTN_SIZE, buttons_starty, rst_button_startx);
+}
+
+// Utility methods to spawn random container within the hoist's workspace
+void spawn_random_container() {
+
+    srand(time(NULL));
+    container.x = rand() % HOIST_X_LIM;
+    container.y = HOIST_Y_LIM - 1;
+    container.is_set = TRUE;
 }
 
 void draw_hoist() {	
@@ -95,6 +113,14 @@ void draw_end_effector_msg(float x, float y) {
     attroff(A_BOLD);
 }
 
+// Method to draw container (if set) withing hoist's workspace
+void draw_container() {
+
+    attron(A_BOLD | COLOR_PAIR(2));
+    mvaddch(hoist.starty + container.y, hoist.startx + container.x, '#');
+    attroff(A_BOLD | COLOR_PAIR(2));
+}
+
 // Draw hoist's end-effector within the structure
 void draw_hoist_end_effector_at(float ee_x, float ee_y) {
 
@@ -117,25 +143,29 @@ void draw_hoist_end_effector_at(float ee_x, float ee_y) {
     attron(A_BOLD | COLOR_PAIR(1));
     mvaddch(hoist.starty + ee_y_int, hoist.startx + ee_x_int, ACS_DARROW);
     attroff(A_BOLD | COLOR_PAIR(1));
+
+    if(container.is_set) {
+        draw_container();
+    }
 }
 
 // Utility method to check for end-effector within limits
-void check_ee_within_limits(float* x, float* y) {
+void check_ee_within_limits(float* ee_x, float* ee_y) {
 
     // Checks for horizontal axis
-    if(*x <= 0) {
-        *x = 0;
+    if(*ee_x <= 0) {
+        *ee_x = 0;
     }
-    else if(*x >= HOIST_X_LIM) {
-        *x = HOIST_X_LIM - 1;
+    else if(*ee_x >= HOIST_X_LIM) {
+        *ee_x = HOIST_X_LIM - 1;
     }
    
     // Checks for vertical axis
-    if(*y <= 0) {
-        *y = 0;
+    if(*ee_y <= 0) {
+        *ee_y = 0;
     }
-    else if(*y >= HOIST_Y_LIM) {
-        *y = HOIST_Y_LIM - 1;
+    else if(*ee_y >= HOIST_Y_LIM) {
+        *ee_y = HOIST_Y_LIM - 1;
     }
 }
 
@@ -177,6 +207,16 @@ int check_button_pressed(WINDOW *btn, MEVENT *event) {
 
 }
 
+// Method to check whether ee grasped the container
+int check_ee_grasped_container(float ee_x, float ee_y) {
+
+    // Convert  real coordinates to lower integer...
+    int ee_x_int = floor(ee_x);
+    int ee_y_int = floor(ee_y);
+
+    return ee_x_int == container.x && ee_y_int == container.y;
+}
+
 void init_console_ui() {
 
     // Initialize curses mode
@@ -204,6 +244,9 @@ void init_console_ui() {
     draw_end_effector_msg(0, 0);
     draw_buttons();
 
+    // Set initially container as not spawned..
+    container.is_set = FALSE;
+
     // Activate input listening (keybord + mouse events ...)
     keypad(stdscr, TRUE);
     mousemask(ALL_MOUSE_EVENTS, NULL);
@@ -215,11 +258,22 @@ void update_console_ui(float *ee_x, float *ee_y) {
 
     // check if next end-effector position is within limits
     check_ee_within_limits(ee_x, ee_y);
+
     // Draw updated end-effector position
     draw_hoist_end_effector_at(*ee_x,*ee_y);
+
     // Update string message for end-effector position
     draw_end_effector_msg(*ee_x, *ee_y);
 
+    // Check whether end-effector reached container
+    if(container.is_set) {
+        container.is_set = !check_ee_grasped_container(*ee_x, *ee_y);
+    }
+    // If reached, spawn a new one
+    else {
+        spawn_random_container();
+    }
+    
     refresh();
 
 }
