@@ -26,14 +26,6 @@ int spawn(const char * program, char * arg_list[]) {
   }
 }
 
-//functiion of proccess motor X
-
-
-
-//function of process motor Z
-
-//function of process world
-
 
 int main() {
 

@@ -13,6 +13,7 @@
 
 int main(){
     float v=0;
+
     while(1){
     //aprire la pipe in letteura(CX) e contrallare non dia errore
     int fd_read ;
@@ -27,6 +28,7 @@ int main(){
     if(read(fd_read,&v, nbytes)==-1)
         perror("error in reading");
     //aggiornare X
+
     //scrivere in XW
     //sleep
     }
