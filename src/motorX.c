@@ -13,6 +13,7 @@
 #define X_MAX 40
 #define X_MIN 0
 
+
 int main(){
     float v=0;
     float X=X_MIN;
