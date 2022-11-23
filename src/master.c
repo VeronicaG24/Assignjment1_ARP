@@ -5,6 +5,7 @@
 #include <sys/wait.h>
 #include<sys/stat.h>
 
+//function to spawn konsole
 int spawn(const char * program, char * arg_list[]) {
 
   pid_t child_pid = fork();
@@ -24,7 +25,10 @@ int spawn(const char * program, char * arg_list[]) {
     return 1;
   }
 }
+
 //functiion of proccess motor X
+
+
 
 //function of process motor Z
 
