@@ -41,5 +41,6 @@ int main(){
             perror("error in writing");
         //sleep
         sleep(1);
-        }
+    }
+    
 }
