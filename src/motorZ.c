@@ -13,7 +13,6 @@
 #define zMax 10
 #define zMin 0
 
-
 int main(){
     float v=0;
     float z = zMin;
