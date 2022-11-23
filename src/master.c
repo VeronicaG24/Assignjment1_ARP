@@ -3,7 +3,7 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/wait.h>
-
+#include<sys/stat.h>
 
 int spawn(const char * program, char * arg_list[]) {
 
@@ -24,11 +24,42 @@ int spawn(const char * program, char * arg_list[]) {
     return 1;
   }
 }
+//functiion of proccess motor X
+
+//function of process motor Z
+
+//function of process world
+
 
 int main() {
 
   char * arg_list_command[] = { "/usr/bin/konsole", "-e", "./bin/command", NULL };
   char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", NULL };
+
+  //create pipes
+
+  //pipe X-world 
+  char * fifoXW = "/tmp/fifoXW";
+  if (mkfifo(fifoXW, S_IRUSR | S_IWUSR) != 0)
+    perror("Cannot create fifo. Already existing?");
+  //pipe Z-world
+  char * fifoZW = "/tmp/fifoZW";
+  if (mkfifo(fifoZW, S_IRUSR | S_IWUSR) != 0)
+    perror("Cannot create fifo. Already existing?");
+
+  //world -inspection
+  char * fifoWI = "/tmp/fifoWI";
+  if (mkfifo(fifoWI, S_IRUSR | S_IWUSR) != 0)
+    perror("Cannot create fifo. Already existing?");
+
+  //command-X
+  char * fifoCX = "/tmp/fifoCX";
+  if (mkfifo(fifoCX, S_IRUSR | S_IWUSR) != 0)
+    perror("Cannot create fifo. Already existing?");  
+  //command-Z
+   char * fifoCZ = "/tmp/fifoCZ";
+  if (mkfifo(fifoCZ, S_IRUSR | S_IWUSR) != 0)
+    perror("Cannot create fifo. Already existing?");
 
   //spawn command window and inspection window 
   pid_t pid_cmd = spawn("/usr/bin/konsole", arg_list_command);
