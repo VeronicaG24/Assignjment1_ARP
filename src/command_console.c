@@ -37,6 +37,8 @@ int main(int argc, char const *argv[])
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
+                    //update Vx+ on motor X 
+                        //inviare messaggio nella pipe
                 }
 
                 // Vx-- button pressed
@@ -47,6 +49,8 @@ int main(int argc, char const *argv[])
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
+                    //update Vx- on motor X 
+                        //inviare messaggio nella pipe
                 }
 
                 // Vx stop button pressed
@@ -57,6 +61,8 @@ int main(int argc, char const *argv[])
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
+                    ////update Vx=0 on motor X 
+                        //inviare messaggio nella pipe
                 }
 
                 // Vz++ button pressed
@@ -67,6 +73,8 @@ int main(int argc, char const *argv[])
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
+                    //update Vz+ on motor z
+                        //inviare messaggio nella pipe
                 }
 
                 // Vz-- button pressed
@@ -77,6 +85,8 @@ int main(int argc, char const *argv[])
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
+                    //update Vz- on motor z
+                        //inviare messaggio nella pipe
                 }
 
                 // Vz stop button pressed
@@ -87,7 +97,9 @@ int main(int argc, char const *argv[])
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
-                }
+                    //update Vz=0 on motor z
+                        //inviare messaggio nella pipe
+                }               
             }
         }
 

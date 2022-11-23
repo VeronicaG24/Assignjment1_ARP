@@ -4,8 +4,6 @@
 #include <unistd.h>
 #include <sys/wait.h>
 
-//Branch Develop
-//PUSH FRANCESCA
 
 int spawn(const char * program, char * arg_list[]) {
 
@@ -32,9 +30,15 @@ int main() {
   char * arg_list_command[] = { "/usr/bin/konsole", "-e", "./bin/command", NULL };
   char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", NULL };
 
+  //spawn command window and inspection window 
   pid_t pid_cmd = spawn("/usr/bin/konsole", arg_list_command);
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
+  //generate two motor process
+
+  //generate world process
+
+  //change into watchdog
   int status;
   waitpid(pid_cmd, &status, 0);
   waitpid(pid_insp, &status, 0);

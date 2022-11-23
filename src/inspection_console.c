@@ -40,6 +40,7 @@ int main(int argc, char const *argv[])
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
+                    //signal to STOP everything send to every proccess
                 }
 
                 // RESET button pressed
@@ -50,12 +51,15 @@ int main(int argc, char const *argv[])
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
+                    //comand console unable to use untill reached the original position
+                    //motor X and motor Z V=0 then Vx Vz negative untill reach 0,0
+
                 }
             }
         }
         
         // To be commented in final version...
-        switch (cmd)
+        /*switch (cmd)
         {
             case KEY_LEFT:
                 ee_x--;
@@ -74,7 +78,7 @@ int main(int argc, char const *argv[])
         }
         
         // Update UI
-        update_console_ui(&ee_x, &ee_y);
+        update_console_ui(&ee_x, &ee_y);*/
 	}
 
     // Terminate
