@@ -20,11 +20,11 @@ void sig_handler(int signo) {
     if(signo == SIGINT) {
         printf("received SIGINT, closing pipes and exit\n");
         //chiudere le pipe
-        if(close(fd_read != 0)) {
+        if(close(fd_read) != 0){
             perror("can't close tmp/fifoCZ");
             exit(-1);
         }
-        if(close(fd_write != 0)) {
+        if(close(fd_write) != 0) {
             perror("can't close tmp/fifoZW");
             exit(-1);
         }
