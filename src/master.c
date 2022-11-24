@@ -69,6 +69,10 @@ int main() {
 
   char * arg_list_command[] = { "/usr/bin/konsole", "-e", "./bin/command", NULL };
   char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", NULL };
+  char * arg_motorX[]={"./motorX", NULL};
+  char * arg_motorZ[]={"./motorZ", NULL};
+  char * arg_world[]={"./world", NULL};
+
   
   signal(SIGINT, sig_handler);
 
@@ -94,19 +98,10 @@ int main() {
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
   //generate two motor process
-  pid_t pid_motorX=fork();
-  if(pid_motorX==-1){
-    perror("Error while forking for motor X");
-  }
-  pid_t pid_motorZ=fork();
-  if(pid_motorZ==-1){
-    perror("Error while forking for motor Z");
-  }
-  if(pid_motorX==0){
-    //exec to execute code of motorX process
-    exec("/",NULL);
-  }
+  pid_t pid_motorX=spawn("./motorX", arg_motorX);
+  pid_t pid_motorZ=spawn("./motorZ", arg_motorZ);
   //generate world process
+  pid_t pid_world=spawn("./world", arg_world);
 
   //change into watchdog
   int status;
