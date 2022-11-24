@@ -12,7 +12,7 @@ char * fifoWI = "/tmp/fifoWI";
 char * fifoCX = "/tmp/fifoCX";
 char * fifoCZ = "/tmp/fifoCZ";
 
-
+//function to manage SIGINT
 void sig_handler(int signo) {
     if(signo == SIGINT) {
         printf("received SIGINT, unlink pipes and exit\n");
@@ -39,7 +39,6 @@ void sig_handler(int signo) {
         }
         exit(0);
     }
-
     signal(SIGINT, sig_handler);
 }
 
@@ -72,29 +71,21 @@ int main() {
   char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", NULL };
   
   signal(SIGINT, sig_handler);
-  
-  //create pipes
 
+  //create pipes
   //pipe X-world 
-  
   if (mkfifo(fifoXW, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");
   //pipe Z-world
-
   if (mkfifo(fifoZW, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");
-
   //world -inspection
-  
   if (mkfifo(fifoWI, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");
-
   //command-X
-  
   if (mkfifo(fifoCX, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");  
   //command-Z
-  
   if (mkfifo(fifoCZ, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");
 
@@ -103,7 +94,7 @@ int main() {
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
   //generate two motor process
-
+  
   //generate world process
 
   //change into watchdog
