@@ -1,4 +1,9 @@
 #include "./../include/inspection_utilities.h"
+#include <fcntl.h>
+
+#define r "/tmp/fifoWI"
+
+int fd_read;
 
 int main(int argc, char const *argv[])
 {
@@ -10,6 +15,12 @@ int main(int argc, char const *argv[])
 
     // Initialize User Interface 
     init_console_ui();
+
+    //aprire pipe WI in lettura
+    if((fd_read = open(r, O_RDONLY)) !=0 ) {
+            perror("Can't open /tmp/fifoWI");
+            exit(-1);
+    }
 
     // Infinite loop
     while(TRUE)
