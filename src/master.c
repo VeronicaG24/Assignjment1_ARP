@@ -3,7 +3,46 @@
 #include <sys/types.h>
 #include <unistd.h>
 #include <sys/wait.h>
-#include<sys/stat.h>
+#include <sys/stat.h>
+#include <signal.h>
+
+char * fifoXW = "/tmp/fifoXW";
+char * fifoZW = "/tmp/fifoZW";
+char * fifoWI = "/tmp/fifoWI";
+char * fifoCX = "/tmp/fifoCX";
+char * fifoCZ = "/tmp/fifoCZ";
+
+
+void sig_handler(int signo) {
+    if(signo == SIGINT) {
+        printf("received SIGINT, unlink pipes and exit\n");
+        //unlink le pipe
+        if(unlink(fifoXW) != 0) {
+            perror("can't unlink tmp/fifoXW");
+            exit(-1);
+        }
+        if(unlink(fifoZW) != 0) {
+            perror("can't unlink tmp/fifoZW");
+            exit(-1);
+        }
+        if(unlink(fifoWI) != 0) {
+            perror("can't unlink tmp/fifoWI");
+            exit(-1);
+        }
+        if(unlink(fifoCX) != 0) {
+            perror("can't unlink tmp/fifoCX");
+            exit(-1);
+        }
+        if(unlink(fifoCZ) != 0) {
+            perror("can't unlink tmp/fifoCZ");
+            exit(-1);
+        }
+        exit(0);
+    }
+
+    signal(SIGINT, sig_handler);
+}
+
 
 //function to spawn konsole
 int spawn(const char * program, char * arg_list[]) {
@@ -31,29 +70,31 @@ int main() {
 
   char * arg_list_command[] = { "/usr/bin/konsole", "-e", "./bin/command", NULL };
   char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", NULL };
-
+  
+  signal(SIGINT, sig_handler);
+  
   //create pipes
 
   //pipe X-world 
-  char * fifoXW = "/tmp/fifoXW";
+  
   if (mkfifo(fifoXW, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");
   //pipe Z-world
-  char * fifoZW = "/tmp/fifoZW";
+
   if (mkfifo(fifoZW, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");
 
   //world -inspection
-  char * fifoWI = "/tmp/fifoWI";
+  
   if (mkfifo(fifoWI, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");
 
   //command-X
-  char * fifoCX = "/tmp/fifoCX";
+  
   if (mkfifo(fifoCX, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");  
   //command-Z
-   char * fifoCZ = "/tmp/fifoCZ";
+  
   if (mkfifo(fifoCZ, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");
 
