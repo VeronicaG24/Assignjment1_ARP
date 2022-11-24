@@ -94,7 +94,18 @@ int main() {
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
   //generate two motor process
-  
+  pid_t pid_motorX=fork();
+  if(pid_motorX==-1){
+    perror("Error while forking for motor X");
+  }
+  pid_t pid_motorZ=fork();
+  if(pid_motorZ==-1){
+    perror("Error while forking for motor Z");
+  }
+  if(pid_motorX==0){
+    //exec to execute code of motorX process
+    exec("/",NULL);
+  }
   //generate world process
 
   //change into watchdog
