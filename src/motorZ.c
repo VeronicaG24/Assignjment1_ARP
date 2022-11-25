@@ -43,13 +43,13 @@ int main(){
         printf("can't set the signal hendler for SIGINT\n");
     
     //aprire la pipe in letteura(CZ) e contrallare non dia errore
-    if(fd_read = open(r, O_RDONLY) != 0 ) {
+    if(fd_read = open(r, O_RDONLY) == 0 ) {
         perror("Can't open /tmp/fifoCZ");
         exit(-1);
     }
     
     //aprire pipe in scritture(ZW)
-    if(fd_write = open(w, O_WRONLY)!= 0 ) {
+    if(fd_write = open(w, O_WRONLY) == 0 ) {
         perror("can't open  tmp/fifoZW");
         exit(-1);
     }

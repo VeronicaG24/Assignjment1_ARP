@@ -17,7 +17,7 @@ int main(int argc, char const *argv[])
     init_console_ui();
 
     //aprire pipe WI in lettura
-    if((fd_read = open(r, O_RDONLY)) !=0 ) {
+    if((fd_read = open(r, O_RDONLY)) ==0 ) {
             perror("Can't open /tmp/fifoWI");
             exit(-1);
     }

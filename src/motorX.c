@@ -40,12 +40,12 @@ int main(){
         printf("Can't set the signal handler for SIGINT\n");
     }
     //aprire la pipe in letteura(CX) e contrallare non dia errore
-    if((fd_read=open(r, O_RDONLY)) !=0 ){
+    if((fd_read=open(r, O_RDONLY)) ==0 ){
         error("Can't open /tmp/fifoCX");
         exit(-1);
     }
     //aprire pipe in scritture(XW)
-    if((fd_write=open(w, O_WRONLY))!=0){
+    if((fd_write=open(w, O_WRONLY))==0){
         perror("can't open  tmp/fifoXW");
         exit(-1);
     }
