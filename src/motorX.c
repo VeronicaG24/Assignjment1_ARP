@@ -15,6 +15,7 @@
 #define X_MIN 0
 int fd_read;
 int fd_write;
+
 void sig_handler(int signo){
     if(signo==SIGINT){
         print("received SIGINT, closing the pipes and exit\n");
@@ -39,15 +40,15 @@ int main(){
         printf("Can't set the signal handler for SIGINT\n");
     }
     //aprire la pipe in letteura(CX) e contrallare non dia errore
-        if((fd_read=open(r, O_RDONLY)) !=0 ){
-            perror("Can't open /tmp/fifoCX");
-            exit(-1);
-        }
-        //aprire pipe in scritture(XW)
-        if((fd_write=open(w, O_WRONLY))!=0){
-            perror("can't open  tmp/fifoXW");
-            exit(-1);
-        }
+    if((fd_read=open(r, O_RDONLY)) !=0 ){
+        error("Can't open /tmp/fifoCX");
+        exit(-1);
+    }
+    //aprire pipe in scritture(XW)
+    if((fd_write=open(w, O_WRONLY))!=0){
+        perror("can't open  tmp/fifoXW");
+        exit(-1);
+    }
     while(1){
         //leggere CX e controllare che non dia errore
         if(read(fd_read,&v, nbytes)==-1)
