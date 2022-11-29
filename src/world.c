@@ -28,15 +28,17 @@ int main() {
         while(1){
                 float Xr, Zr;
                 //read X from pipe
-                if(read(fd_readX, &Xr, sizeof(float))){
+                if(read(fd_readX, &Xr, sizeof(float))==-1){
                         perror("can't read X");
                 }
                 //readZ from pipe 
-                if(read(fd_readZ, &Zr, sizeof(float))){
-                        perro("can't read Z");
+                if(read(fd_readZ, &Zr, sizeof(float))==-1){
+                        perror("can't read Z");
                 }
+                //if X and Z are change write on the pipe and update their value
                 if(Xr!= X || Zr != Z){
                         //write the new value on the pipe.
+                        //update the value if the write go well
                         X=Xr;
                         Z=Zr;
                         //update log file
