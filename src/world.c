@@ -6,6 +6,10 @@
 
 int fd_readX, fd_readZ;
 int fd_write;
+struct position {
+        float x;
+        float z;
+};
 
 int main() {
         if((fd_readX = open(rX, O_RDONLY)) == 0 ) {
@@ -23,27 +27,56 @@ int main() {
             exit(-1);
         }
 
-        float X=0;
-        float Z=0;
+        float Xold=0;
+        float Zold=0;
         float Xr=0, Zr=0;
+        struct position p = {0, 0};
         //deve mandare la x e la z solo quando viene modificata!
         while(1){
                 //read X from pipe
-                if(read(fd_readX, &Xr, sizeof(float))==-1){
+                read_byteX = read(fd_readX, &Xr, sizeof(float));
+                read_byteZ = read(fd_readZ, &Zr, sizeof(float));
+                
+                if(read_byteX == -1) {
                         perror("can't read X");
+                }
+                else if(read_byteX < sizeof(float)) {
+                        printf("nothing to readX");
+                        Xr = Xold;
+                }
+                else {
+                        if(Xr!= Xold) {
+                                p.x = Xr;
+                        }
                 }
                 
                 //readZ from pipe 
-                if(read(fd_readZ, &Zr, sizeof(float))==-1){
+                if(read_byteZ == -1) {
                         perror("can't read Z");
+                }
+                else if(read_byteZ < sizeof(float)) {
+                        printf("nothing to readZ");
+                        Zr = Zold;
+                }
+                else {
+                        if(Zr!= Zold) {
+                                p.z = Zr;
+                        }
                 }
                 
                 //if X and Z are change write on the pipe and update their value
-                if(Xr!= X || Zr != Z){
+                if(Xr!= Xold || Zr != Zold) {
+                        
                         //write the new value on the pipe.
-                        //update the value if the write go well
-                        X=Xr;
-                        Z=Zr;
+                        if(write(fd_write, &p, sizeof(struct position)) != -1) {
+                                //update the value if the write go well
+                                Xold = Xr;
+                                Zold = Zr;
+                        }
+                        else
+                                perror("can't write position");
+
+                        
                         //update log file
                 }
 
