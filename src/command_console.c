@@ -5,8 +5,9 @@
 #define rwZ "/tmp/fifoCZ"
 
 int fd_X, fd_Z;
+float v[2] = {0, 0};
 
-int write_vel(int fd, int act ){
+int write_vel(int fd, int act, int index){
     /*give the file descriptor fd and a integer to say how velocity need to change act
     write on the pipe associated with fd the new velocity
     act will be:
@@ -14,23 +15,16 @@ int write_vel(int fd, int act ){
     -0 to stop 
     -(-1)to decrement
     */
-    float old_v;
-    
-    //read old value of velocity on the pipe
-    if(read(fd,&old_v,sizeof(float))){
-        perror("Can't read");
-    }
 
     //decide the new 
-    float v;
-    if(act==0){
-        v=0;
+    if(act == 0) {
+        v[index] = 0;
     }
-    else{
-        v=old_v+act;
+    else {
+        v[index] += act;
     }
     
-    if(write(fd,&v, sizeof(float))){
+    if(write(fd, &v[index], sizeof(float))){
         perror("Can't write ");
     }
 
@@ -87,7 +81,7 @@ int main(int argc, char const *argv[])
                     }
                     //update Vx+ on motor X 
                         //inviare messaggio nella pipe
-                        write_vel(fd_X,-1);
+                        write_vel(fd_X, -1, 0);
                 }
 
                 // Vx-- button pressed
@@ -100,7 +94,7 @@ int main(int argc, char const *argv[])
                     }
                     //update Vx- on motor X 
                         //inviare messaggio nella pipe
-                        write_vel(fd_X,1);
+                        write_vel(fd_X, 1, 0);
                 }
 
                 // Vx stop button pressed
@@ -113,7 +107,7 @@ int main(int argc, char const *argv[])
                     }
                     ////update Vx=0 on motor X 
                         //inviare messaggio nella pipe
-                        write_vel(fd_X,0);
+                        write_vel(fd_X, 0, 0);
                 }
 
                 // Vz++ button pressed
@@ -126,7 +120,7 @@ int main(int argc, char const *argv[])
                     }
                     //update Vz+ on motor z
                         //inviare messaggio nella pipe
-                        write_vel(fd_Z,-1);
+                        write_vel(fd_Z, -1, 1);
                 }
 
                 // Vz-- button pressed
@@ -139,7 +133,7 @@ int main(int argc, char const *argv[])
                     }
                     //update Vz- on motor z
                         //inviare messaggio nella pipe
-                        write_vel(fd_Z,1);
+                        write_vel(fd_Z, 1, 1);
                 }
 
                 // Vz stop button pressed
@@ -152,7 +146,7 @@ int main(int argc, char const *argv[])
                     }
                     //update Vz=0 on motor z
                         //inviare messaggio nella pipe
-                        write_vel(fd_Z,0);
+                        write_vel(fd_Z, 0, 1);
                 }               
             }
         }
