@@ -3,21 +3,26 @@
 
 #define r "/tmp/fifoWI"
 
+struct position {
+        float x;
+        float z;
+};
 int fd_read;
 
 int main(int argc, char const *argv[])
 {
     // Utility variable to avoid trigger resize event on launch
     int first_resize = TRUE;
+    struct position p = {0, 0};
 
     // End-effector coordinates
-    float ee_x, ee_y;
+    float ee_x, ee_z;
 
     // Initialize User Interface 
     init_console_ui();
 
     //aprire pipe WI in lettura
-    if((fd_read = open(r, O_RDONLY)) ==0 ) {
+    if((fd_read = open(r, O_RDONLY)) ==0 ) { //metti not block
             perror("Can't open /tmp/fifoWI");
             exit(-1);
     }
@@ -69,6 +74,20 @@ int main(int argc, char const *argv[])
             }
         }
         
+        read_byte = read(fd_read, &p, sizeof(struct position));
+        if(read_byte == -1) {
+            perror("can't read position");
+        }
+        else if(read_byte < sizeof(struct position)) {
+            printf("nothing to read");
+        }
+        else {
+            ee_x = p.x;
+            ee_z = p.z;
+            // Update UI
+            update_console_ui(&ee_x, &ee_z);
+        }
+
         // To be commented in final version...
         /*switch (cmd)
         {
@@ -79,17 +98,16 @@ int main(int argc, char const *argv[])
                 ee_x++;
                 break;
             case KEY_UP:
-                ee_y--;
+                ee_z--;
                 break;
             case KEY_DOWN:
-                ee_y++;
+                ee_z++;
                 break;
             default:
                 break;
         }
-        
-        // Update UI
-        update_console_ui(&ee_x, &ee_y);*/
+        */
+
 	}
 
     // Terminate
