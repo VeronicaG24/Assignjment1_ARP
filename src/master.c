@@ -37,8 +37,10 @@ void sig_handler(int signo) {
             perror("can't unlink tmp/fifoCZ");
             exit(-1);
         }
+        
         exit(0);
     }
+    
     signal(SIGINT, sig_handler);
 }
 
@@ -52,16 +54,15 @@ int spawn(const char * program, char * arg_list[]) {
     perror("Error while forking...");
     return 1;
   }
-
   else if(child_pid != 0) {
     return child_pid;
   }
-
   else {
     if(execvp (program, arg_list) == 0);
     perror("Exec failed");
     return 1;
   }
+
 }
 
 
@@ -73,22 +74,25 @@ int main() {
   char * arg_motorZ[]={"./motorZ", NULL};
   char * arg_world[]={"./world", NULL};
 
-  
   signal(SIGINT, sig_handler);
 
   //create pipes
   //pipe X-world 
   if (mkfifo(fifoXW, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");
+  
   //pipe Z-world
   if (mkfifo(fifoZW, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");
+  
   //world -inspection
   if (mkfifo(fifoWI, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");
+  
   //command-X
   if (mkfifo(fifoCX, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");  
+  
   //command-Z
   if (mkfifo(fifoCZ, S_IRUSR | S_IWUSR) != 0)
     perror("Cannot create fifo. Already existing?");

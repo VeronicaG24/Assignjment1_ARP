@@ -22,19 +22,22 @@ int main() {
             perror("can't open  tmp/fifoWI");
             exit(-1);
         }
+
         float X=0;
         float Z=0;
-    //deve mandare la x e la z solo quando viene modificata!
+        float Xr=0, Zr=0;
+        //deve mandare la x e la z solo quando viene modificata!
         while(1){
-                float Xr, Zr;
                 //read X from pipe
                 if(read(fd_readX, &Xr, sizeof(float))==-1){
                         perror("can't read X");
                 }
+                
                 //readZ from pipe 
                 if(read(fd_readZ, &Zr, sizeof(float))==-1){
                         perror("can't read Z");
                 }
+                
                 //if X and Z are change write on the pipe and update their value
                 if(Xr!= X || Zr != Z){
                         //write the new value on the pipe.
