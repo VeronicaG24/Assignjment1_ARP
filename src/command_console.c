@@ -15,10 +15,12 @@ int write_vel(int fd, int act ){
     -(-1)to decrement
     */
     float old_v;
+    
     //read old value of velocity on the pipe
     if(read(fd,&old_v,sizeof(float))){
         perror("Can't read");
     }
+
     //decide the new 
     float v;
     if(act==0){
@@ -27,6 +29,7 @@ int write_vel(int fd, int act ){
     else{
         v=old_v+act;
     }
+    
     if(write(fd,&v, sizeof(float))){
         perror("Can't write ");
     }
