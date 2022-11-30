@@ -59,7 +59,7 @@ int main(){
     
     while(1){
         //leggere CX e controllare che non dia errore
-        read_byteV = read(fd_read, &v_read, nbytes)
+        read_byteV = read(fd_read, &v_read, nbytes);
         if(read_byteV == -1) 
             perror("error in reading");
         else if(read_byteV < nbytes) {
@@ -71,7 +71,7 @@ int main(){
 
         //aggiornare X
         float dx = (v*dt);
-        if(X<X_MAX-dx){
+        if(X< X_MAX - dx){
             X+=dx;
         }
         else 
