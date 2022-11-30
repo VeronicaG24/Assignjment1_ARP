@@ -37,8 +37,8 @@ void sig_handler(int signo){
 } 
 
 int main(){
-    float v=0;
-    float X=X_MIN;
+    float v = 0, v_read = 0;
+    float X=X_MIN, xOld = 0;
     
     //definire gestione SIGNIT
     if(signal(SIGINT, sig_handler)==SIG_ERR){
@@ -59,9 +59,16 @@ int main(){
     
     while(1){
         //leggere CX e controllare che non dia errore
-        if(read(fd_read,&v, nbytes)==-1)
+        read_byteV = read(fd_read, &v_read, nbytes)
+        if(read_byteV == -1) 
             perror("error in reading");
-        
+        else if(read_byteV < nbytes) {
+            printf("nothing to read");
+        }
+        else {
+            v = v_read;
+        }
+
         //aggiornare X
         float dx = (v*dt);
         if(X<X_MAX-dx){
@@ -70,9 +77,13 @@ int main(){
         else 
             X=X_MAX;
         
-        //scrivere in XW
-        if(write(fd_write,&X, nbytes)==-1)
-            perror("error in writing");
+        //scrivere in XW solo se x è cambiata
+        if (X != xOld) {
+            if(write(fd_write, &X, nbytes) == -1)
+                perror("error in writing");
+            
+            xOld = X;
+        }
         
         //sleep
         sleep(1);

@@ -37,8 +37,8 @@ void sig_handler(int signo) {
 }
 
 int main(){
-    float v=0;
-    float z = zMin;
+    float v = 0, v_read = 0;
+    float z = zMin, zOld = 0;
 
     //gestione segnale SIGINT
     if(signal(SIGINT, sig_handler) == SIG_ERR)
@@ -58,8 +58,15 @@ int main(){
 
     while(1){
         //leggere ZX e controllare che non dia errore
-        if(read(fd_read, &v, nbytes)==-1)
+        read_byteV = read(fd_read, &v_read, nbytes)
+        if(read_byteV == -1) 
             perror("error in reading");
+        else if(read_byteV < nbytes) {
+            printf("nothing to read");
+        }
+        else {
+            v = v_read;
+        }
         
         //aggiornare Z
         if(z < zMax - v*dt) {
@@ -68,10 +75,14 @@ int main(){
         else
             z = zMax;    
         
-        //scrivere in XW
-        if(write(fd_write, &z, nbytes) == -1)
-            perror("error in writing");
-
+        //scrivere in ZW solo se z è cambiata
+        if (z != zOld) {
+            if(write(fd_write, &z, nbytes) == -1)
+                perror("error in writing");
+            
+            zOld = z;
+        }
+        
         //sleep
         sleep(1);
     }
