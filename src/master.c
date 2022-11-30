@@ -70,9 +70,9 @@ int main() {
 
   char * arg_list_command[] = { "/usr/bin/konsole", "-e", "./bin/command", NULL };
   char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", NULL };
-  char * arg_motorX[]={"./motorX", NULL};
-  char * arg_motorZ[]={"./motorZ", NULL};
-  char * arg_world[]={"./world", NULL};
+  char * arg_motorX[]={"./bin/motorX", NULL};
+  char * arg_motorZ[]={"./bin/motorZ", NULL};
+  char * arg_world[]={"./bin/world", NULL};
 
   signal(SIGINT, sig_handler);
 
