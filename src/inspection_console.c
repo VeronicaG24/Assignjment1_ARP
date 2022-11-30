@@ -21,6 +21,9 @@ int main(int argc, char const *argv[])
     // Initialize User Interface 
     init_console_ui();
 
+    //
+    int read_byte;
+
     //aprire pipe WI in lettura
     if((fd_read = open(r, O_RDONLY)) ==0 ) { //metti not block
             perror("Can't open /tmp/fifoWI");

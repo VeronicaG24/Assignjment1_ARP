@@ -31,6 +31,7 @@ int main() {
         float Zold=0;
         float Xr=0, Zr=0;
         struct position p = {0, 0};
+        int read_byteX, read_byteZ;
         //deve mandare la x e la z solo quando viene modificata!
         while(1){
                 //read X from pipe

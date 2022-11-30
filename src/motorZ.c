@@ -37,8 +37,6 @@ void sig_handler(int signo) {
 }
 
 int main(){
-    float v = 0, v_read = 0;
-    float z = zMin, zOld = 0;
 
     //gestione segnale SIGINT
     if(signal(SIGINT, sig_handler) == SIG_ERR)
@@ -55,6 +53,10 @@ int main(){
         perror("can't open  tmp/fifoZW");
         exit(-1);
     }
+
+    float v = 0, v_read = 0;
+    float z = zMin, zOld = 0;
+    int read_byteV;
 
     while(1){
         //leggere ZX e controllare che non dia errore

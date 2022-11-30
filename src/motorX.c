@@ -37,8 +37,6 @@ void sig_handler(int signo){
 } 
 
 int main(){
-    float v = 0, v_read = 0;
-    float X=X_MIN, xOld = 0;
     
     //definire gestione SIGNIT
     if(signal(SIGINT, sig_handler)==SIG_ERR){
@@ -56,6 +54,10 @@ int main(){
         perror("can't open  tmp/fifoXW");
         exit(-1);
     }
+
+    float v = 0, v_read = 0;
+    float X=X_MIN, xOld = 0;
+    int read_byteV;
     
     while(1){
         //leggere CX e controllare che non dia errore
