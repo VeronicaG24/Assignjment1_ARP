@@ -74,11 +74,14 @@ int main(){
         }
         
         //aggiornare Z
-        if(z < zMax - v*dt) {
-            z += v*dt;
+        if((z + v*dt) > zMax) {
+            z = zMax;
+        }
+        else if ((z + v*dt) < zMin) {
+            z = zMin;
         }
         else
-            z = zMax;    
+            z += v*dt;
         
         //scrivere in ZW solo se z è cambiata
         if (z != zOld) {
