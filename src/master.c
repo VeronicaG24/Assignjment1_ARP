@@ -69,12 +69,6 @@ int spawn(const char * program, char * arg_list[]) {
 
 int main() {
 
-  char * arg_list_command[] = { "/usr/bin/konsole", "-e", "./bin/command", NULL };
-  char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", NULL };
-  char * arg_motorX[]={"./bin/motorX", NULL};
-  char * arg_motorZ[]={"./bin/motorZ", NULL};
-  char * arg_world[]={"./bin/world", NULL};
-
   signal(SIGINT, sig_handler);
 
   //create pipes
@@ -98,16 +92,22 @@ int main() {
   if (mkfifo(fifoCZ, 0666) != 0)
     perror("Cannot create fifo. Already existing?");
 
-  //spawn command window and inspection window 
-  pid_t pid_cmd = spawn("/usr/bin/konsole", arg_list_command);
-  pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
-
+  
   //generate two motor process
+  char * arg_motorX[]={"./bin/motorX", NULL};
+  char * arg_motorZ[]={"./bin/motorZ", NULL};
   pid_t pid_motorX=spawn("./bin/motorX", arg_motorX);
   pid_t pid_motorZ=spawn("./bin/motorZ", arg_motorZ);
 
   //generate world process
+  char * arg_world[]={"./bin/world", NULL};
   pid_t pid_world=spawn("./bin/world", arg_world);
+
+  //spawn command window and inspection window 
+  char * arg_list_command[] = { "/usr/bin/konsole", "-e", "./bin/command", NULL };
+  pid_t pid_cmd = spawn("/usr/bin/konsole", arg_list_command);
+  char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", pid_cmd, pid_motorX, pid_motorZ, NULL };
+  pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
   //change into watchdog
   int status;
