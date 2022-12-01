@@ -44,7 +44,7 @@ int main(){
     }
     
     //aprire la pipe in letteura(CX) e contrallare non dia errore
-    if((fd_read=open(r, O_RDONLY)) ==0 ){
+    if((fd_read=open(r, O_RDONLY| O_NONBLOCK)) ==0 ){
         error("Can't open /tmp/fifoCX");
         exit(-1);
     }

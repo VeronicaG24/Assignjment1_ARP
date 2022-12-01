@@ -43,7 +43,7 @@ int main(){
         printf("can't set the signal hendler for SIGINT\n");
     
     //aprire la pipe in letteura(CZ) e contrallare non dia errore
-    if((fd_read = open(r, O_RDONLY)) == 0 ) {
+    if((fd_read = open(r, O_RDONLY|O_NONBLOCK)) == 0 ) {
         perror("Can't open /tmp/fifoCZ");
         exit(-1);
     }
