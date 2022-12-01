@@ -1,0 +1,4 @@
+#run master
+
+./bin/master
+
