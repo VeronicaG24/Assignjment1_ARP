@@ -15,7 +15,7 @@ int fd_X, fd_Z;
 float v[] = {0.0, 0.0};
 char * fd[2]= { "/tmp/fifoCX","/tmp/fifoCZ"};
 
-int write_vel(int act, int index){
+int write_vel(int act, int index) {
     /*give the file descriptor fd and a integer to say how velocity need to change act
     write on the pipe associated with fd the new velocity
     act will be:

@@ -18,6 +18,10 @@ int fd_read;
 
 int main(int argc, char const *argv[])
 {
+    pid_t pid_cmd = argv[3];
+    pid_t pid_motorX = argv[4];
+    pid_t pid_motorZ = argv[5];
+
     // Utility variable to avoid trigger resize event on launch
     int first_resize = TRUE;
     struct position p = {0, 0};
@@ -32,7 +36,7 @@ int main(int argc, char const *argv[])
     int read_byte;
 
     //aprire pipe WI in lettura
-    if((fd_read = open(r, O_RDONLY | O_NONBLOCK)) ==0 ) { //metti not block
+    if((fd_read = open(r, O_RDONLY | O_NONBLOCK)) ==0 ) {
             perror("Inspection: Can't open /tmp/fifoWI");
             exit(-1);
     }
@@ -79,7 +83,9 @@ int main(int argc, char const *argv[])
                     }
                     //comand console unable to use untill reached the original position
                     //motor X and motor Z V=0 then Vx Vz negative untill reach 0,0
-
+                    kill(SIGUSR1, pid_motorX);
+                    kill(SIGUSR1, pid_motorZ);
+                    kill(SIGUSR1, pid_cmd);
                 }
             }
         }
