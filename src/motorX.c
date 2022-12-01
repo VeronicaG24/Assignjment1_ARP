@@ -20,15 +20,15 @@ int nbytes = sizeof(float);
 
 void sig_handler(int signo){
     if(signo==SIGINT){
-        printf("received SIGINT, closing the pipes and exit\n");
+        printf("MotorX: received SIGINT, closing the pipes and exit\n");
         
         //chiusura pipe
         if(close(fd_read)!=0){
-            perror("Can't close the reading pipe");
+            perror("MotorX: Can't close the reading pipe");
             exit(-1);
         }
         if(close(fd_write)!=0){
-            perror("Can't close the write pipe");
+            perror("MotorX: Can't close the write pipe");
             exit(-1);
         }
         
@@ -38,21 +38,20 @@ void sig_handler(int signo){
 } 
 
 int main(){
-    printf("motorX \n");
     //definire gestione SIGNIT
     if(signal(SIGINT, sig_handler)==SIG_ERR){
-        printf("Can't set the signal handler for SIGINT\n");
+        printf("MotorX:Can't set the signal handler for SIGINT\n");
     }
     
     //aprire la pipe in letteura(CX) e contrallare non dia errore
     if((fd_read=open(r, O_RDONLY| O_NONBLOCK)) ==0 ){
-        perror("Can't open /tmp/fifoCX");
+        perror("MotorX:Can't open /tmp/fifoCX");
         exit(-1);
     }
     
     //aprire pipe in scritture(XW)
     if((fd_write=open(w, O_WRONLY))==0){
-        perror("can't open  tmp/fifoXW");
+        perror("MotorX:can't open  tmp/fifoXW");
         exit(-1);
     }
 
@@ -69,7 +68,6 @@ int main(){
             //printf("MotorX: nothing to read");
         }
         else {
-            printf("%f", v_read);
             v = v_read;
         }
 
@@ -93,7 +91,7 @@ int main(){
         //scrivere in XW solo se x è cambiata
         if (X != xOld) {
             if(write(fd_write, &X, nbytes) == -1)
-                perror("error in writing");
+                perror("MotorX: error in writing");
             
             xOld = X;
         }

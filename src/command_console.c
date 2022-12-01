@@ -31,11 +31,11 @@ int write_vel(int act, int index){
     else {
         v[index] += act;
     }
-    
+
     int fd2= open(fd[index], O_WRONLY); 
 
     if(write(fd2, &v[index], sizeof(float))<sizeof(float)){
-        perror("Write:");
+        perror("Command: error in write");
     }
     close(fd2);
 
@@ -51,13 +51,13 @@ int main(int argc, char const *argv[])
     
     //Open pipe CX in srittura
      if(fd_X = open(rwX, O_WRONLY) == 0 ) {
-        perror("Can't open /tmp/fifoCX");
+        perror("Command: Can't open /tmp/fifoCX");
         exit(-1);
     }
     
     //aprire pipe in scritture(CZ)
     if(fd_Z= open(rwZ, O_WRONLY) == 0 ) {
-        perror("can't open  tmp/ffoCZ");
+        perror("Command: can't open  tmp/ffoCZ");
         exit(-1);
     }
 

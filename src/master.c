@@ -15,7 +15,7 @@ char * fifoCZ = "/tmp/fifoCZ";
 //function to manage SIGINT
 void sig_handler(int signo) {
     if(signo == SIGINT) {
-        printf("received SIGINT, unlink pipes and exit\n");
+        printf("Master: received SIGINT, unlink pipes and exit\n");
         //unlink le pipe
         if(unlink(fifoXW) != 0) {
             perror("can't unlink tmp/fifoXW");

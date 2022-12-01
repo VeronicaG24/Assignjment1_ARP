@@ -33,7 +33,7 @@ int main(int argc, char const *argv[])
 
     //aprire pipe WI in lettura
     if((fd_read = open(r, O_RDONLY | O_NONBLOCK)) ==0 ) { //metti not block
-            perror("Can't open /tmp/fifoWI");
+            perror("Inspection: Can't open /tmp/fifoWI");
             exit(-1);
     }
 

@@ -22,17 +22,17 @@ int main() {
         printf("world \n");
 
         if((fd_readX = open(rX, O_RDONLY|O_NONBLOCK)) == 0 ) {
-            perror("Can't open /tmp/fifoXW");
+            perror("World: Can't open /tmp/fifoXW");
             exit(-1);
         }
     
         if((fd_readZ = open(rZ, O_RDONLY|O_NONBLOCK)) == 0 ) {
-            perror("Can't open /tmp/fifoZW");
+            perror("World: Can't open /tmp/fifoZW");
             exit(-1);
         }
 
         if((fd_write = open(w, O_WRONLY)) == 0) {
-            perror("can't open  tmp/fifoWI");
+            perror("World: can't open  tmp/fifoWI");
             exit(-1);
         }
 
@@ -48,7 +48,7 @@ int main() {
                 read_byteZ = read(fd_readZ, &Zr, sizeof(float));
                 
                 if(read_byteX == -1 && errno != EAGAIN) {
-                        perror("can't read X");
+                        perror("World: can't read X");
                 }
                 else if(read_byteX < sizeof(float) || errno != EAGAIN) {
                         //printf("nothing to readX");
@@ -62,7 +62,7 @@ int main() {
                 
                 //readZ from pipe 
                 if(read_byteZ == -1 && errno != EAGAIN) {
-                        perror("can't read Z");
+                        perror("World: can't read Z");
                 }
                 else if(read_byteZ < sizeof(float) || errno != EAGAIN) {
                         //printf("nothing to readZ");
@@ -84,9 +84,8 @@ int main() {
                                 Zold = Zr;
                         }
                         else
-                                perror("can't write position");
+                                perror("World: can't write position");
 
-                        
                         //update log file
                 }
 
