@@ -1,5 +1,11 @@
 #include "./../include/command_utilities.h"
 #include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
 
 #define rwX "/tmp/fifoCX"
 #define rwZ "/tmp/fifoCZ"
@@ -25,7 +31,7 @@ int write_vel(int fd, int act, int index){
     }
     
     if(write(fd, &v[index], sizeof(float))){
-        perror("Can't write ");
+        perror("Write: ");
     }
 
 }
@@ -38,15 +44,15 @@ int main(int argc, char const *argv[])
     // Initialize User Interface 
     init_console_ui();
     
-    //Open pipes
-     if(fd_X = open(rwX, O_RDONLY|O_NONBLOCK) == 0 ) {
-        perror("Can't open /tmp/fifoCZ");
+    //Open pipe CX in srittura
+     if(fd_X = open(rwX, O_WRONLY) == 0 ) {
+        perror("Can't open /tmp/fifoCX");
         exit(-1);
     }
     
-    //aprire pipe in scritture(ZW)
+    //aprire pipe in scritture(CZ)
     if(fd_Z= open(rwZ, O_WRONLY) == 0 ) {
-        perror("can't open  tmp/fifoZW");
+        perror("can't open  tmp/ffoCZ");
         exit(-1);
     }
 

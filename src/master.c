@@ -59,7 +59,8 @@ int spawn(const char * program, char * arg_list[]) {
   }
   else {
     if(execvp (program, arg_list) == 0);
-    perror("Exec failed");
+    printf("%s", program);
+    perror("Exec failed:");
     return 1;
   }
 
@@ -102,10 +103,11 @@ int main() {
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
   //generate two motor process
-  pid_t pid_motorX=spawn("./motorX", arg_motorX);
-  pid_t pid_motorZ=spawn("./motorZ", arg_motorZ);
+  pid_t pid_motorX=spawn("./bin/motorX", arg_motorX);
+  pid_t pid_motorZ=spawn("./bin/motorZ", arg_motorZ);
+
   //generate world process
-  pid_t pid_world=spawn("./world", arg_world);
+  pid_t pid_world=spawn("./bin/world", arg_world);
 
   //change into watchdog
   int status;

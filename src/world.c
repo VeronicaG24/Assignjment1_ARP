@@ -1,4 +1,10 @@
 #include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
 
 #define rX "/tmp/fifoXW"
 #define rZ "/tmp/fifoZW"
@@ -42,7 +48,7 @@ int main() {
                         perror("can't read X");
                 }
                 else if(read_byteX < sizeof(float)) {
-                        printf("nothing to readX");
+                        //printf("nothing to readX");
                         Xr = Xold;
                 }
                 else {
@@ -56,7 +62,7 @@ int main() {
                         perror("can't read Z");
                 }
                 else if(read_byteZ < sizeof(float)) {
-                        printf("nothing to readZ");
+                        //printf("nothing to readZ");
                         Zr = Zold;
                 }
                 else {

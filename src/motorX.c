@@ -19,7 +19,7 @@ int fd_write;
 
 void sig_handler(int signo){
     if(signo==SIGINT){
-        print("received SIGINT, closing the pipes and exit\n");
+        printf("received SIGINT, closing the pipes and exit\n");
         
         //chiusura pipe
         if(close(fd_read)!=0){
@@ -45,7 +45,7 @@ int main(){
     
     //aprire la pipe in letteura(CX) e contrallare non dia errore
     if((fd_read=open(r, O_RDONLY| O_NONBLOCK)) ==0 ){
-        error("Can't open /tmp/fifoCX");
+        perror("Can't open /tmp/fifoCX");
         exit(-1);
     }
     

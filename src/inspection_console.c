@@ -1,5 +1,11 @@
 #include "./../include/inspection_utilities.h"
 #include <fcntl.h>
+#include <stdio.h>
+#include <stdlib.h>
+#include <sys/types.h>
+#include <unistd.h>
+#include <sys/wait.h>
+#include <sys/stat.h>
 
 #define r "/tmp/fifoWI"
 
@@ -82,7 +88,7 @@ int main(int argc, char const *argv[])
             perror("can't read position");
         }
         else if(read_byte < sizeof(struct position)) {
-            printf("nothing to read");
+            //printf("nothing to read");
         }
         else {
             ee_x = p.x;
