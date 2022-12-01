@@ -66,7 +66,7 @@ int main(){
         if(read_byteV == -1 && errno != EAGAIN) 
             perror("error in reading");
         else if(read_byteV < nbytes) {
-            printf("nothing to read");
+            printf("MotorX: nothing to read");
         }
         else {
             v = v_read;

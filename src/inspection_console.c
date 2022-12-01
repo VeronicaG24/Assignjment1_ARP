@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <errno.h>
 
 #define r "/tmp/fifoWI"
 
@@ -84,7 +85,7 @@ int main(int argc, char const *argv[])
         }
         
         read_byte = read(fd_read, &p, sizeof(struct position));
-        if(read_byte == -1) {
+        if(read_byte == -1 && errno != EAGAIN) {
             perror("can't read position");
         }
         else if(read_byte < sizeof(struct position)) {
