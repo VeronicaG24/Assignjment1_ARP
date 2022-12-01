@@ -1,10 +1,5 @@
 #include <fcntl.h>
-#include <stdio.h>
-#include <stdlib.h>
-#include <sys/types.h>
-#include <unistd.h>
-#include <sys/wait.h>
-#include <sys/stat.h>
+#include <errno.h>
 
 #define rX "/tmp/fifoXW"
 #define rZ "/tmp/fifoZW"
@@ -40,14 +35,14 @@ int main() {
         int read_byteX, read_byteZ;
         //deve mandare la x e la z solo quando viene modificata!
         while(1){
-                //read X from pipe
+                //read X from pipe 
                 read_byteX = read(fd_readX, &Xr, sizeof(float));
                 read_byteZ = read(fd_readZ, &Zr, sizeof(float));
                 
-                if(read_byteX == -1) {
+                if(read_byteX == -1 && errno != EAGAIN) {
                         perror("can't read X");
                 }
-                else if(read_byteX < sizeof(float)) {
+                else if(read_byteX < sizeof(float) || errno != EAGAIN) {
                         //printf("nothing to readX");
                         Xr = Xold;
                 }
@@ -58,10 +53,10 @@ int main() {
                 }
                 
                 //readZ from pipe 
-                if(read_byteZ == -1) {
+                if(read_byteZ == -1 && errno != EAGAIN) {
                         perror("can't read Z");
                 }
-                else if(read_byteZ < sizeof(float)) {
+                else if(read_byteZ < sizeof(float) || errno != EAGAIN) {
                         //printf("nothing to readZ");
                         Zr = Zold;
                 }
