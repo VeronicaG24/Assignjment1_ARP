@@ -19,6 +19,8 @@ struct position {
 };
 
 int main() {
+        printf("world \n");
+
         if((fd_readX = open(rX, O_RDONLY|O_NONBLOCK)) == 0 ) {
             perror("Can't open /tmp/fifoXW");
             exit(-1);

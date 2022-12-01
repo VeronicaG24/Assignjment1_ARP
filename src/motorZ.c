@@ -39,6 +39,8 @@ void sig_handler(int signo) {
 
 int main(){
 
+    printf("motorX \n");
+
     //gestione segnale SIGINT
     if(signal(SIGINT, sig_handler) == SIG_ERR)
         printf("can't set the signal hendler for SIGINT\n");

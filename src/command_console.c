@@ -6,14 +6,16 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <string.h>
 
 #define rwX "/tmp/fifoCX"
 #define rwZ "/tmp/fifoCZ"
 
 int fd_X, fd_Z;
-float v[2] = {0, 0};
+float v[] = {0.0, 0.0};
+char * fd[2]= { "/tmp/fifoCX","/tmp/fifoCZ"};
 
-int write_vel(int fd, int act, int index){
+int write_vel(int act, int index){
     /*give the file descriptor fd and a integer to say how velocity need to change act
     write on the pipe associated with fd the new velocity
     act will be:
@@ -24,15 +26,18 @@ int write_vel(int fd, int act, int index){
 
     //decide the new 
     if(act == 0) {
-        v[index] = 0;
+        v[index] = 0.0;
     }
     else {
         v[index] += act;
     }
     
-    if(write(fd, &v[index], sizeof(float))){
-        perror("Write: ");
+    int fd2= open(fd[index], O_WRONLY); 
+
+    if(write(fd2, &v[index], sizeof(float))<sizeof(float)){
+        perror("Write:");
     }
+    close(fd2);
 
 }
 
@@ -77,82 +82,87 @@ int main(int argc, char const *argv[])
             // Check which button has been pressed...
             if(getmouse(&event) == OK) {
 
-                // Vx++ button pressed
+                // Vx-- button pressed
                 if(check_button_pressed(vx_decr_btn, &event)) {
                     mvprintw(LINES - 1, 1, "Horizontal Speed Decreased");
+                    //update Vx+ on motor X
+                    //inviare messaggio nella pipe
+                    write_vel(-1, 0);
                     refresh();
                     sleep(1);
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
-                    //update Vx+ on motor X 
-                        //inviare messaggio nella pipe
-                        write_vel(fd_X, -1, 0);
                 }
 
-                // Vx-- button pressed
+                // Vx++ button pressed
                 else if(check_button_pressed(vx_incr_btn, &event)) {
                     mvprintw(LINES - 1, 1, "Horizontal Speed Increased");
+                    //update Vx- on motor X 
+                    //inviare messaggio nella pipe
+                    write_vel( 1, 0);
                     refresh();
                     sleep(1);
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
-                    //update Vx- on motor X 
-                        //inviare messaggio nella pipe
-                        write_vel(fd_X, 1, 0);
+
                 }
 
                 // Vx stop button pressed
                 else if(check_button_pressed(vx_stp_button, &event)) {
                     mvprintw(LINES - 1, 1, "Horizontal Motor Stopped");
+                    ////update Vx=0 on motor X 
+                    //inviare messaggio nella pipe
+                    write_vel(0, 0);
                     refresh();
                     sleep(1);
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
-                    ////update Vx=0 on motor X 
-                        //inviare messaggio nella pipe
-                        write_vel(fd_X, 0, 0);
+                   
                 }
 
-                // Vz++ button pressed
+                // Vz-- button pressed
                 else if(check_button_pressed(vz_decr_btn, &event)) {
                     mvprintw(LINES - 1, 1, "Vertical Speed Decreased");
+                    //inviare messaggio nella pipe
+                    write_vel(-1, 1);
                     refresh();
                     sleep(1);
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
                     //update Vz+ on motor z
-                        //inviare messaggio nella pipe
-                        write_vel(fd_Z, -1, 1);
+                    
                 }
 
-                // Vz-- button pressed
+                // Vz++ button pressed
                 else if(check_button_pressed(vz_incr_btn, &event)) {
                     mvprintw(LINES - 1, 1, "Vertical Speed Increased");
+                    //update Vz- on motor z
+                    //inviare messaggio nella pipe
+                    write_vel(1, 1);
                     refresh();
                     sleep(1);
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
-                    //update Vz- on motor z
-                        //inviare messaggio nella pipe
-                        write_vel(fd_Z, 1, 1);
+
                 }
 
                 // Vz stop button pressed
                 else if(check_button_pressed(vz_stp_button, &event)) {
                     mvprintw(LINES - 1, 1, "Vertical Motor Stopped");
+                    //update Vz=0 on motor z
+                    //inviare messaggio nella pipe
+                    write_vel(0, 1);
                     refresh();
                     sleep(1);
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
-                    //update Vz=0 on motor z
-                        //inviare messaggio nella pipe
-                        write_vel(fd_Z, 0, 1);
+                    
                 }               
             }
         }

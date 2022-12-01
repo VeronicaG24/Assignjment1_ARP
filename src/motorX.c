@@ -9,7 +9,6 @@
 #include <errno.h>
 
 #define dt 1/30
-#define nbytes sizeof(float)
 #define r "/tmp/fifoCX"
 #define w "/tmp/fifoXW"
 #define X_MAX 40
@@ -17,6 +16,7 @@
 
 int fd_read;
 int fd_write;
+int nbytes = sizeof(float);
 
 void sig_handler(int signo){
     if(signo==SIGINT){
@@ -38,7 +38,7 @@ void sig_handler(int signo){
 } 
 
 int main(){
-    
+    printf("motorX \n");
     //definire gestione SIGNIT
     if(signal(SIGINT, sig_handler)==SIG_ERR){
         printf("Can't set the signal handler for SIGINT\n");
@@ -64,21 +64,31 @@ int main(){
         //leggere CX e controllare che non dia errore
         read_byteV = read(fd_read, &v_read, nbytes);
         if(read_byteV == -1 && errno != EAGAIN) 
-            perror("error in reading");
+            perror("Motorx: error in reading");
         else if(read_byteV < nbytes) {
-            printf("MotorX: nothing to read");
+            //printf("MotorX: nothing to read");
         }
         else {
+            printf("%f", v_read);
             v = v_read;
         }
 
         //aggiornare X
         float dx = (v*dt);
-        if(X< X_MAX - dx){
+        if(X< X_MAX - dx || X > X_MIN +dx){
             X+=dx;
         }
         else 
             X=X_MAX;
+        if((X+dx)>X_MAX){
+            X=X_MAX;
+        }
+        else if( (X+dx) < X_MIN){
+            X=X_MIN;
+        }
+        else{
+            X+=dx;
+        }
         
         //scrivere in XW solo se x è cambiata
         if (X != xOld) {
@@ -92,5 +102,6 @@ int main(){
         sleep(1);
     }
 
-    
+    close(fd_read);
+    close(fd_write);
 }

@@ -79,23 +79,23 @@ int main() {
 
   //create pipes
   //pipe X-world 
-  if (mkfifo(fifoXW, S_IRUSR | S_IWUSR) != 0)
+  if (mkfifo(fifoXW, 0666) != 0)
     perror("Cannot create fifo. Already existing?");
   
   //pipe Z-world
-  if (mkfifo(fifoZW, S_IRUSR | S_IWUSR) != 0)
+  if (mkfifo(fifoZW, 0666) != 0)
     perror("Cannot create fifo. Already existing?");
   
   //world -inspection
-  if (mkfifo(fifoWI, S_IRUSR | S_IWUSR) != 0)
+  if (mkfifo(fifoWI, 0666) != 0)
     perror("Cannot create fifo. Already existing?");
   
   //command-X
-  if (mkfifo(fifoCX, S_IRUSR | S_IWUSR) != 0)
+  if (mkfifo(fifoCX, 0666) != 0)
     perror("Cannot create fifo. Already existing?");  
   
   //command-Z
-  if (mkfifo(fifoCZ, S_IRUSR | S_IWUSR) != 0)
+  if (mkfifo(fifoCZ, 0666) != 0)
     perror("Cannot create fifo. Already existing?");
 
   //spawn command window and inspection window 
