@@ -25,7 +25,7 @@ int main(int argc, char const *argv[])
     int read_byte;
 
     //aprire pipe WI in lettura
-    if((fd_read = open(r, O_RDONLY)) ==0 ) { //metti not block
+    if((fd_read = open(r, O_RDONLY | O_NONBLOCK)) ==0 ) { //metti not block
             perror("Can't open /tmp/fifoWI");
             exit(-1);
     }

@@ -39,7 +39,7 @@ int main(int argc, char const *argv[])
     init_console_ui();
     
     //Open pipes
-     if(fd_X = open(rwX, O_RDONLY) == 0 ) {
+     if(fd_X = open(rwX, O_RDONLY|O_NONBLOCK) == 0 ) {
         perror("Can't open /tmp/fifoCZ");
         exit(-1);
     }

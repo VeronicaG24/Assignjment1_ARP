@@ -12,12 +12,12 @@ struct position {
 };
 
 int main() {
-        if((fd_readX = open(rX, O_RDONLY)) == 0 ) {
+        if((fd_readX = open(rX, O_RDONLY|O_NONBLOCK)) == 0 ) {
             perror("Can't open /tmp/fifoXW");
             exit(-1);
         }
     
-        if((fd_readZ = open(rZ, O_RDONLY)) == 0 ) {
+        if((fd_readZ = open(rZ, O_RDONLY|O_NONBLOCK)) == 0 ) {
             perror("Can't open /tmp/fifoZW");
             exit(-1);
         }
