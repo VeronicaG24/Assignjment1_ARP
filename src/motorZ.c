@@ -6,6 +6,7 @@
 #include <sys/stat.h>
 #include <fcntl.h>
 #include <signal.h>
+#include <errno.h>
 
 #define dt 1/30
 #define nbytes sizeof(float)
@@ -61,10 +62,10 @@ int main(){
     while(1){
         //leggere ZX e controllare che non dia errore
         read_byteV = read(fd_read, &v_read, nbytes);
-        if(read_byteV == -1) 
+        if(read_byteV == -1 && errno != EAGAIN) 
             perror("error in reading");
         else if(read_byteV < nbytes) {
-            printf("nothing to read");
+            //printf("nothing to read");
         }
         else {
             v = v_read;
