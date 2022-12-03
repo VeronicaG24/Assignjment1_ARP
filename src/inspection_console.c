@@ -16,8 +16,8 @@ struct position {
 };
 int fd_read;
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
+    
     pid_t pid_cmd = argv[3];
     pid_t pid_motorX = argv[4];
     pid_t pid_motorZ = argv[5];
@@ -32,18 +32,16 @@ int main(int argc, char const *argv[])
     // Initialize User Interface 
     init_console_ui();
 
-    //
     int read_byte;
 
     //aprire pipe WI in lettura
-    if((fd_read = open(r, O_RDONLY | O_NONBLOCK)) ==0 ) {
+    if((fd_read = open(r, O_RDONLY | O_NONBLOCK)) == 0) {
             perror("Inspection: Can't open /tmp/fifoWI");
             exit(-1);
     }
 
     // Infinite loop
-    while(TRUE)
-	{	
+    while(TRUE) {	
         // Get mouse/resize commands in non-blocking mode...
         int cmd = getch();
 
@@ -78,9 +76,11 @@ int main(int argc, char const *argv[])
                     mvprintw(LINES - 1, 1, "RST button pressed");
                     refresh();
                     sleep(1);
+                    
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
+                    
                     //comand console unable to use untill reached the original position
                     //motor X and motor Z V=0 then Vx Vz negative untill reach 0,0
                     kill(SIGUSR1, pid_motorX);
@@ -91,6 +91,7 @@ int main(int argc, char const *argv[])
         }
         
         read_byte = read(fd_read, &p, sizeof(struct position));
+        
         if(read_byte == -1 && errno != EAGAIN) {
             perror("can't read position");
         }

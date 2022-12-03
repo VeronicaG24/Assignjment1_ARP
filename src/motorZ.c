@@ -18,6 +18,7 @@
 int fd_read, fd_write;
 
 void sig_handler(int signo) {
+    
     if(signo == SIGINT) {
         printf("MotorZ:received SIGINT, closing pipes and exit\n");
         
@@ -26,6 +27,7 @@ void sig_handler(int signo) {
             perror("MotorZ:can't close tmp/fifoCZ");
             exit(-1);
         }
+
         if(close(fd_write) != 0) {
             perror("MotorZ:an't close tmp/fifoZW");
             exit(-1);
@@ -37,7 +39,7 @@ void sig_handler(int signo) {
     signal(SIGINT, sig_handler);
 }
 
-int main(){
+int main() {
 
     //gestione segnale SIGINT
     if(signal(SIGINT, sig_handler) == SIG_ERR)
@@ -59,9 +61,10 @@ int main(){
     float z = zMin, zOld = 0;
     int read_byteV;
 
-    while(1){
+    while(1) {
         //leggere ZX e controllare che non dia errore
         read_byteV = read(fd_read, &v_read, nbytes);
+        
         if(read_byteV == -1 && errno != EAGAIN) 
             perror("MotorZ: error in reading");
         else if(read_byteV < nbytes) {

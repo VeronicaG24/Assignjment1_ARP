@@ -13,6 +13,7 @@
 
 int fd_readX, fd_readZ;
 int fd_write;
+
 struct position {
         float x;
         float z;
@@ -36,13 +37,14 @@ int main() {
             exit(-1);
         }
 
-        float Xold=0;
-        float Zold=0;
-        float Xr=0, Zr=0;
+        float Xold = 0;
+        float Zold = 0;
+        float Xr = 0, Zr = 0;
         struct position p = {0, 0};
         int read_byteX, read_byteZ;
+
         //deve mandare la x e la z solo quando viene modificata!
-        while(1){
+        while(1) {
                 //read X from pipe 
                 read_byteX = read(fd_readX, &Xr, sizeof(float));
                 read_byteZ = read(fd_readZ, &Zr, sizeof(float));

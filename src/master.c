@@ -16,23 +16,28 @@ char * fifoCZ = "/tmp/fifoCZ";
 void sig_handler(int signo) {
     if(signo == SIGINT) {
         printf("Master: received SIGINT, unlink pipes and exit\n");
+        
         //unlink le pipe
         if(unlink(fifoXW) != 0) {
             perror("can't unlink tmp/fifoXW");
             exit(-1);
         }
+        
         if(unlink(fifoZW) != 0) {
             perror("can't unlink tmp/fifoZW");
             exit(-1);
         }
+        
         if(unlink(fifoWI) != 0) {
             perror("can't unlink tmp/fifoWI");
             exit(-1);
         }
+        
         if(unlink(fifoCX) != 0) {
             perror("can't unlink tmp/fifoCX");
             exit(-1);
         }
+        
         if(unlink(fifoCZ) != 0) {
             perror("can't unlink tmp/fifoCZ");
             exit(-1);
@@ -106,7 +111,7 @@ int main() {
   //spawn command window and inspection window 
   char * arg_list_command[] = { "/usr/bin/konsole", "-e", "./bin/command", NULL };
   pid_t pid_cmd = spawn("/usr/bin/konsole", arg_list_command);
-  char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", pid_cmd, pid_motorX, pid_motorZ, NULL };
+  char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", pid_cmd, pid_motorX, pid_motorZ, NULL};
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
   //change into watchdog
@@ -115,6 +120,7 @@ int main() {
   waitpid(pid_insp, &status, 0);
   
   printf ("Main program exiting with status %d\n", status);
+  
   return 0;
 }
 

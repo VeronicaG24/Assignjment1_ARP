@@ -18,7 +18,8 @@ int fd_read;
 int fd_write;
 int nbytes = sizeof(float);
 
-void sig_handler(int signo){
+void sig_handler(int signo) {
+    
     if(signo==SIGINT){
         printf("MotorX: received SIGINT, closing the pipes and exit\n");
         
@@ -39,18 +40,18 @@ void sig_handler(int signo){
 
 int main(){
     //definire gestione SIGNIT
-    if(signal(SIGINT, sig_handler)==SIG_ERR){
+    if(signal(SIGINT, sig_handler)==SIG_ERR) {
         printf("MotorX:Can't set the signal handler for SIGINT\n");
     }
     
     //aprire la pipe in letteura(CX) e contrallare non dia errore
-    if((fd_read=open(r, O_RDONLY| O_NONBLOCK)) ==0 ){
+    if((fd_read=open(r, O_RDONLY| O_NONBLOCK)) ==0 ) {
         perror("MotorX:Can't open /tmp/fifoCX");
         exit(-1);
     }
     
     //aprire pipe in scritture(XW)
-    if((fd_write=open(w, O_WRONLY))==0){
+    if((fd_write=open(w, O_WRONLY))==0) {
         perror("MotorX:can't open  tmp/fifoXW");
         exit(-1);
     }
@@ -59,9 +60,10 @@ int main(){
     float X=X_MIN, xOld = 0;
     int read_byteV;
     
-    while(1){
+    while(1) {
         //leggere CX e controllare che non dia errore
         read_byteV = read(fd_read, &v_read, nbytes);
+        
         if(read_byteV == -1 && errno != EAGAIN) 
             perror("Motorx: error in reading");
         else if(read_byteV < nbytes) {
@@ -73,18 +75,19 @@ int main(){
 
         //aggiornare X
         float dx = (v*dt);
-        if(X< X_MAX - dx || X > X_MIN +dx){
+        if(X< (X_MAX - dx) || X > (X_MIN + dx)) { 
             X+=dx;
         }
         else 
             X=X_MAX;
-        if((X+dx)>X_MAX){
+        
+        if((X + dx) > X_MAX) {
             X=X_MAX;
         }
-        else if( (X+dx) < X_MIN){
+        else if( (X + dx) < X_MIN) {
             X=X_MIN;
         }
-        else{
+        else {
             X+=dx;
         }
         

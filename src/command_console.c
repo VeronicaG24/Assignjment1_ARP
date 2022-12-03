@@ -41,8 +41,7 @@ int write_vel(int act, int index) {
 
 }
 
-int main(int argc, char const *argv[])
-{
+int main(int argc, char const *argv[]) {
     // Utility variable to avoid trigger resize event on launch
     int first_resize = TRUE;
 
@@ -62,8 +61,7 @@ int main(int argc, char const *argv[])
     }
 
     // Infinite loop
-    while(TRUE)
-	{	
+    while(TRUE) {	
         // Get mouse/resize commands in non-blocking mode...
         int cmd = getch();
 
@@ -94,7 +92,6 @@ int main(int argc, char const *argv[])
                         mvaddch(LINES - 1, j, ' ');
                     }
                 }
-
                 // Vx++ button pressed
                 else if(check_button_pressed(vx_incr_btn, &event)) {
                     mvprintw(LINES - 1, 1, "Horizontal Speed Increased");
@@ -108,7 +105,6 @@ int main(int argc, char const *argv[])
                     }
 
                 }
-
                 // Vx stop button pressed
                 else if(check_button_pressed(vx_stp_button, &event)) {
                     mvprintw(LINES - 1, 1, "Horizontal Motor Stopped");
@@ -122,7 +118,6 @@ int main(int argc, char const *argv[])
                     }
                    
                 }
-
                 // Vz-- button pressed
                 else if(check_button_pressed(vz_decr_btn, &event)) {
                     mvprintw(LINES - 1, 1, "Vertical Speed Decreased");
@@ -136,7 +131,6 @@ int main(int argc, char const *argv[])
                     //update Vz+ on motor z
                     
                 }
-
                 // Vz++ button pressed
                 else if(check_button_pressed(vz_incr_btn, &event)) {
                     mvprintw(LINES - 1, 1, "Vertical Speed Increased");
@@ -150,7 +144,6 @@ int main(int argc, char const *argv[])
                     }
 
                 }
-
                 // Vz stop button pressed
                 else if(check_button_pressed(vz_stp_button, &event)) {
                     mvprintw(LINES - 1, 1, "Vertical Motor Stopped");
