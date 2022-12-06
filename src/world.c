@@ -58,6 +58,7 @@ int main() {
                 }
                 else {
                         if(Xr!= Xold) {
+                                //IMPORTANT: remember to add errors
                                 p.x = Xr;
                         }
                 }

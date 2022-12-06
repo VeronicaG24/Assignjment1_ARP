@@ -111,6 +111,7 @@ int main() {
   //spawn command window and inspection window 
   char * arg_list_command[] = { "/usr/bin/konsole", "-e", "./bin/command", NULL };
   pid_t pid_cmd = spawn("/usr/bin/konsole", arg_list_command);
+  //error in compiling when passing the pid
   char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", pid_cmd, pid_motorX, pid_motorZ, NULL};
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
