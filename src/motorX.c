@@ -17,9 +17,31 @@
 int fd_read;
 int fd_write;
 int nbytes = sizeof(float);
+//need to declare v and X outside the main otherwise can't update when RESET or STOP
+float X=X_MIN;
+
+//function to update X
+void update_X(float v){
+    float dx = (v*dt);
+        if(X< (X_MAX - dx) || X > (X_MIN + dx)) { 
+            X+=dx;
+        }
+        else 
+            X=X_MAX;
+        
+        if((X + dx) > X_MAX) {
+            X=X_MAX;
+        }
+        else if( (X + dx) < X_MIN) {
+            X=X_MIN;
+        }
+        else {
+            X+=dx;
+        }
+}
 
 void sig_handler(int signo) {
-    
+    //code to execute when arrive SIGINT
     if(signo==SIGINT){
         printf("MotorX: received SIGINT, closing the pipes and exit\n");
         
@@ -35,13 +57,51 @@ void sig_handler(int signo) {
         
         exit(0);
     }
-    signal(SIGINT, sig_handler);
+    //code to execute when receive SIGUSR1(RESET)
+    
+    else if(signo==SIGUSR1){
+        //RESET INSTRUCTION ROUTINE
+        //stop 
+        updateX(0);
+        //sleep
+        while(X!=0){
+            //update X
+            update_X(-1);
+        }
+    }
+    
+
+    //code to execute when receive SIGUSR2(STOP)
+    
+    else if(signo ==SIGUSR2){
+        //STOP INSTRUCTION ROUTINE
+        //set v=0
+        //update X
+        update_X(0);
+
+    }
+    
+    if(signal(SIGINT, sig_handler)==SIG_ERR) {
+        printf("MotorX:Can't set the signal handler for SIGINT\n");
+    }
+    if(signal(SIGUSR1, sig_handler)==SIG_ERR) {
+        printf("MotorX:Can't set the signal handler for SIGUSR1(RESET)\n");
+    }
+    if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
+        printf("MotorX:Can't set the signal handler for SIGUSR2(STOP)\n");
+    }
 } 
 
 int main(){
     //definire gestione SIGNIT
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
         printf("MotorX:Can't set the signal handler for SIGINT\n");
+    }
+    if(signal(SIGUSR1, sig_handler)==SIG_ERR) {
+        printf("MotorX:Can't set the signal handler for SIGUSR1(RESET)\n");
+    }
+    if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
+        printf("MotorX:Can't set the signal handler for SIGUSR2(STOP)\n");
     }
     
     //aprire la pipe in letteura(CX) e contrallare non dia errore
@@ -57,7 +117,7 @@ int main(){
     }
 
     float v = 0, v_read = 0;
-    float X=X_MIN, xOld = 0;
+    float xOld = 0;
     int read_byteV;
     
     while(1) {
@@ -74,7 +134,7 @@ int main(){
         }
 
         //aggiornare X
-        float dx = (v*dt);
+        /*float dx = (v*dt);
         if(X< (X_MAX - dx) || X > (X_MIN + dx)) { 
             X+=dx;
         }
@@ -89,7 +149,8 @@ int main(){
         }
         else {
             X+=dx;
-        }
+        }*/
+        update_X(v);
         
         //scrivere in XW solo se x è cambiata
         if (X != xOld) {
