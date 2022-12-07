@@ -61,11 +61,9 @@ int main() {
                 else {
                         print("%d",read_byteX);
                         if(Xr != Xold) {
-                                float range = boundErr*2;
-                                err = ((float)rand()/((float)boundErr));
-                                err = (err*range) - boundErr;
-
-                                p.x = Xr + err;
+                                err = (float)rand()/(float)(RAND_MAX/(boundErr*2));
+                                err = err - boundErr;
+                                p.z = Xr + err;
                                 printf("World: Xr-%f\n X-%f", Xr, p.x);
                         }
                 }
