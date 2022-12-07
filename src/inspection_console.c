@@ -21,6 +21,9 @@ int main(int argc, char const *argv[]) {
     //const char * pid_cmd_c = argv[3];
     //char * pid_mX_c = argv[4];
     //char * pid_mZ_c = argv[5];
+    prinf("%s", argv[3]);
+    prinf("%s", argv[4]);
+    prinf("%s", argv[5]);
 
     pid_t pid_cmd, pid_motorX, pid_motorZ;
     pid_cmd = atoi(argv[3]);
