@@ -53,7 +53,7 @@ void sig_handler(int signo) {
         //RESET INSTRUCTION ROUTINE
         //stop 
         update_z(0);
-        //sleep
+        sleep(1);
         while(z!=0){
             //update X
             update_z(-1);
@@ -122,17 +122,6 @@ int main() {
         else {
             v = v_read;
         }
-        
-        //aggiornare Z
-        /*if((z + v*dt) > zMax) {
-            z = zMax;
-        }
-        else if ((z + v*dt) < zMin) {
-            z = zMin;
-        }
-        else
-            z += v*dt;*/
-
 
         update_z(v);
         //scrivere in ZW solo se z è cambiata
