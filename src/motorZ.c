@@ -50,12 +50,13 @@ void sig_handler(int signo) {
     //code to execute when receive SIGUSR1(RESET)
     
     else if(signo==SIGUSR1){
+        printf("MotorZ:received SIGUSR1, reset routine starting\n");
         //RESET INSTRUCTION ROUTINE
         //stop 
         update_z(0);
         sleep(1);
         while(z!=0){
-            //update X
+            //update Z
             update_z(-1);
         }
     }
