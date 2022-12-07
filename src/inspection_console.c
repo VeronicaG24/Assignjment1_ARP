@@ -22,9 +22,10 @@ int main(int argc, char const *argv[]) {
     char * pid_mX_c = argv[4];
     char * pid_mZ_c = argv[5];
 
-    pid_t pid_cmd = (pid_t)(pid_cmd_c);
-    pid_t pid_motorX = (pid_t)(pid_mX_c);
-    pid_t pid_motorZ = (pid_t)(pid_mZ_c);
+    pid_t pid_cmd, pid_motorX, pid_motorZ;
+    sscanf(pid_cmd_c, "%d", &pid_cmd);
+    sscanf(pid_mX_c, "%d", &pid_motorX);
+    sscanf(pid_mZ_c, "%d", &pid_motorZ);
 
     // Utility variable to avoid trigger resize event on launch
     int first_resize = TRUE;
