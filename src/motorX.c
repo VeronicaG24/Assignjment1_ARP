@@ -18,7 +18,7 @@ int fd_read;
 int fd_write;
 int nbytes = sizeof(float);
 //need to declare v and X outside the main otherwise can't update when RESET or STOP
-float X=X_MIN;
+float X=X_MIN, v = 0;
 
 //function to update X
 void update_X(float v){
@@ -75,9 +75,9 @@ void sig_handler(int signo) {
     
     else if(signo ==SIGUSR2){
         //STOP INSTRUCTION ROUTINE
-        //set v=0
         //update X
         update_X(0);
+        v=0;
 
     }
     
@@ -116,7 +116,7 @@ int main(){
         exit(-1);
     }
 
-    float v = 0, v_read = 0;
+    float v_read = 0;
     float xOld = 0;
     int read_byteV;
     
