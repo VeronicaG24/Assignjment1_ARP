@@ -22,22 +22,17 @@ float X=X_MIN, v = 0;
 
 //function to update X
 void update_X(float v){
-    float dx = (v*dt);
-        if(X< (X_MAX - dx) || X > (X_MIN + dx)) { 
-            X+=dx;
-        }
-        else 
-            X=X_MAX;
-        
-        if((X + dx) > X_MAX) {
-            X=X_MAX;
-        }
-        else if( (X + dx) < X_MIN) {
-            X=X_MIN;
-        }
-        else {
-            X+=dx;
-        }
+    float dx = (v*dt);    
+    if((X + dx) > X_MAX) {
+         X=X_MAX;
+    }
+    else if( (X + dx) < X_MIN) {
+        X=X_MIN;
+    }
+    else {
+        X+=dx;
+    }
+    printf("X:%f", X);
 }
 
 void sig_handler(int signo) {

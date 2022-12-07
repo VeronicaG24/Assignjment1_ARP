@@ -41,6 +41,50 @@ int write_vel(int act, int index) {
 
 }
 
+void sig_handler(int signo) {
+    //code to execute when arrive SIGINT
+    if(signo==SIGINT){
+        printf("Command: received SIGINT, closing the pipes and exit\n");
+        
+        //chiusura pipe
+        if(close(fd_X)!=0){
+            perror("Command: Can't close the re");
+            exit(-1);
+        }
+        if(close(fd_X)!= 0){
+            perror("MotorX: Can't close the write pipe");
+            exit(-1);
+        }        
+        exit(0);
+    }
+    //code to execute when receive SIGUSR1(RESET)
+    
+    else if(signo==SIGUSR1){
+        //RESET INSTRUCTION ROUTINE
+        //stop 
+
+    }
+    
+
+    //code to execute when receive SIGUSR2(STOP)
+    
+    else if(signo ==SIGUSR2){
+        //STOP INSTRUCTION ROUTINE
+        //update X
+
+    }
+    
+    if(signal(SIGINT, sig_handler)==SIG_ERR) {
+        printf("MotorX:Can't set the signal handler for SIGINT\n");
+    }
+    if(signal(SIGUSR1, sig_handler)==SIG_ERR) {
+        printf("MotorX:Can't set the signal handler for SIGUSR1(RESET)\n");
+    }
+    if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
+        printf("MotorX:Can't set the signal handler for SIGUSR2(STOP)\n");
+    }
+} 
+
 int main(int argc, char const *argv[]) {
     // Utility variable to avoid trigger resize event on launch
     int first_resize = TRUE;

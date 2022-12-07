@@ -22,11 +22,12 @@ void update_z(float v){
     if((z + v*dt) > zMax) {
             z = zMax;
         }
-        else if ((z + v*dt) < zMin) {
-            z = zMin;
+    else if ((z + v*dt) < zMin) {
+        z = zMin;
         }
-        else
-            z += v*dt;
+    else
+        z += v*dt;
+    printf("Z:%f", z);
 }
 
 void sig_handler(int signo) {
