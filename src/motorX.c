@@ -63,7 +63,7 @@ void sig_handler(int signo) {
         //RESET INSTRUCTION ROUTINE
         //stop 
         updateX(0);
-        //sleep
+        sleep(1);
         while(X!=0){
             //update X
             update_X(-1);
@@ -133,23 +133,6 @@ int main(){
             v = v_read;
         }
 
-        //aggiornare X
-        /*float dx = (v*dt);
-        if(X< (X_MAX - dx) || X > (X_MIN + dx)) { 
-            X+=dx;
-        }
-        else 
-            X=X_MAX;
-        
-        if((X + dx) > X_MAX) {
-            X=X_MAX;
-        }
-        else if( (X + dx) < X_MIN) {
-            X=X_MIN;
-        }
-        else {
-            X+=dx;
-        }*/
         update_X(v);
         
         //scrivere in XW solo se x è cambiata
