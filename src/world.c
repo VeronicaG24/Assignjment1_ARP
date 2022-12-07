@@ -76,19 +76,20 @@ int main() {
                 }
                 else {
                         if(Zr != Zold) {
-                                err = ((float)rand()/((float)2*boundErr))-boundErr;
+                                err = (float)rand()/(float)(RAND_MAX/(boundErr*2));
+                                err = err - boundErr;
                                 p.z = Zr + err;
                         }
                 }
                 
                 //if X and Z are change write on the pipe and update their value
-                if(p.x != Xold || p.z != Zold) {
+                if(Xr != Xold || Zr != Zold) {
                         
                         //write the new value on the pipe.
                         if(write(fd_write, &p, sizeof(struct position)) != -1) {
                                 //update the value if the write go well
-                                Xold = p.x;
-                                Zold = p.z;
+                                Xold = Xr;
+                                Zold = Zr;
                         }
                         else
                                 perror("World: can't write position");
