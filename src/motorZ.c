@@ -27,7 +27,6 @@ void update_z(float v){
         }
     else
         z += v*dt;
-    printf("Z:%f", z);
 }
 
 void sig_handler(int signo) {

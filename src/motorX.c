@@ -18,7 +18,8 @@ int fd_read;
 int fd_write;
 int nbytes = sizeof(float);
 //need to declare v and X outside the main otherwise can't update when RESET or STOP
-float X=X_MIN, v = 0;
+float X=X_MIN;
+float v = 0;
 
 //function to update X
 void update_X(float v){
@@ -32,7 +33,6 @@ void update_X(float v){
     else {
         X+=dx;
     }
-    printf("X:%f", X);
 }
 
 void sig_handler(int signo) {
