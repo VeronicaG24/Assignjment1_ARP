@@ -121,6 +121,8 @@ int main() {
   sprintf(pid_mX_c, "%d", pid_motorX);
   sprintf(pid_mZ_c, "%d", pid_motorZ);
   //error in compiling when passing the pid
+  printf("pid_cmd:%d", pid_cmd);
+  printf("converted-pid_cmd:%s", pid_cmd_c);
   char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", pid_cmd_c, pid_mX_c, pid_mZ_c, NULL};
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
