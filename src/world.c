@@ -60,9 +60,8 @@ int main() {
                 }
                 else {
                         if(Xr != Xold) {
-                                float range = boundErr*2;
-                                err = ((float)rand()/((float)boundErr));
-                                err = (err*range) - boundErr;
+                                err = (float)rand()/(float)(RAND_MAX/(boundErr*2));
+                                err = err - boundErr;
                                 p.x = Xr + err;
                         }
                 }
