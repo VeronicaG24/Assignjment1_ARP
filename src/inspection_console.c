@@ -18,14 +18,14 @@ int fd_read;
 
 int main(int argc, char const *argv[]) {
     
-    char * pid_cmd_c = argv[3];
-    char * pid_mX_c = argv[4];
-    char * pid_mZ_c = argv[5];
+    //const char * pid_cmd_c = argv[3];
+    //char * pid_mX_c = argv[4];
+    //char * pid_mZ_c = argv[5];
 
     pid_t pid_cmd, pid_motorX, pid_motorZ;
-    sscanf(pid_cmd, "%d", pid_cmd_c);
-    sscanf(pid_motorX, "%d", pid_mX_c);
-    sscanf(pid_motorZ, "%d", pid_mZ_c);
+    pid_cmd = atoi(argv[3]);
+    pid_motorX = atoi(argv[4]);
+    pid_motorZ = atoi(argv[5]);
 
     // Utility variable to avoid trigger resize event on launch
     int first_resize = TRUE;
