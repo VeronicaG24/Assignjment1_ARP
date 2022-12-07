@@ -12,37 +12,40 @@ char * fifoWI = "/tmp/fifoWI";
 char * fifoCX = "/tmp/fifoCX";
 char * fifoCZ = "/tmp/fifoCZ";
 
+void unlinkpipe(){
+if(unlink(fifoXW) != 0) {
+            perror("can't unlink tmp/fifoXW");
+            //exit(-1);
+        }
+        
+        if(unlink(fifoZW) != 0) {
+            perror("can't unlink tmp/fifoZW");
+            //exit(-1);
+        }
+        
+        if(unlink(fifoWI) != 0) {
+            perror("can't unlink tmp/fifoWI");
+            //exit(-1);
+        }
+        
+        if(unlink(fifoCX) != 0) {
+            perror("can't unlink tmp/fifoCX");
+            //exit(-1);
+        }
+        
+        if(unlink(fifoCZ) != 0) {
+            perror("can't unlink tmp/fifoCZ");
+            //exit(-1);
+        }
+}
 //function to manage SIGINT
 void sig_handler(int signo) {
     if(signo == SIGINT) {
         printf("Master: received SIGINT, unlink pipes and exit\n");
         
         //unlink le pipe
-        if(unlink(fifoXW) != 0) {
-            perror("can't unlink tmp/fifoXW");
-            exit(-1);
-        }
-        
-        if(unlink(fifoZW) != 0) {
-            perror("can't unlink tmp/fifoZW");
-            exit(-1);
-        }
-        
-        if(unlink(fifoWI) != 0) {
-            perror("can't unlink tmp/fifoWI");
-            exit(-1);
-        }
-        
-        if(unlink(fifoCX) != 0) {
-            perror("can't unlink tmp/fifoCX");
-            exit(-1);
-        }
-        
-        if(unlink(fifoCZ) != 0) {
-            perror("can't unlink tmp/fifoCZ");
-            exit(-1);
-        }
-        
+        unlinkpipe();  
+      
         exit(0);
     }
     
@@ -75,7 +78,7 @@ int spawn(const char * program, char * arg_list[]) {
 int main() {
 
   signal(SIGINT, sig_handler);
-
+  unlinkpipe();
   //create pipes
   //pipe X-world 
   if (mkfifo(fifoXW, 0666) != 0)
@@ -126,6 +129,7 @@ int main() {
   waitpid(pid_cmd, &status, 0);
   waitpid(pid_insp, &status, 0);
   
+  unlinkpipe();
   printf ("Main program exiting with status %d\n", status);
   
   return 0;
