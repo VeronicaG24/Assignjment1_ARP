@@ -62,7 +62,7 @@ void sig_handler(int signo) {
     else if(signo==SIGUSR1){
         //RESET INSTRUCTION ROUTINE
         //stop 
-        updateX(0);
+        update_X(0);
         sleep(1);
         while(X!=0){
             //update X
