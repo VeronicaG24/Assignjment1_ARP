@@ -14,7 +14,7 @@ char * fifoCZ = "/tmp/fifoCZ";
 
 void unlinkpipe(){
 if(unlink(fifoXW) != 0) {
-            perror("can't unlink tmp/fifoXW");
+        perror("can't unlink tmp/fifoXW");
             //exit(-1);
         }
         
@@ -130,6 +130,9 @@ int main() {
   waitpid(pid_insp, &status, 0);
   
   unlinkpipe();
+  kill(pid_motorX,SIGINT);
+  kill(pid_motorZ,SIGINT);
+  kill(pid_world,SIGINT);
   printf ("Main program exiting with status %d\n", status);
   
   return 0;

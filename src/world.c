@@ -20,10 +20,33 @@ struct position {
         float x;
         float z;
 };
+void sig_handler(int signo){
+        if(signo==SIGINT){
+        printf("MotorX: received SIGINT, closing the pipes and exit\n");
+        
+        //chiusura pipe
+        if(close(fd_readX)!=0){
+            perror("World: Can't close the reading pipe X");
+            exit(-1);
+        }
+        if(close(fd_readZ)!=0){
+            perror("World: Can't close the reading pipe Z");
+            exit(-1);
+        }
+        if(close(fd_write)!=0){
+            perror("WOrld: Can't close the write pipe");
+            exit(-1);
+        }
+        
+        exit(0);
+    }
+}
 
 int main() {
         printf("world \n");
-
+        if(signal(SIGINT, sig_handler)==SIG_ERR) {
+        printf("World:Can't set the signal handler for SIGINT\n");
+        }
         if((fd_readX = open(rX, O_RDONLY|O_NONBLOCK)) == 0 ) {
             perror("World: Can't open /tmp/fifoXW");
             exit(-1);
