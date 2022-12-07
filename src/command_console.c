@@ -62,6 +62,7 @@ void sig_handler(int signo) {
     else if(signo==SIGUSR1){
         //RESET INSTRUCTION ROUTINE
         //stop 
+        printf("Command: received SIGUSR1- Reset routine starting\n");
 
     }
     

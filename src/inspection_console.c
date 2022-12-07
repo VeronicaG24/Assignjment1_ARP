@@ -21,14 +21,12 @@ int main(int argc, char const *argv[]) {
     //const char * pid_cmd_c = argv[3];
     //char * pid_mX_c = argv[4];
     //char * pid_mZ_c = argv[5];
-    prinf("%s", argv[3]);
-    prinf("%s", argv[4]);
-    prinf("%s", argv[5]);
+
 
     pid_t pid_cmd, pid_motorX, pid_motorZ;
-    pid_cmd = atoi(argv[3]);
-    pid_motorX = atoi(argv[4]);
-    pid_motorZ = atoi(argv[5]);
+    pid_cmd = atoi(argv[1]);
+    pid_motorX = atoi(argv[2]);
+    pid_motorZ = atoi(argv[3]);
 
     // Utility variable to avoid trigger resize event on launch
     int first_resize = TRUE;
@@ -39,6 +37,11 @@ int main(int argc, char const *argv[]) {
 
     // Initialize User Interface 
     init_console_ui();
+
+    /*printf("3)%s\n", argv[1]);
+    printf("4)%s\n", argv[2]);
+    printf("5)%s\n", argv[3]);
+    fflush(stdout);*/
 
     int read_byte;
 
@@ -91,9 +94,9 @@ int main(int argc, char const *argv[]) {
                     
                     //comand console unable to use untill reached the original position
                     //motor X and motor Z V=0 then Vx Vz negative untill reach 0,0
-                    kill(SIGUSR1, pid_motorX);
-                    kill(SIGUSR1, pid_motorZ);
-                    kill(SIGUSR1, pid_cmd);
+                    kill(pid_motorX, SIGUSR1);
+                    kill(pid_motorZ, SIGUSR1);
+                    kill(pid_cmd, SIGUSR1);
                 }
             }
         }
