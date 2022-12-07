@@ -60,6 +60,7 @@ void sig_handler(int signo) {
         //stop 
         update_X(0);
         sleep(1);
+        v=0;
         while(X!=0){
             //update X
             update_X(-1);
@@ -70,6 +71,7 @@ void sig_handler(int signo) {
     //code to execute when receive SIGUSR2(STOP)
     
     else if(signo ==SIGUSR2){
+        printf("MotorX: received SIGUSR2- STOP routine starting\n");
         //STOP INSTRUCTION ROUTINE
         //update X
         update_X(0);

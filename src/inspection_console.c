@@ -15,7 +15,7 @@ struct position {
         float z;
 };
 int fd_read;
-
+bool reset=FALSE;
 int main(int argc, char const *argv[]) {
     
     //const char * pid_cmd_c = argv[3];
@@ -27,6 +27,7 @@ int main(int argc, char const *argv[]) {
     pid_cmd = atoi(argv[1]);
     pid_motorX = atoi(argv[2]);
     pid_motorZ = atoi(argv[3]);
+ 
 
     // Utility variable to avoid trigger resize event on launch
     int first_resize = TRUE;
@@ -38,9 +39,7 @@ int main(int argc, char const *argv[]) {
     // Initialize User Interface 
     init_console_ui();
 
-    /*printf("3)%s\n", argv[1]);
-    printf("4)%s\n", argv[2]);
-    printf("5)%s\n", argv[3]);
+    /*printf("%d", pid_cmd);
     fflush(stdout);*/
 
     int read_byte;
@@ -80,6 +79,9 @@ int main(int argc, char const *argv[]) {
                         mvaddch(LINES - 1, j, ' ');
                     }
                     //signal to STOP everything send to every proccess
+                    kill(pid_motorX, SIGUSR2);
+                    kill(pid_motorZ, SIGUSR2);
+                    kill(pid_cmd, SIGUSR2);
                 }
 
                 // RESET button pressed
@@ -97,6 +99,7 @@ int main(int argc, char const *argv[]) {
                     kill(pid_motorX, SIGUSR1);
                     kill(pid_motorZ, SIGUSR1);
                     kill(pid_cmd, SIGUSR1);
+                    reset=TRUE;
                 }
             }
         }
@@ -114,6 +117,9 @@ int main(int argc, char const *argv[]) {
             ee_z = p.z;
             // Update UI
             update_console_ui(&ee_x, &ee_z);
+            if(ee_x<=0.05 && ee_z<=0.05 && reset ){
+                kill(pid_cmd, SIGUSR2);
+            }
         }
 
         // To be commented in final version...

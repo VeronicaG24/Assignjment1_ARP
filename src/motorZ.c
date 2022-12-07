@@ -55,6 +55,7 @@ void sig_handler(int signo) {
         //stop 
         update_z(0);
         sleep(1);
+        v=0;
         while(z!=0){
             //update Z
             update_z(-1);
@@ -64,6 +65,7 @@ void sig_handler(int signo) {
     //code to execute when receive SIGUSR2(STOP)
     
     else if(signo ==SIGUSR2){
+        printf("MotorZ: received SIGUSR2- STOP routine starting\n");
         //STOP INSTRUCTION ROUTINE
         //set v=0
         //update X
