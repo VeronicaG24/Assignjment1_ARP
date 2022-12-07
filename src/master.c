@@ -111,10 +111,12 @@ int main() {
   //spawn command window and inspection window 
   char * arg_list_command[] = { "/usr/bin/konsole", "-e", "./bin/command", NULL };
   pid_t pid_cmd = spawn("/usr/bin/konsole", arg_list_command);
-  char * pid_cmd_c = malloc(6);
+  char * pid_cmd_c = malloc(6), pid_mX_c = malloc(6), pid_mZ_c = malloc(6);
   sprintf(pid_cmd_c, "%d", pid_cmd);
+  sprintf(pid_mX_c, "%d", pid_motorX);
+  sprintf(pid_mZ_c, "%d", pid_motorZ);
   //error in compiling when passing the pid
-  char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", pid_cmd_c, pid_motorX, pid_motorZ, NULL};
+  char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", pid_cmd_c, pid_mX_c, pid_mZ_c, NULL};
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
   //change into watchdog
