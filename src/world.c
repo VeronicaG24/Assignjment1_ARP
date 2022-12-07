@@ -10,9 +10,11 @@
 #define rX "/tmp/fifoXW"
 #define rZ "/tmp/fifoZW"
 #define w "/tmp/fifoWI"
+#define boundErr 0.05
 
 int fd_readX, fd_readZ;
 int fd_write;
+float err = 0;
 
 struct position {
         float x;
@@ -57,9 +59,9 @@ int main() {
                         Xr = Xold;
                 }
                 else {
-                        if(Xr!= Xold) {
-                                //IMPORTANT: remember to add errors
-                                p.x = Xr;
+                        if(Xr != Xold) {
+                                err = ((float)rand()/((float)2*boundErr))-boundErr;
+                                p.x = Xr + err;
                         }
                 }
                 
@@ -72,19 +74,20 @@ int main() {
                         Zr = Zold;
                 }
                 else {
-                        if(Zr!= Zold) {
-                                p.z = Zr;
+                        if(Zr != Zold) {
+                                err = ((float)rand()/((float)2*boundErr))-boundErr;
+                                p.z = Zr + err;
                         }
                 }
                 
                 //if X and Z are change write on the pipe and update their value
-                if(Xr!= Xold || Zr != Zold) {
+                if(p.x != Xold || p.z != Zold) {
                         
                         //write the new value on the pipe.
                         if(write(fd_write, &p, sizeof(struct position)) != -1) {
                                 //update the value if the write go well
-                                Xold = Xr;
-                                Zold = Zr;
+                                Xold = p.x;
+                                Zold = p.z;
                         }
                         else
                                 perror("World: can't write position");
