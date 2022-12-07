@@ -22,7 +22,7 @@ struct position {
 };
 void sig_handler(int signo){
         if(signo==SIGINT){
-        printf("MotorX: received SIGINT, closing the pipes and exit\n");
+        printf("World: received SIGINT, closing the pipes and exit\n");
         
         //chiusura pipe
         if(close(fd_readX)!=0){
@@ -34,7 +34,7 @@ void sig_handler(int signo){
             exit(-1);
         }
         if(close(fd_write)!=0){
-            perror("WOrld: Can't close the write pipe");
+            perror("World: Can't close the write pipe");
             exit(-1);
         }
         
