@@ -16,7 +16,7 @@
 #define zMin 0
 
 int fd_read, fd_write;
-float z =zMin;
+float z =zMin, v = 0;
 
 void update_z(float v){
     if((z + v*dt) > zMax) {
@@ -67,7 +67,7 @@ void sig_handler(int signo) {
         //set v=0
         //update X
         update_z(0);
-
+        v = 0;
     }
 
    
@@ -106,7 +106,7 @@ int main() {
         exit(-1);
     }
 
-    float v = 0, v_read = 0;
+    float v_read = 0;
     float zOld = 0;
     int read_byteV;
 
