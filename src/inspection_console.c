@@ -18,9 +18,13 @@ int fd_read;
 
 int main(int argc, char const *argv[]) {
     
-    pid_t pid_cmd = argv[3];
-    pid_t pid_motorX = argv[4];
-    pid_t pid_motorZ = argv[5];
+    char * pid_cmd_c = argv[3];
+    char * pid_mX_c = argv[4];
+    char * pid_mZ_c = argv[5];
+
+    pid_t pid_cmd = (pid_t)(pid_cmd_c);
+    pid_t pid_motorX = (pid_t)(pid_mX_c);
+    pid_t pid_motorZ = (pid_t)(pid_mZ_c);
 
     // Utility variable to avoid trigger resize event on launch
     int first_resize = TRUE;
