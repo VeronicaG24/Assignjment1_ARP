@@ -55,6 +55,7 @@ void sig_handler(int signo) {
     //code to execute when receive SIGUSR1(RESET)
     
     else if(signo==SIGUSR1){
+         printf("MotorX: received SIGUSR1- Reset routine starting\n");
         //RESET INSTRUCTION ROUTINE
         //stop 
         update_X(0);
