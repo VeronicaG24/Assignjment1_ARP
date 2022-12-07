@@ -78,7 +78,7 @@ int spawn(const char * program, char * arg_list[]) {
 int main() {
 
   signal(SIGINT, sig_handler);
-  unlinkpipe();
+  //unlinkpipe();
   //create pipes
   //pipe X-world 
   if (mkfifo(fifoXW, 0666) != 0)
