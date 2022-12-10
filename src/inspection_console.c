@@ -27,11 +27,26 @@ int main(int argc, char const *argv[]) {
     pid_cmd = atoi(argv[1]);
     pid_motorX = atoi(argv[2]);
     pid_motorZ = atoi(argv[3]);
+
     //get pid command window from command window
     int fd= open("/tmp/fifoCI", O_RDONLY|O_NONBLOCK);
+    pid_t pidcmd=0;
     if(fd==0){
-        perror("Can't open comunication inspection-command")
+        perror("Can't open comunication inspection-command");
     }
+    while(pidcmd==0){
+        int read_byte = read(fd_read, &pidcmd, sizeof(pid_t));
+        
+        if(read_byte == -1 && errno != EAGAIN) {
+            pidcmd=0;
+            perror("can't read position");
+        }
+        else if(read_byte < sizeof(pid_t)) {
+            pidcmd=0;
+        }
+    }
+
+
 
     // Utility variable to avoid trigger resize event on launch
     int first_resize = TRUE;
@@ -43,7 +58,8 @@ int main(int argc, char const *argv[]) {
     // Initialize User Interface 
     init_console_ui();
 
-    printf("%d", pid_cmd);
+    printf("master:%d\n", pid_cmd);
+    printf("command:%d", pidcmd);
     fflush(stdout);
 
     int read_byte;
