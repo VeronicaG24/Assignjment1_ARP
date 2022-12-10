@@ -27,7 +27,11 @@ int main(int argc, char const *argv[]) {
     pid_cmd = atoi(argv[1]);
     pid_motorX = atoi(argv[2]);
     pid_motorZ = atoi(argv[3]);
- 
+    //get pid command window from command window
+    int fd= open("/tmp/fifoCI", O_RDONLY|O_NONBLOCK);
+    if(fd==0){
+        perror("Can't open comunication inspection-command")
+    }
 
     // Utility variable to avoid trigger resize event on launch
     int first_resize = TRUE;
@@ -39,8 +43,8 @@ int main(int argc, char const *argv[]) {
     // Initialize User Interface 
     init_console_ui();
 
-    /*printf("%d", pid_cmd);
-    fflush(stdout);*/
+    printf("%d", pid_cmd);
+    fflush(stdout);
 
     int read_byte;
 
@@ -96,6 +100,8 @@ int main(int argc, char const *argv[]) {
                     
                     //comand console unable to use untill reached the original position
                     //motor X and motor Z V=0 then Vx Vz negative untill reach 0,0
+                    printf("Reset cmd:%d", pid_cmd);
+                    fflush(stdout);
                     kill(pid_motorX, SIGUSR1);
                     kill(pid_motorZ, SIGUSR1);
                     kill(pid_cmd, SIGUSR1);

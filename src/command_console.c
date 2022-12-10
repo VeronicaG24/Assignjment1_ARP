@@ -111,9 +111,19 @@ int main(int argc, char const *argv[]) {
 
     // Initialize User Interface 
     init_console_ui();
+    //send pid to inspection console
+    if(mkfifo("/tmp/fifoCI",066)!=0){
+        perror("Cannot create pipe. already existing?");
+    }
+    int fd=open("/tmp/fifoCI", O_WRONLY);
+    pid_t mypid=getpid();
+    write(fd,&mypid, sizeof(pid_t));
+    sleep(1);
+    close(fd);
+    unlink("/tmp/fifoCI");
     
-    /*printf("%d", getpid());
-    fflush(stdout);*/
+    printf("%d", getpid());
+    fflush(stdout);
 
     //Open pipe CX in srittura
      if(fd_X = open(rwX, O_WRONLY) == 0 ) {
