@@ -6,6 +6,7 @@
 #include <unistd.h>
 #include <sys/wait.h>
 #include <sys/stat.h>
+#include <time.h>
 
 #define rX "/tmp/fifoXW"
 #define rZ "/tmp/fifoZW"
@@ -20,6 +21,19 @@ struct position {
         float x;
         float z;
 };
+
+char* current_time(){
+    time_t rawtime;
+    struct tm * timeinfo;
+    char* timedate;
+
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+
+    timedate = asctime(timeinfo);
+    return timedate;
+}
+
 void sig_handler(int signo){
         if(signo==SIGINT){
         printf("World: received SIGINT, closing the pipes and exit\n");
@@ -113,11 +127,20 @@ int main() {
                                 //update the value if the write go well
                                 Xold = Xr;
                                 Zold = Zr;
+
+                                FILE *flog;
+                                flog = fopen("logFile.log", "a+"); //a+ fa append 
+                                if (flog == NULL) {
+                                        perror("World: cannot open log file");
+                                }
+                                else {
+                                        char * curr_time = current_time();
+                                        fprintf(flog, "< WORLD > updated (x,z) position (%f,%f) cm at time: %s \n", Xr, Zr, curr_time);
+                                }
+                                fclose(flog);
                         }
                         else
                                 perror("World: can't write position");
-
-                        //update log file
                 }
 
 

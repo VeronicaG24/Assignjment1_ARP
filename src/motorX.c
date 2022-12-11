@@ -7,6 +7,8 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <errno.h>
+#include <time.h>
+#include <string.h>
 
 #define dt 1/30
 #define r "/tmp/fifoCX"
@@ -20,6 +22,19 @@ int nbytes = sizeof(float);
 //need to declare v and X outside the main otherwise can't update when RESET or STOP
 float X=X_MIN;
 float v = 0;
+
+// Retrieve current time procedure
+char* current_time(){
+    time_t rawtime;
+    struct tm * timeinfo;
+    char* timedate;
+
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+
+    timedate = asctime(timeinfo);
+    return timedate;
+}
 
 //function to update X
 void update_X(float v){
@@ -129,7 +144,7 @@ int main(){
         }
         else {
             v = v_read;
-        }
+        } 
 
         update_X(v);
         
@@ -137,7 +152,18 @@ int main(){
         if (X != xOld) {
             if(write(fd_write, &X, nbytes) == -1)
                 perror("MotorX: error in writing");
-            
+
+            FILE *flog;
+            flog = fopen("logFile.log", "a+"); //a+ fa append 
+            if (flog == NULL) {
+                perror("MotorX: cannot open log file");
+            }
+            else {
+                char * curr_time = current_time();
+                fprintf(flog, "< MOTOR X > reached position %f cm at time: %s \n", X, curr_time);
+            }
+            fclose(flog);
+
             xOld = X;
         }
         

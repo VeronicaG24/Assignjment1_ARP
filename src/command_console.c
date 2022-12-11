@@ -16,6 +16,18 @@ float v[] = {0.0, 0.0};
 char * fd[2]= {"/tmp/fifoCX","/tmp/fifoCZ"};
 bool reset=FALSE;
 
+char* current_time(){
+    time_t rawtime;
+    struct tm * timeinfo;
+    char* timedate;
+
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+
+    timedate = asctime(timeinfo);
+    return timedate;
+}
+
 int write_vel(int act, int index) {
     /*give the file descriptor fd and a integer to say how velocity need to change act
     write on the pipe associated with fd the new velocity
@@ -228,6 +240,18 @@ int main(int argc, char const *argv[]) {
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
+
+                    FILE *flog;
+                    flog = fopen("logFile.log", "a+"); //a+ fa append 
+                    if (flog == NULL) {
+                            perror("Command Console: cannot open log file");
+                    }
+                    else {
+                            char * curr_time = current_time();
+                            fprintf(flog, "< COMM_CONSOLE > pressed Vx-- button at time: %s \n", curr_time);
+                    }
+                    fclose(flog);
+
                 }
                 // Vx++ button pressed
                 else if(check_button_pressed(vx_incr_btn, &event)) {
@@ -241,6 +265,17 @@ int main(int argc, char const *argv[]) {
                         mvaddch(LINES - 1, j, ' ');
                     }
 
+                    FILE *flog;
+                    flog = fopen("logFile.log", "a+"); //a+ fa append 
+                    if (flog == NULL) {
+                            perror("Command Console: cannot open log file");
+                    }
+                    else {
+                            char * curr_time = current_time();
+                            fprintf(flog, "< COMM_CONSOLE > pressed Vx++ button at time: %s \n", curr_time);
+                    }
+                    fclose(flog);
+
                 }
                 // Vx stop button pressed
                 else if(check_button_pressed(vx_stp_button, &event)) {
@@ -253,6 +288,17 @@ int main(int argc, char const *argv[]) {
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
+
+                    FILE *flog;
+                    flog = fopen("logFile.log", "a+"); //a+ fa append 
+                    if (flog == NULL) {
+                            perror("Command Console: cannot open log file");
+                    }
+                    else {
+                            char * curr_time = current_time();
+                            fprintf(flog, "< COMM_CONSOLE > pressed Vx stop button at time: %s \n", curr_time);
+                    }
+                    fclose(flog);
                    
                 }
                 // Vz-- button pressed
@@ -266,6 +312,17 @@ int main(int argc, char const *argv[]) {
                         mvaddch(LINES - 1, j, ' ');
                     }
                     //update Vz+ on motor z
+
+                    FILE *flog;
+                    flog = fopen("logFile.log", "a+"); //a+ fa append 
+                    if (flog == NULL) {
+                            perror("Command Console: cannot open log file");
+                    }
+                    else {
+                            char * curr_time = current_time();
+                            fprintf(flog, "< COMM_CONSOLE > pressed Vz-- button at time: %s \n", curr_time);
+                    }
+                    fclose(flog);
                     
                 }
                 // Vz++ button pressed
@@ -280,6 +337,17 @@ int main(int argc, char const *argv[]) {
                         mvaddch(LINES - 1, j, ' ');
                     }
 
+                    FILE *flog;
+                    flog = fopen("logFile.log", "a+"); //a+ fa append 
+                    if (flog == NULL) {
+                            perror("Command Console: cannot open log file");
+                    }
+                    else {
+                            char * curr_time = current_time();
+                            fprintf(flog, "< COMM_CONSOLE > pressed Vz++ button at time: %s \n", curr_time);
+                    }
+                    fclose(flog);
+
                 }
                 // Vz stop button pressed
                 else if(check_button_pressed(vz_stp_button, &event)) {
@@ -292,6 +360,17 @@ int main(int argc, char const *argv[]) {
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
+
+                    FILE *flog;
+                    flog = fopen("logFile.log", "a+"); //a+ fa append 
+                    if (flog == NULL) {
+                            perror("Command Console: cannot open log file");
+                    }
+                    else {
+                            char * curr_time = current_time();
+                            fprintf(flog, "< COMM_CONSOLE > pressed Vz stop button at time: %s \n", curr_time);
+                    }
+                    fclose(flog);
                     
                 }               
             }

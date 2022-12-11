@@ -1,0 +1,7 @@
+{
+    "files.associations": {
+        "cstdio": "c",
+        "errno.h": "c",
+        "time.h": "c"
+    }
+}

@@ -7,6 +7,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <errno.h>
+#include <time.h>
 
 #define r "/tmp/fifoWI"
 
@@ -16,6 +17,19 @@ struct position {
 };
 int fd_read;
 bool reset=FALSE;
+
+char* current_time(){
+    time_t rawtime;
+    struct tm * timeinfo;
+    char* timedate;
+
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+
+    timedate = asctime(timeinfo);
+    return timedate;
+}
+
 int main(int argc, char const *argv[]) {
     
     //const char * pid_cmd_c = argv[3];
@@ -110,6 +124,16 @@ int main(int argc, char const *argv[]) {
                         mvaddch(LINES - 1, j, ' ');
                     }
                     //signal to STOP everything send to every proccess
+                    FILE *flog;
+                    flog = fopen("logFile.log", "a+"); //a+ fa append 
+                    if (flog == NULL) {
+                            perror("Inspection Console: cannot open log file");
+                    }
+                    else {
+                            char * curr_time = current_time();
+                            fprintf(flog, "< INSP_CONSOLE > stop signal at time: %s \n", curr_time);
+                    }
+                    fclose(flog);
 
                 }
 
@@ -126,7 +150,17 @@ int main(int argc, char const *argv[]) {
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
-                    
+
+                    FILE *flog;
+                    flog = fopen("logFile.log", "a+"); //a+ fa append 
+                    if (flog == NULL) {
+                            perror("Inspection Console: cannot open log file");
+                    }
+                    else {
+                            char * curr_time = current_time();
+                            fprintf(flog, "< INSP_CONSOLE > reset signal at time: %s \n", curr_time);
+                    }
+                    fclose(flog);
                     //comand console unable to use untill reached the original position
                     //motor X and motor Z V=0 then Vx Vz negative untill reach 0,0
                 }

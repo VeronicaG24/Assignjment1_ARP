@@ -7,6 +7,8 @@
 #include <fcntl.h>
 #include <signal.h>
 #include <errno.h>
+#include <time.h>
+#include <string.h>
 
 #define dt 1/30
 #define nbytes sizeof(float)
@@ -17,6 +19,18 @@
 
 int fd_read, fd_write;
 float z =zMin, v = 0;
+
+char* current_time(){
+    time_t rawtime;
+    struct tm * timeinfo;
+    char* timedate;
+
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+
+    timedate = asctime(timeinfo);
+    return timedate;
+}
 
 void update_z(float v){
     if((z + v*dt) > zMax) {
@@ -131,6 +145,17 @@ int main() {
         if (z != zOld) {
             if(write(fd_write, &z, nbytes) == -1)
                 perror("MotorZ: error in writing");
+            
+            FILE *flog;
+            flog = fopen("logFile.log", "a+"); //a+ fa append 
+            if (flog == NULL) {
+                perror("MotorZ: cannot open log file");
+            }
+            else {
+                char * curr_time = current_time();
+                fprintf(flog, "< MOTOR Z > reached position %f cm at time: %s \n", z, curr_time);
+            }
+            fclose(flog);
             
             zOld = z;
         }
