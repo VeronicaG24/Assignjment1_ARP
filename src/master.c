@@ -5,12 +5,26 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <signal.h>
+#include <time.h>
 
 char * fifoXW = "/tmp/fifoXW";
 char * fifoZW = "/tmp/fifoZW";
 char * fifoWI = "/tmp/fifoWI";
 char * fifoCX = "/tmp/fifoCX";
 char * fifoCZ = "/tmp/fifoCZ";
+
+// Retrieve current time procedure
+char* current_time(){
+    time_t rawtime;
+    struct tm * timeinfo;
+    char* timedate;
+
+    time ( &rawtime );
+    timeinfo = localtime ( &rawtime );
+
+    timedate = asctime(timeinfo);
+    return timedate;
+}
 
 void unlinkpipe(){
 if(unlink(fifoXW) != 0) {
@@ -128,16 +142,54 @@ int main() {
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
   //change into watchdog
+  //while(1) { non so se ci vada
   int status;
+  FILE *flog; //file pointer log file
+  long bytesWritten = 0;
+  long bytesWritten_old = 0;
+  time_t startTimer;
   waitpid(pid_cmd, &status, 0);
   waitpid(pid_insp, &status, 0);
   
-  unlinkpipe();
-  kill(pid_motorX,SIGINT);
-  kill(pid_motorZ,SIGINT);
-  kill(pid_world,SIGINT);
-  printf ("Main program exiting with status %d\n", status);
+  flog = fopen("./logFile.log", "r"); //decidere posizione
+  fseek(flog, 0L, SEEK_END); //mi posizione alla fine del file (file pointer at 0 bytes from the end)
+  bytesWritten_old = ftell(flog); //numero di byte dall'inizio alla fine (alla posizione del file pointer)
+  fclose(flog);
+  startTimer = time(NULL);
+
+  bytesWritten = bytesWritten_old;
+  while((bytesWritten==bytesWritten_old) && (difftime(time(NULL), startTimer) < 60)) {
+    flog = fopen("./logFile.log", "r"); //decidere posizione
+    fseek(flog, 0L, SEEK_END); 
+    bytesWritten_old = ftell(flog); 
+    fclose(flog);
+  }
+
+  if(difftime(time(NULL), startTimer) >= 60) {
+    // Write on the LOG.txt
+    char * currTime = current_time();
+    flog = fopen("./logFile.log", "a+"); //decidere posizione (controlla a o a+, per me a+ meglio)
+    fprintf(flog, "< WATCHDOG > inactivity detected, resetting the system at: %s \n", currTime);
+    fclose(flog);
+
+    unlinkpipe();
+    sleep(1);
+    if(kill(pid_motorX,SIGINT) == -1) { //controlla sia -1
+      perror("MotorX: failed to kill motorX");
+    }
+    sleep(1); //simone ha consigliato di fare le sleep se no non killa bene
+    if(kill(pid_motorZ,SIGINT) == -1) { 
+      perror("MotorZ: failed to kill motorZ");
+    }
+    sleep(1);
+    if(kill(pid_world,SIGINT) == -1) {
+      perror("World: failed to kill world");
+    }
+    printf ("Main program exiting with status %d\n", status);
+
+  }
   
+  //}
   return 0;
 }
 
