@@ -18,7 +18,7 @@
 #define zMin 0
 
 int fd_read, fd_write;
-float z =zMin, v = 0;
+float z =zMin, v = 0, zOld =0;
 
 char* current_time(){
     time_t rawtime;
@@ -41,6 +41,25 @@ void update_z(float v){
         }
     else
         z += v*dt;
+
+    //write the new value on the pipe if it is different
+    if (z != zOld) {
+            if(write(fd_write, &z, nbytes) == -1)
+                perror("MotorZ: error in writing");
+            
+            FILE *flog;
+            flog = fopen("logFile.log", "a+"); //a+ fa append 
+            if (flog == NULL) {
+                perror("MotorZ: cannot open log file");
+            }
+            else {
+                char * curr_time = current_time();
+                fprintf(flog, "< MOTOR Z > reached position %f cm at time: %s \n", z, curr_time);
+            }
+            fclose(flog);
+            
+            zOld = z;
+        }
 }
 
 void sig_handler(int signo) {
@@ -68,11 +87,12 @@ void sig_handler(int signo) {
         //RESET INSTRUCTION ROUTINE
         //stop 
         update_z(0);
-        sleep(1);
+        sleep(0.5);
         v=0;
         while(z!=0){
             //update Z
-            update_z(-1);
+            update_z(-2);
+            sleep(1);
         }
     }
     

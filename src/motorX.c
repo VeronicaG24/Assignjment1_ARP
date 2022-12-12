@@ -20,7 +20,7 @@ int fd_read;
 int fd_write;
 int nbytes = sizeof(float);
 //need to declare v and X outside the main otherwise can't update when RESET or STOP
-float X=X_MIN;
+float X=X_MIN,xOld=0;
 float v = 0;
 
 // Retrieve current time procedure
@@ -48,6 +48,24 @@ void update_X(float v){
     else {
         X+=dx;
     }
+
+    if (X != xOld) {
+            if(write(fd_write, &X, nbytes) == -1)
+                perror("MotorX: error in writing");
+
+            FILE *flog;
+            flog = fopen("logFile.log", "a+"); //a+ fa append 
+            if (flog == NULL) {
+                perror("MotorX: cannot open log file");
+            }
+            else {
+                char * curr_time = current_time();
+                fprintf(flog, "< MOTOR X > reached position %f cm at time: %s \n", X, curr_time);
+            }
+            fclose(flog);
+
+            xOld = X;
+        }
 }
 
 void sig_handler(int signo) {
@@ -78,7 +96,8 @@ void sig_handler(int signo) {
         v=0;
         while(X!=0){
             //update X
-            update_X(-1);
+            update_X(-4);
+            sleep(1);
         }
     }
     
@@ -130,7 +149,7 @@ int main(){
     }
 
     float v_read = 0;
-    float xOld = 0;
+    //float xOld = 0;
     int read_byteV;
     
     while(1) {
@@ -149,7 +168,7 @@ int main(){
         update_X(v);
         
         //scrivere in XW solo se x è cambiata
-        if (X != xOld) {
+        /*if (X != xOld) {
             if(write(fd_write, &X, nbytes) == -1)
                 perror("MotorX: error in writing");
 
@@ -165,7 +184,7 @@ int main(){
             fclose(flog);
 
             xOld = X;
-        }
+        }*/
         
         //sleep
         sleep(1);
