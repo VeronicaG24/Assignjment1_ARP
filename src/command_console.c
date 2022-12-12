@@ -7,6 +7,7 @@
 #include <sys/wait.h>
 #include <sys/stat.h>
 #include <string.h>
+#include <time.h>
 
 #define rwX "/tmp/fifoCX"
 #define rwZ "/tmp/fifoCZ"
@@ -60,7 +61,7 @@ void sig_handler(int signo) {
         printf("Command: received SIGINT, closing the pipes and exit\n");
         //chiusura pipe
         if(close(fd_X)!=0){
-            perror("Command: Can't close the re");
+            perror("Command: Can't close the read pipe");
             exit(-1);
         }
         if(close(fd_Z)!= 0){
