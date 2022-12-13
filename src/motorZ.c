@@ -161,24 +161,6 @@ int main() {
         }
 
         update_z(v);
-        //scrivere in ZW solo se z è cambiata
-        if (z != zOld) {
-            if(write(fd_write, &z, nbytes) == -1)
-                perror("MotorZ: error in writing");
-            
-            FILE *flog;
-            flog = fopen("logFile.log", "a+"); //a+ fa append 
-            if (flog == NULL) {
-                perror("MotorZ: cannot open log file");
-            }
-            else {
-                char * curr_time = current_time();
-                fprintf(flog, "< MOTOR Z > reached position %f cm at time: %s \n", z, curr_time);
-            }
-            fclose(flog);
-            
-            zOld = z;
-        }
         
         //sleep
         sleep(1);

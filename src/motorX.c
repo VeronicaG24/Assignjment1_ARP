@@ -167,25 +167,6 @@ int main(){
 
         update_X(v);
         
-        //scrivere in XW solo se x è cambiata
-        /*if (X != xOld) {
-            if(write(fd_write, &X, nbytes) == -1)
-                perror("MotorX: error in writing");
-
-            FILE *flog;
-            flog = fopen("logFile.log", "a+"); //a+ fa append 
-            if (flog == NULL) {
-                perror("MotorX: cannot open log file");
-            }
-            else {
-                char * curr_time = current_time();
-                fprintf(flog, "< MOTOR X > reached position %f cm at time: %s \n", X, curr_time);
-            }
-            fclose(flog);
-
-            xOld = X;
-        }*/
-        
         //sleep
         sleep(1);
     }
