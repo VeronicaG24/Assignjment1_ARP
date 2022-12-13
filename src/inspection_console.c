@@ -119,6 +119,7 @@ int main(int argc, char const *argv[]) {
                     kill(pid_motorX, SIGUSR2);
                     kill(pid_motorZ, SIGUSR2);
                     kill(pid_c, SIGUSR2);
+                    reset=FALSE;
                     sleep(1);
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');

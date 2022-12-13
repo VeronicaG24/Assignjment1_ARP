@@ -9,6 +9,7 @@
 #include <errno.h>
 #include <time.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define dt 1/30
 #define nbytes sizeof(float)
@@ -19,6 +20,8 @@
 
 int fd_read, fd_write;
 float z =zMin, v = 0, zOld =0;
+bool reset = false;
+
 
 char* current_time(){
     time_t rawtime;
@@ -85,15 +88,17 @@ void sig_handler(int signo) {
     else if(signo==SIGUSR1){
         printf("MotorZ:received SIGUSR1, reset routine starting\n");
         //RESET INSTRUCTION ROUTINE
-        //stop 
+        //stop
+        reset=true;
         update_z(0);
         sleep(0.5);
         v=0;
-        while(z!=0){
+        while(z!=0 && reset){
             //update Z
             update_z(-2);
             sleep(1);
         }
+        reset=false;
     }
     
     //code to execute when receive SIGUSR2(STOP)
@@ -105,6 +110,7 @@ void sig_handler(int signo) {
         //update X
         update_z(0);
         v = 0;
+        reset=false;
     }
 
    

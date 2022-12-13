@@ -9,6 +9,7 @@
 #include <errno.h>
 #include <time.h>
 #include <string.h>
+#include <stdbool.h>
 
 #define dt 1/30
 #define r "/tmp/fifoCX"
@@ -22,6 +23,7 @@ int nbytes = sizeof(float);
 //need to declare v and X outside the main otherwise can't update when RESET or STOP
 float X=X_MIN,xOld=0;
 float v = 0;
+bool reset = false;
 
 // Retrieve current time procedure
 char* current_time(){
@@ -92,13 +94,15 @@ void sig_handler(int signo) {
         //RESET INSTRUCTION ROUTINE
         //stop 
         update_X(0);
+        reset = true;
         sleep(1);
         v=0;
-        while(X!=0){
+        while(X!=0 && reset){
             //update X
             update_X(-4);
             sleep(1);
         }
+        reset=false;
     }
     
 
@@ -110,6 +114,7 @@ void sig_handler(int signo) {
         //update X
         update_X(0);
         v=0;
+        reset=false;
 
     }
     

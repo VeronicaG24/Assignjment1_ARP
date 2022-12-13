@@ -6430,3 +6430,1037 @@
  
 < COMM_CONSOLE > pressed Vz stop button at time: Mon Dec 12 21:46:08 2022
  
+< WORLD > updated (x,z) position (0.033333,0.000000) cm at time: Tue Dec 13 17:17:29 2022
+ 
+< MOTOR X > reached position 0.033333 cm at time: Tue Dec 13 17:17:29 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:30 2022
+ 
+< MOTOR X > reached position 0.066667 cm at time: Tue Dec 13 17:17:30 2022
+ 
+< WORLD > updated (x,z) position (0.066667,0.000000) cm at time: Tue Dec 13 17:17:30 2022
+ 
+< MOTOR X > reached position 0.133333 cm at time: Tue Dec 13 17:17:31 2022
+ 
+< WORLD > updated (x,z) position (0.133333,0.000000) cm at time: Tue Dec 13 17:17:31 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:31 2022
+ 
+< MOTOR X > reached position 0.233333 cm at time: Tue Dec 13 17:17:32 2022
+ 
+< WORLD > updated (x,z) position (0.233333,0.000000) cm at time: Tue Dec 13 17:17:32 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:32 2022
+ 
+< MOTOR X > reached position 0.366667 cm at time: Tue Dec 13 17:17:33 2022
+ 
+< WORLD > updated (x,z) position (0.366667,0.000000) cm at time: Tue Dec 13 17:17:33 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:34 2022
+ 
+< MOTOR X > reached position 0.533333 cm at time: Tue Dec 13 17:17:34 2022
+ 
+< WORLD > updated (x,z) position (0.533333,0.000000) cm at time: Tue Dec 13 17:17:34 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:35 2022
+ 
+< MOTOR X > reached position 0.733333 cm at time: Tue Dec 13 17:17:35 2022
+ 
+< WORLD > updated (x,z) position (0.733333,0.000000) cm at time: Tue Dec 13 17:17:35 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:36 2022
+ 
+< MOTOR X > reached position 0.966667 cm at time: Tue Dec 13 17:17:36 2022
+ 
+< WORLD > updated (x,z) position (0.966667,0.000000) cm at time: Tue Dec 13 17:17:36 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:37 2022
+ 
+< MOTOR X > reached position 1.200000 cm at time: Tue Dec 13 17:17:37 2022
+ 
+< WORLD > updated (x,z) position (1.200000,0.000000) cm at time: Tue Dec 13 17:17:37 2022
+ 
+< MOTOR X > reached position 1.466667 cm at time: Tue Dec 13 17:17:38 2022
+ 
+< WORLD > updated (x,z) position (1.466667,0.000000) cm at time: Tue Dec 13 17:17:38 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:38 2022
+ 
+< MOTOR X > reached position 1.766667 cm at time: Tue Dec 13 17:17:39 2022
+ 
+< WORLD > updated (x,z) position (1.766667,0.000000) cm at time: Tue Dec 13 17:17:39 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:40 2022
+ 
+< MOTOR X > reached position 2.066667 cm at time: Tue Dec 13 17:17:40 2022
+ 
+< WORLD > updated (x,z) position (2.066667,0.000000) cm at time: Tue Dec 13 17:17:40 2022
+ 
+< MOTOR X > reached position 2.366667 cm at time: Tue Dec 13 17:17:41 2022
+ 
+< WORLD > updated (x,z) position (2.366667,0.000000) cm at time: Tue Dec 13 17:17:41 2022
+ 
+< MOTOR X > reached position 2.700000 cm at time: Tue Dec 13 17:17:42 2022
+ 
+< WORLD > updated (x,z) position (2.700000,0.000000) cm at time: Tue Dec 13 17:17:42 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:43 2022
+ 
+< MOTOR X > reached position 3.066667 cm at time: Tue Dec 13 17:17:43 2022
+ 
+< WORLD > updated (x,z) position (3.066667,0.000000) cm at time: Tue Dec 13 17:17:43 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:44 2022
+ 
+< MOTOR X > reached position 3.433333 cm at time: Tue Dec 13 17:17:44 2022
+ 
+< WORLD > updated (x,z) position (3.433333,0.000000) cm at time: Tue Dec 13 17:17:44 2022
+ 
+< MOTOR X > reached position 3.800000 cm at time: Tue Dec 13 17:17:45 2022
+ 
+< WORLD > updated (x,z) position (3.800000,0.000000) cm at time: Tue Dec 13 17:17:45 2022
+ 
+< MOTOR X > reached position 4.200000 cm at time: Tue Dec 13 17:17:46 2022
+ 
+< WORLD > updated (x,z) position (4.200000,0.000000) cm at time: Tue Dec 13 17:17:46 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:47 2022
+ 
+< MOTOR X > reached position 4.633334 cm at time: Tue Dec 13 17:17:47 2022
+ 
+< WORLD > updated (x,z) position (4.633334,0.000000) cm at time: Tue Dec 13 17:17:47 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:17:48 2022
+ 
+< MOTOR X > reached position 5.066667 cm at time: Tue Dec 13 17:17:48 2022
+ 
+< WORLD > updated (x,z) position (5.066667,0.000000) cm at time: Tue Dec 13 17:17:48 2022
+ 
+< WORLD > updated (x,z) position (5.066667,0.033333) cm at time: Tue Dec 13 17:17:49 2022
+ 
+< MOTOR Z > reached position 0.033333 cm at time: Tue Dec 13 17:17:49 2022
+ 
+< WORLD > updated (x,z) position (5.500000,0.033333) cm at time: Tue Dec 13 17:17:49 2022
+ 
+< MOTOR X > reached position 5.500000 cm at time: Tue Dec 13 17:17:49 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:17:50 2022
+ 
+< MOTOR Z > reached position 0.066667 cm at time: Tue Dec 13 17:17:50 2022
+ 
+< WORLD > updated (x,z) position (5.500000,0.066667) cm at time: Tue Dec 13 17:17:50 2022
+ 
+< MOTOR X > reached position 5.933334 cm at time: Tue Dec 13 17:17:50 2022
+ 
+< WORLD > updated (x,z) position (5.933334,0.066667) cm at time: Tue Dec 13 17:17:50 2022
+ 
+< MOTOR Z > reached position 0.133333 cm at time: Tue Dec 13 17:17:51 2022
+ 
+< WORLD > updated (x,z) position (5.933334,0.133333) cm at time: Tue Dec 13 17:17:51 2022
+ 
+< MOTOR X > reached position 6.366667 cm at time: Tue Dec 13 17:17:51 2022
+ 
+< WORLD > updated (x,z) position (6.366667,0.133333) cm at time: Tue Dec 13 17:17:51 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:17:51 2022
+ 
+< MOTOR Z > reached position 0.200000 cm at time: Tue Dec 13 17:17:52 2022
+ 
+< WORLD > updated (x,z) position (6.366667,0.200000) cm at time: Tue Dec 13 17:17:52 2022
+ 
+< WORLD > updated (x,z) position (6.800001,0.200000) cm at time: Tue Dec 13 17:17:52 2022
+ 
+< MOTOR X > reached position 6.800001 cm at time: Tue Dec 13 17:17:52 2022
+ 
+< MOTOR Z > reached position 0.300000 cm at time: Tue Dec 13 17:17:53 2022
+ 
+< WORLD > updated (x,z) position (6.800001,0.300000) cm at time: Tue Dec 13 17:17:53 2022
+ 
+< WORLD > updated (x,z) position (7.233334,0.300000) cm at time: Tue Dec 13 17:17:53 2022
+ 
+< MOTOR X > reached position 7.233334 cm at time: Tue Dec 13 17:17:53 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:17:54 2022
+ 
+< MOTOR Z > reached position 0.433333 cm at time: Tue Dec 13 17:17:54 2022
+ 
+< WORLD > updated (x,z) position (7.233334,0.433333) cm at time: Tue Dec 13 17:17:54 2022
+ 
+< WORLD > updated (x,z) position (7.666667,0.433333) cm at time: Tue Dec 13 17:17:54 2022
+ 
+< MOTOR X > reached position 7.666667 cm at time: Tue Dec 13 17:17:54 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:17:55 2022
+ 
+< MOTOR Z > reached position 0.566667 cm at time: Tue Dec 13 17:17:55 2022
+ 
+< WORLD > updated (x,z) position (7.666667,0.566667) cm at time: Tue Dec 13 17:17:55 2022
+ 
+< WORLD > updated (x,z) position (8.100000,0.566667) cm at time: Tue Dec 13 17:17:55 2022
+ 
+< MOTOR X > reached position 8.100000 cm at time: Tue Dec 13 17:17:55 2022
+ 
+< MOTOR Z > reached position 0.733333 cm at time: Tue Dec 13 17:17:56 2022
+ 
+< WORLD > updated (x,z) position (8.100000,0.733333) cm at time: Tue Dec 13 17:17:56 2022
+ 
+< WORLD > updated (x,z) position (8.533334,0.733333) cm at time: Tue Dec 13 17:17:56 2022
+ 
+< MOTOR X > reached position 8.533334 cm at time: Tue Dec 13 17:17:56 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:17:56 2022
+ 
+< MOTOR Z > reached position 0.933333 cm at time: Tue Dec 13 17:17:57 2022
+ 
+< WORLD > updated (x,z) position (8.533334,0.933333) cm at time: Tue Dec 13 17:17:57 2022
+ 
+< WORLD > updated (x,z) position (8.966667,0.933333) cm at time: Tue Dec 13 17:17:57 2022
+ 
+< MOTOR X > reached position 8.966667 cm at time: Tue Dec 13 17:17:57 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:17:58 2022
+ 
+< MOTOR Z > reached position 1.133333 cm at time: Tue Dec 13 17:17:58 2022
+ 
+< WORLD > updated (x,z) position (8.966667,1.133333) cm at time: Tue Dec 13 17:17:58 2022
+ 
+< WORLD > updated (x,z) position (9.366667,1.133333) cm at time: Tue Dec 13 17:17:58 2022
+ 
+< MOTOR X > reached position 9.366667 cm at time: Tue Dec 13 17:17:58 2022
+ 
+< COMM_CONSOLE > pressed Vx-- button at time: Tue Dec 13 17:17:59 2022
+ 
+< MOTOR Z > reached position 1.333333 cm at time: Tue Dec 13 17:17:59 2022
+ 
+< WORLD > updated (x,z) position (9.366667,1.333333) cm at time: Tue Dec 13 17:17:59 2022
+ 
+< WORLD > updated (x,z) position (9.733334,1.333333) cm at time: Tue Dec 13 17:17:59 2022
+ 
+< MOTOR X > reached position 9.733334 cm at time: Tue Dec 13 17:17:59 2022
+ 
+< COMM_CONSOLE > pressed Vx-- button at time: Tue Dec 13 17:18:00 2022
+ 
+< MOTOR Z > reached position 1.533333 cm at time: Tue Dec 13 17:18:00 2022
+ 
+< WORLD > updated (x,z) position (9.733334,1.533333) cm at time: Tue Dec 13 17:18:00 2022
+ 
+< MOTOR X > reached position 10.100000 cm at time: Tue Dec 13 17:18:00 2022
+ 
+< WORLD > updated (x,z) position (10.100000,1.533333) cm at time: Tue Dec 13 17:18:00 2022
+ 
+< MOTOR Z > reached position 1.733333 cm at time: Tue Dec 13 17:18:01 2022
+ 
+< WORLD > updated (x,z) position (10.100000,1.733333) cm at time: Tue Dec 13 17:18:01 2022
+ 
+< WORLD > updated (x,z) position (10.466667,1.733333) cm at time: Tue Dec 13 17:18:01 2022
+ 
+< MOTOR X > reached position 10.466667 cm at time: Tue Dec 13 17:18:01 2022
+ 
+< MOTOR Z > reached position 1.966667 cm at time: Tue Dec 13 17:18:02 2022
+ 
+< WORLD > updated (x,z) position (10.466667,1.966667) cm at time: Tue Dec 13 17:18:02 2022
+ 
+< WORLD > updated (x,z) position (10.833334,1.966667) cm at time: Tue Dec 13 17:18:02 2022
+ 
+< MOTOR X > reached position 10.833334 cm at time: Tue Dec 13 17:18:02 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:18:02 2022
+ 
+< MOTOR Z > reached position 2.200000 cm at time: Tue Dec 13 17:18:03 2022
+ 
+< WORLD > updated (x,z) position (10.833334,2.200000) cm at time: Tue Dec 13 17:18:03 2022
+ 
+< WORLD > updated (x,z) position (11.200001,2.200000) cm at time: Tue Dec 13 17:18:03 2022
+ 
+< MOTOR X > reached position 11.200001 cm at time: Tue Dec 13 17:18:03 2022
+ 
+< MOTOR Z > reached position 2.466667 cm at time: Tue Dec 13 17:18:04 2022
+ 
+< WORLD > updated (x,z) position (11.200001,2.466667) cm at time: Tue Dec 13 17:18:04 2022
+ 
+< WORLD > updated (x,z) position (11.566668,2.466667) cm at time: Tue Dec 13 17:18:04 2022
+ 
+< MOTOR X > reached position 11.566668 cm at time: Tue Dec 13 17:18:04 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:18:05 2022
+ 
+< MOTOR Z > reached position 2.766667 cm at time: Tue Dec 13 17:18:05 2022
+ 
+< WORLD > updated (x,z) position (11.566668,2.766667) cm at time: Tue Dec 13 17:18:05 2022
+ 
+< MOTOR X > reached position 11.933334 cm at time: Tue Dec 13 17:18:05 2022
+ 
+< WORLD > updated (x,z) position (11.933334,2.766667) cm at time: Tue Dec 13 17:18:05 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:18:06 2022
+ 
+< MOTOR Z > reached position 3.066667 cm at time: Tue Dec 13 17:18:06 2022
+ 
+< WORLD > updated (x,z) position (11.933334,3.066667) cm at time: Tue Dec 13 17:18:06 2022
+ 
+< MOTOR X > reached position 12.300001 cm at time: Tue Dec 13 17:18:06 2022
+ 
+< WORLD > updated (x,z) position (12.300001,3.066667) cm at time: Tue Dec 13 17:18:06 2022
+ 
+< MOTOR Z > reached position 3.000000 cm at time: Tue Dec 13 17:18:07 2022
+ 
+< WORLD > updated (x,z) position (12.300001,3.000000) cm at time: Tue Dec 13 17:18:07 2022
+ 
+< MOTOR X > reached position 12.166668 cm at time: Tue Dec 13 17:18:08 2022
+ 
+< WORLD > updated (x,z) position (12.166668,3.000000) cm at time: Tue Dec 13 17:18:08 2022
+ 
+< INSP_CONSOLE > reset signal at time: Tue Dec 13 17:18:08 2022
+ 
+< WORLD > updated (x,z) position (12.166668,2.933333) cm at time: Tue Dec 13 17:18:08 2022
+ 
+< MOTOR Z > reached position 2.933333 cm at time: Tue Dec 13 17:18:08 2022
+ 
+< WORLD > updated (x,z) position (12.033335,2.933333) cm at time: Tue Dec 13 17:18:09 2022
+ 
+< MOTOR X > reached position 12.033335 cm at time: Tue Dec 13 17:18:09 2022
+ 
+< MOTOR Z > reached position 2.866667 cm at time: Tue Dec 13 17:18:09 2022
+ 
+< WORLD > updated (x,z) position (12.033335,2.866667) cm at time: Tue Dec 13 17:18:09 2022
+ 
+< WORLD > updated (x,z) position (11.900002,2.866667) cm at time: Tue Dec 13 17:18:10 2022
+ 
+< MOTOR X > reached position 11.900002 cm at time: Tue Dec 13 17:18:10 2022
+ 
+< MOTOR Z > reached position 2.800000 cm at time: Tue Dec 13 17:18:10 2022
+ 
+< WORLD > updated (x,z) position (11.900002,2.800000) cm at time: Tue Dec 13 17:18:10 2022
+ 
+< WORLD > updated (x,z) position (11.766668,2.800000) cm at time: Tue Dec 13 17:18:11 2022
+ 
+< MOTOR X > reached position 11.766668 cm at time: Tue Dec 13 17:18:11 2022
+ 
+< WORLD > updated (x,z) position (11.766668,2.733334) cm at time: Tue Dec 13 17:18:11 2022
+ 
+< MOTOR Z > reached position 2.733334 cm at time: Tue Dec 13 17:18:11 2022
+ 
+< MOTOR X > reached position 11.633335 cm at time: Tue Dec 13 17:18:12 2022
+ 
+< WORLD > updated (x,z) position (11.633335,2.733334) cm at time: Tue Dec 13 17:18:12 2022
+ 
+< WORLD > updated (x,z) position (11.633335,2.666667) cm at time: Tue Dec 13 17:18:12 2022
+ 
+< MOTOR Z > reached position 2.666667 cm at time: Tue Dec 13 17:18:12 2022
+ 
+< MOTOR X > reached position 11.500002 cm at time: Tue Dec 13 17:18:13 2022
+ 
+< WORLD > updated (x,z) position (11.500002,2.666667) cm at time: Tue Dec 13 17:18:13 2022
+ 
+< WORLD > updated (x,z) position (11.500002,2.600000) cm at time: Tue Dec 13 17:18:13 2022
+ 
+< MOTOR Z > reached position 2.600000 cm at time: Tue Dec 13 17:18:13 2022
+ 
+< MOTOR X > reached position 11.366669 cm at time: Tue Dec 13 17:18:14 2022
+ 
+< WORLD > updated (x,z) position (11.366669,2.600000) cm at time: Tue Dec 13 17:18:14 2022
+ 
+< MOTOR Z > reached position 2.533334 cm at time: Tue Dec 13 17:18:14 2022
+ 
+< WORLD > updated (x,z) position (11.366669,2.533334) cm at time: Tue Dec 13 17:18:14 2022
+ 
+< MOTOR X > reached position 11.233335 cm at time: Tue Dec 13 17:18:15 2022
+ 
+< WORLD > updated (x,z) position (11.233335,2.533334) cm at time: Tue Dec 13 17:18:15 2022
+ 
+< MOTOR Z > reached position 2.466667 cm at time: Tue Dec 13 17:18:15 2022
+ 
+< WORLD > updated (x,z) position (11.233335,2.466667) cm at time: Tue Dec 13 17:18:15 2022
+ 
+< MOTOR Z > reached position 2.400001 cm at time: Tue Dec 13 17:18:16 2022
+ 
+< MOTOR X > reached position 11.100002 cm at time: Tue Dec 13 17:18:16 2022
+ 
+< WORLD > updated (x,z) position (11.233335,2.400001) cm at time: Tue Dec 13 17:18:16 2022
+ 
+< WORLD > updated (x,z) position (11.100002,2.400001) cm at time: Tue Dec 13 17:18:16 2022
+ 
+< WORLD > updated (x,z) position (11.100002,2.333334) cm at time: Tue Dec 13 17:18:17 2022
+ 
+< MOTOR Z > reached position 2.333334 cm at time: Tue Dec 13 17:18:17 2022
+ 
+< MOTOR X > reached position 10.966669 cm at time: Tue Dec 13 17:18:17 2022
+ 
+< WORLD > updated (x,z) position (10.966669,2.333334) cm at time: Tue Dec 13 17:18:17 2022
+ 
+< WORLD > updated (x,z) position (10.833336,2.266667) cm at time: Tue Dec 13 17:18:18 2022
+ 
+< MOTOR Z > reached position 2.266667 cm at time: Tue Dec 13 17:18:18 2022
+ 
+< MOTOR X > reached position 10.833336 cm at time: Tue Dec 13 17:18:18 2022
+ 
+< MOTOR Z > reached position 2.200001 cm at time: Tue Dec 13 17:18:19 2022
+ 
+< MOTOR X > reached position 10.700003 cm at time: Tue Dec 13 17:18:19 2022
+ 
+< WORLD > updated (x,z) position (10.833336,2.200001) cm at time: Tue Dec 13 17:18:19 2022
+ 
+< WORLD > updated (x,z) position (10.700003,2.200001) cm at time: Tue Dec 13 17:18:19 2022
+ 
+< MOTOR Z > reached position 2.133334 cm at time: Tue Dec 13 17:18:20 2022
+ 
+< MOTOR X > reached position 10.566669 cm at time: Tue Dec 13 17:18:20 2022
+ 
+< WORLD > updated (x,z) position (10.700003,2.133334) cm at time: Tue Dec 13 17:18:20 2022
+ 
+< WORLD > updated (x,z) position (10.566669,2.133334) cm at time: Tue Dec 13 17:18:20 2022
+ 
+< MOTOR Z > reached position 2.066668 cm at time: Tue Dec 13 17:18:21 2022
+ 
+< MOTOR X > reached position 10.433336 cm at time: Tue Dec 13 17:18:21 2022
+ 
+< WORLD > updated (x,z) position (10.566669,2.066668) cm at time: Tue Dec 13 17:18:21 2022
+ 
+< WORLD > updated (x,z) position (10.433336,2.066668) cm at time: Tue Dec 13 17:18:21 2022
+ 
+< MOTOR X > reached position 10.300003 cm at time: Tue Dec 13 17:18:22 2022
+ 
+< WORLD > updated (x,z) position (10.300003,2.066668) cm at time: Tue Dec 13 17:18:22 2022
+ 
+< MOTOR Z > reached position 2.000001 cm at time: Tue Dec 13 17:18:22 2022
+ 
+< WORLD > updated (x,z) position (10.300003,2.000001) cm at time: Tue Dec 13 17:18:22 2022
+ 
+< WORLD > updated (x,z) position (10.166670,2.000001) cm at time: Tue Dec 13 17:18:23 2022
+ 
+< MOTOR X > reached position 10.166670 cm at time: Tue Dec 13 17:18:23 2022
+ 
+< WORLD > updated (x,z) position (10.166670,1.933334) cm at time: Tue Dec 13 17:18:23 2022
+ 
+< MOTOR Z > reached position 1.933334 cm at time: Tue Dec 13 17:18:23 2022
+ 
+< MOTOR X > reached position 10.033337 cm at time: Tue Dec 13 17:18:24 2022
+ 
+< WORLD > updated (x,z) position (10.033337,1.933334) cm at time: Tue Dec 13 17:18:24 2022
+ 
+< MOTOR Z > reached position 1.866668 cm at time: Tue Dec 13 17:18:24 2022
+ 
+< WORLD > updated (x,z) position (10.033337,1.866668) cm at time: Tue Dec 13 17:18:24 2022
+ 
+< MOTOR X > reached position 9.900003 cm at time: Tue Dec 13 17:18:25 2022
+ 
+< MOTOR Z > reached position 1.800001 cm at time: Tue Dec 13 17:18:25 2022
+ 
+< WORLD > updated (x,z) position (9.900003,1.800001) cm at time: Tue Dec 13 17:18:25 2022
+ 
+< MOTOR X > reached position 9.766670 cm at time: Tue Dec 13 17:18:26 2022
+ 
+< WORLD > updated (x,z) position (9.766670,1.733334) cm at time: Tue Dec 13 17:18:26 2022
+ 
+< MOTOR Z > reached position 1.733334 cm at time: Tue Dec 13 17:18:26 2022
+ 
+< MOTOR Z > reached position 1.666667 cm at time: Tue Dec 13 17:18:27 2022
+ 
+< WORLD > updated (x,z) position (9.766670,1.666667) cm at time: Tue Dec 13 17:18:27 2022
+ 
+< MOTOR X > reached position 9.633337 cm at time: Tue Dec 13 17:18:27 2022
+ 
+< WORLD > updated (x,z) position (9.633337,1.666667) cm at time: Tue Dec 13 17:18:27 2022
+ 
+< MOTOR Z > reached position 1.600001 cm at time: Tue Dec 13 17:18:28 2022
+ 
+< MOTOR X > reached position 9.500004 cm at time: Tue Dec 13 17:18:28 2022
+ 
+< WORLD > updated (x,z) position (9.633337,1.600001) cm at time: Tue Dec 13 17:18:28 2022
+ 
+< WORLD > updated (x,z) position (9.500004,1.600001) cm at time: Tue Dec 13 17:18:28 2022
+ 
+< WORLD > updated (x,z) position (9.366671,1.533334) cm at time: Tue Dec 13 17:18:29 2022
+ 
+< MOTOR X > reached position 9.366671 cm at time: Tue Dec 13 17:18:29 2022
+ 
+< MOTOR Z > reached position 1.533334 cm at time: Tue Dec 13 17:18:29 2022
+ 
+< WORLD > updated (x,z) position (9.233337,1.466667) cm at time: Tue Dec 13 17:18:30 2022
+ 
+< MOTOR Z > reached position 1.466667 cm at time: Tue Dec 13 17:18:30 2022
+ 
+< MOTOR X > reached position 9.233337 cm at time: Tue Dec 13 17:18:30 2022
+ 
+< WORLD > updated (x,z) position (9.233337,1.400000) cm at time: Tue Dec 13 17:18:31 2022
+ 
+< MOTOR X > reached position 9.100004 cm at time: Tue Dec 13 17:18:31 2022
+ 
+< MOTOR Z > reached position 1.400000 cm at time: Tue Dec 13 17:18:31 2022
+ 
+< WORLD > updated (x,z) position (9.100004,1.400000) cm at time: Tue Dec 13 17:18:31 2022
+ 
+< MOTOR Z > reached position 1.333334 cm at time: Tue Dec 13 17:18:32 2022
+ 
+< MOTOR X > reached position 8.966671 cm at time: Tue Dec 13 17:18:32 2022
+ 
+< WORLD > updated (x,z) position (8.966671,1.333334) cm at time: Tue Dec 13 17:18:32 2022
+ 
+< MOTOR X > reached position 8.833338 cm at time: Tue Dec 13 17:18:33 2022
+ 
+< MOTOR Z > reached position 1.266667 cm at time: Tue Dec 13 17:18:33 2022
+ 
+< WORLD > updated (x,z) position (8.966671,1.266667) cm at time: Tue Dec 13 17:18:33 2022
+ 
+< WORLD > updated (x,z) position (8.833338,1.266667) cm at time: Tue Dec 13 17:18:33 2022
+ 
+< WORLD > updated (x,z) position (8.700005,1.200000) cm at time: Tue Dec 13 17:18:34 2022
+ 
+< MOTOR Z > reached position 1.200000 cm at time: Tue Dec 13 17:18:34 2022
+ 
+< MOTOR X > reached position 8.700005 cm at time: Tue Dec 13 17:18:34 2022
+ 
+< WORLD > updated (x,z) position (8.700005,1.133334) cm at time: Tue Dec 13 17:18:35 2022
+ 
+< MOTOR Z > reached position 1.133334 cm at time: Tue Dec 13 17:18:35 2022
+ 
+< MOTOR X > reached position 8.566671 cm at time: Tue Dec 13 17:18:35 2022
+ 
+< WORLD > updated (x,z) position (8.566671,1.133334) cm at time: Tue Dec 13 17:18:35 2022
+ 
+< WORLD > updated (x,z) position (8.566671,1.066667) cm at time: Tue Dec 13 17:18:36 2022
+ 
+< MOTOR Z > reached position 1.066667 cm at time: Tue Dec 13 17:18:36 2022
+ 
+< MOTOR X > reached position 8.433338 cm at time: Tue Dec 13 17:18:36 2022
+ 
+< WORLD > updated (x,z) position (8.433338,1.066667) cm at time: Tue Dec 13 17:18:36 2022
+ 
+< WORLD > updated (x,z) position (8.300005,1.000000) cm at time: Tue Dec 13 17:18:37 2022
+ 
+< MOTOR X > reached position 8.300005 cm at time: Tue Dec 13 17:18:37 2022
+ 
+< MOTOR Z > reached position 1.000000 cm at time: Tue Dec 13 17:18:37 2022
+ 
+< MOTOR X > reached position 8.166672 cm at time: Tue Dec 13 17:18:38 2022
+ 
+< MOTOR Z > reached position 0.933333 cm at time: Tue Dec 13 17:18:38 2022
+ 
+< WORLD > updated (x,z) position (8.166672,0.933333) cm at time: Tue Dec 13 17:18:38 2022
+ 
+< WORLD > updated (x,z) position (8.166672,0.866667) cm at time: Tue Dec 13 17:18:39 2022
+ 
+< MOTOR X > reached position 8.033339 cm at time: Tue Dec 13 17:18:39 2022
+ 
+< MOTOR Z > reached position 0.866667 cm at time: Tue Dec 13 17:18:39 2022
+ 
+< WORLD > updated (x,z) position (8.033339,0.866667) cm at time: Tue Dec 13 17:18:39 2022
+ 
+< WORLD > updated (x,z) position (7.900005,0.800000) cm at time: Tue Dec 13 17:18:40 2022
+ 
+< MOTOR Z > reached position 0.800000 cm at time: Tue Dec 13 17:18:40 2022
+ 
+< MOTOR X > reached position 7.900005 cm at time: Tue Dec 13 17:18:40 2022
+ 
+< MOTOR X > reached position 7.766672 cm at time: Tue Dec 13 17:18:41 2022
+ 
+< MOTOR Z > reached position 0.733333 cm at time: Tue Dec 13 17:18:41 2022
+ 
+< WORLD > updated (x,z) position (7.900005,0.733333) cm at time: Tue Dec 13 17:18:41 2022
+ 
+< WORLD > updated (x,z) position (7.766672,0.733333) cm at time: Tue Dec 13 17:18:41 2022
+ 
+< WORLD > updated (x,z) position (7.633339,0.666667) cm at time: Tue Dec 13 17:18:42 2022
+ 
+< MOTOR X > reached position 7.633339 cm at time: Tue Dec 13 17:18:42 2022
+ 
+< MOTOR Z > reached position 0.666667 cm at time: Tue Dec 13 17:18:42 2022
+ 
+< WORLD > updated (x,z) position (7.500006,0.666667) cm at time: Tue Dec 13 17:18:43 2022
+ 
+< MOTOR X > reached position 7.500006 cm at time: Tue Dec 13 17:18:43 2022
+ 
+< WORLD > updated (x,z) position (7.500006,0.600000) cm at time: Tue Dec 13 17:18:43 2022
+ 
+< MOTOR Z > reached position 0.600000 cm at time: Tue Dec 13 17:18:43 2022
+ 
+< WORLD > updated (x,z) position (7.366673,0.533333) cm at time: Tue Dec 13 17:18:44 2022
+ 
+< MOTOR X > reached position 7.366673 cm at time: Tue Dec 13 17:18:44 2022
+ 
+< MOTOR Z > reached position 0.533333 cm at time: Tue Dec 13 17:18:44 2022
+ 
+< MOTOR Z > reached position 0.466667 cm at time: Tue Dec 13 17:18:45 2022
+ 
+< MOTOR X > reached position 7.233339 cm at time: Tue Dec 13 17:18:45 2022
+ 
+< WORLD > updated (x,z) position (7.233339,0.466667) cm at time: Tue Dec 13 17:18:45 2022
+ 
+< WORLD > updated (x,z) position (7.100006,0.400000) cm at time: Tue Dec 13 17:18:46 2022
+ 
+< MOTOR Z > reached position 0.400000 cm at time: Tue Dec 13 17:18:46 2022
+ 
+< MOTOR X > reached position 7.100006 cm at time: Tue Dec 13 17:18:46 2022
+ 
+< MOTOR X > reached position 6.966673 cm at time: Tue Dec 13 17:18:47 2022
+ 
+< MOTOR Z > reached position 0.333333 cm at time: Tue Dec 13 17:18:47 2022
+ 
+< WORLD > updated (x,z) position (7.100006,0.333333) cm at time: Tue Dec 13 17:18:47 2022
+ 
+< WORLD > updated (x,z) position (6.966673,0.333333) cm at time: Tue Dec 13 17:18:47 2022
+ 
+< MOTOR X > reached position 6.833340 cm at time: Tue Dec 13 17:18:48 2022
+ 
+< MOTOR Z > reached position 0.266667 cm at time: Tue Dec 13 17:18:48 2022
+ 
+< WORLD > updated (x,z) position (6.966673,0.266667) cm at time: Tue Dec 13 17:18:48 2022
+ 
+< WORLD > updated (x,z) position (6.833340,0.266667) cm at time: Tue Dec 13 17:18:48 2022
+ 
+< WORLD > updated (x,z) position (6.700006,0.200000) cm at time: Tue Dec 13 17:18:49 2022
+ 
+< MOTOR X > reached position 6.700006 cm at time: Tue Dec 13 17:18:49 2022
+ 
+< MOTOR Z > reached position 0.200000 cm at time: Tue Dec 13 17:18:49 2022
+ 
+< WORLD > updated (x,z) position (6.700006,0.133334) cm at time: Tue Dec 13 17:18:50 2022
+ 
+< MOTOR X > reached position 6.566673 cm at time: Tue Dec 13 17:18:50 2022
+ 
+< MOTOR Z > reached position 0.133334 cm at time: Tue Dec 13 17:18:50 2022
+ 
+< WORLD > updated (x,z) position (6.566673,0.133334) cm at time: Tue Dec 13 17:18:50 2022
+ 
+< MOTOR Z > reached position 0.066667 cm at time: Tue Dec 13 17:18:51 2022
+ 
+< MOTOR X > reached position 6.433340 cm at time: Tue Dec 13 17:18:51 2022
+ 
+< WORLD > updated (x,z) position (6.566673,0.066667) cm at time: Tue Dec 13 17:18:51 2022
+ 
+< WORLD > updated (x,z) position (6.433340,0.066667) cm at time: Tue Dec 13 17:18:51 2022
+ 
+< WORLD > updated (x,z) position (6.433340,0.000000) cm at time: Tue Dec 13 17:18:52 2022
+ 
+< MOTOR Z > reached position 0.000000 cm at time: Tue Dec 13 17:18:52 2022
+ 
+< MOTOR X > reached position 6.300007 cm at time: Tue Dec 13 17:18:52 2022
+ 
+< WORLD > updated (x,z) position (6.300007,0.000000) cm at time: Tue Dec 13 17:18:52 2022
+ 
+< WORLD > updated (x,z) position (6.166674,0.000000) cm at time: Tue Dec 13 17:18:53 2022
+ 
+< MOTOR X > reached position 6.166674 cm at time: Tue Dec 13 17:18:53 2022
+ 
+< MOTOR Z > reached position 0.000000 cm at time: Tue Dec 13 17:18:53 2022
+ 
+< WORLD > updated (x,z) position (6.033340,0.000000) cm at time: Tue Dec 13 17:18:54 2022
+ 
+< MOTOR X > reached position 6.033340 cm at time: Tue Dec 13 17:18:54 2022
+ 
+< WORLD > updated (x,z) position (5.900007,0.000000) cm at time: Tue Dec 13 17:18:55 2022
+ 
+< MOTOR X > reached position 5.900007 cm at time: Tue Dec 13 17:18:55 2022
+ 
+< MOTOR X > reached position 5.766674 cm at time: Tue Dec 13 17:18:56 2022
+ 
+< WORLD > updated (x,z) position (5.766674,0.000000) cm at time: Tue Dec 13 17:18:56 2022
+ 
+< MOTOR X > reached position 5.633341 cm at time: Tue Dec 13 17:18:57 2022
+ 
+< WORLD > updated (x,z) position (5.633341,0.000000) cm at time: Tue Dec 13 17:18:57 2022
+ 
+< MOTOR X > reached position 5.500008 cm at time: Tue Dec 13 17:18:58 2022
+ 
+< WORLD > updated (x,z) position (5.500008,0.000000) cm at time: Tue Dec 13 17:18:58 2022
+ 
+< MOTOR X > reached position 5.366674 cm at time: Tue Dec 13 17:18:59 2022
+ 
+< WORLD > updated (x,z) position (5.366674,0.000000) cm at time: Tue Dec 13 17:18:59 2022
+ 
+< WORLD > updated (x,z) position (5.233341,0.000000) cm at time: Tue Dec 13 17:19:00 2022
+ 
+< MOTOR X > reached position 5.233341 cm at time: Tue Dec 13 17:19:00 2022
+ 
+< MOTOR X > reached position 5.100008 cm at time: Tue Dec 13 17:19:00 2022
+ 
+< WORLD > updated (x,z) position (5.100008,0.000000) cm at time: Tue Dec 13 17:19:00 2022
+ 
+< INSP_CONSOLE > stop signal at time: Tue Dec 13 17:19:01 2022
+ 
+< MOTOR Z > reached position 0.033333 cm at time: Tue Dec 13 17:19:01 2022
+ 
+< WORLD > updated (x,z) position (5.100008,0.033333) cm at time: Tue Dec 13 17:19:01 2022
+ 
+< WORLD > updated (x,z) position (4.966675,0.033333) cm at time: Tue Dec 13 17:19:01 2022
+ 
+< MOTOR X > reached position 4.966675 cm at time: Tue Dec 13 17:19:01 2022
+ 
+< MOTOR X > reached position 4.833342 cm at time: Tue Dec 13 17:19:01 2022
+ 
+< MOTOR Z > reached position 0.066667 cm at time: Tue Dec 13 17:19:01 2022
+ 
+< WORLD > updated (x,z) position (4.833342,0.066667) cm at time: Tue Dec 13 17:19:01 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:19:01 2022
+ 
+< INSP_CONSOLE > stop signal at time: Tue Dec 13 17:19:02 2022
+ 
+< MOTOR X > reached position 4.700008 cm at time: Tue Dec 13 17:19:02 2022
+ 
+< WORLD > updated (x,z) position (4.700008,0.066667) cm at time: Tue Dec 13 17:19:02 2022
+ 
+< MOTOR X > reached position 4.566675 cm at time: Tue Dec 13 17:19:03 2022
+ 
+< WORLD > updated (x,z) position (4.566675,0.066667) cm at time: Tue Dec 13 17:19:03 2022
+ 
+< MOTOR X > reached position 4.433342 cm at time: Tue Dec 13 17:19:04 2022
+ 
+< WORLD > updated (x,z) position (4.433342,0.066667) cm at time: Tue Dec 13 17:19:04 2022
+ 
+< MOTOR X > reached position 4.300009 cm at time: Tue Dec 13 17:19:05 2022
+ 
+< WORLD > updated (x,z) position (4.300009,0.066667) cm at time: Tue Dec 13 17:19:05 2022
+ 
+< INSP_CONSOLE > stop signal at time: Tue Dec 13 17:19:06 2022
+ 
+< MOTOR X > reached position 4.166676 cm at time: Tue Dec 13 17:19:06 2022
+ 
+< WORLD > updated (x,z) position (4.166676,0.066667) cm at time: Tue Dec 13 17:19:06 2022
+ 
+< WORLD > updated (x,z) position (4.033342,0.066667) cm at time: Tue Dec 13 17:19:06 2022
+ 
+< MOTOR X > reached position 4.033342 cm at time: Tue Dec 13 17:19:06 2022
+ 
+< INSP_CONSOLE > stop signal at time: Tue Dec 13 17:19:07 2022
+ 
+< MOTOR X > reached position 3.900009 cm at time: Tue Dec 13 17:19:07 2022
+ 
+< WORLD > updated (x,z) position (3.900009,0.066667) cm at time: Tue Dec 13 17:19:07 2022
+ 
+< MOTOR X > reached position 3.766675 cm at time: Tue Dec 13 17:19:08 2022
+ 
+< WORLD > updated (x,z) position (3.766675,0.066667) cm at time: Tue Dec 13 17:19:08 2022
+ 
+< MOTOR X > reached position 3.633342 cm at time: Tue Dec 13 17:19:09 2022
+ 
+< WORLD > updated (x,z) position (3.633342,0.066667) cm at time: Tue Dec 13 17:19:09 2022
+ 
+< MOTOR X > reached position 3.500009 cm at time: Tue Dec 13 17:19:10 2022
+ 
+< WORLD > updated (x,z) position (3.500009,0.066667) cm at time: Tue Dec 13 17:19:10 2022
+ 
+< MOTOR X > reached position 3.366675 cm at time: Tue Dec 13 17:19:11 2022
+ 
+< WORLD > updated (x,z) position (3.366675,0.066667) cm at time: Tue Dec 13 17:19:11 2022
+ 
+< MOTOR X > reached position 3.233342 cm at time: Tue Dec 13 17:19:12 2022
+ 
+< WORLD > updated (x,z) position (3.233342,0.066667) cm at time: Tue Dec 13 17:19:12 2022
+ 
+< MOTOR X > reached position 3.100008 cm at time: Tue Dec 13 17:19:13 2022
+ 
+< WORLD > updated (x,z) position (3.100008,0.066667) cm at time: Tue Dec 13 17:19:13 2022
+ 
+< WORLD > updated (x,z) position (2.966675,0.066667) cm at time: Tue Dec 13 17:19:14 2022
+ 
+< MOTOR X > reached position 2.966675 cm at time: Tue Dec 13 17:19:14 2022
+ 
+< MOTOR X > reached position 2.833341 cm at time: Tue Dec 13 17:19:15 2022
+ 
+< WORLD > updated (x,z) position (2.833341,0.066667) cm at time: Tue Dec 13 17:19:15 2022
+ 
+< WORLD > updated (x,z) position (2.700008,0.066667) cm at time: Tue Dec 13 17:19:16 2022
+ 
+< MOTOR X > reached position 2.700008 cm at time: Tue Dec 13 17:19:16 2022
+ 
+< WORLD > updated (x,z) position (2.566674,0.066667) cm at time: Tue Dec 13 17:19:17 2022
+ 
+< MOTOR X > reached position 2.566674 cm at time: Tue Dec 13 17:19:17 2022
+ 
+< WORLD > updated (x,z) position (2.433341,0.066667) cm at time: Tue Dec 13 17:19:18 2022
+ 
+< MOTOR X > reached position 2.433341 cm at time: Tue Dec 13 17:19:18 2022
+ 
+< WORLD > updated (x,z) position (2.300008,0.066667) cm at time: Tue Dec 13 17:19:19 2022
+ 
+< MOTOR X > reached position 2.300008 cm at time: Tue Dec 13 17:19:19 2022
+ 
+< MOTOR X > reached position 2.166674 cm at time: Tue Dec 13 17:19:20 2022
+ 
+< WORLD > updated (x,z) position (2.166674,0.066667) cm at time: Tue Dec 13 17:19:20 2022
+ 
+< MOTOR X > reached position 2.033341 cm at time: Tue Dec 13 17:19:21 2022
+ 
+< WORLD > updated (x,z) position (2.033341,0.066667) cm at time: Tue Dec 13 17:19:21 2022
+ 
+< WORLD > updated (x,z) position (1.900007,0.066667) cm at time: Tue Dec 13 17:19:22 2022
+ 
+< MOTOR X > reached position 1.900007 cm at time: Tue Dec 13 17:19:22 2022
+ 
+< WORLD > updated (x,z) position (1.766674,0.066667) cm at time: Tue Dec 13 17:19:23 2022
+ 
+< MOTOR X > reached position 1.766674 cm at time: Tue Dec 13 17:19:23 2022
+ 
+< WORLD > updated (x,z) position (1.633341,0.066667) cm at time: Tue Dec 13 17:19:24 2022
+ 
+< MOTOR X > reached position 1.633341 cm at time: Tue Dec 13 17:19:24 2022
+ 
+< WORLD > updated (x,z) position (1.500007,0.066667) cm at time: Tue Dec 13 17:19:25 2022
+ 
+< MOTOR X > reached position 1.500007 cm at time: Tue Dec 13 17:19:25 2022
+ 
+< MOTOR X > reached position 1.366674 cm at time: Tue Dec 13 17:19:26 2022
+ 
+< WORLD > updated (x,z) position (1.366674,0.066667) cm at time: Tue Dec 13 17:19:26 2022
+ 
+< WORLD > updated (x,z) position (1.233341,0.066667) cm at time: Tue Dec 13 17:19:27 2022
+ 
+< MOTOR X > reached position 1.233341 cm at time: Tue Dec 13 17:19:27 2022
+ 
+< WORLD > updated (x,z) position (1.100007,0.066667) cm at time: Tue Dec 13 17:19:28 2022
+ 
+< MOTOR X > reached position 1.100007 cm at time: Tue Dec 13 17:19:28 2022
+ 
+< WORLD > updated (x,z) position (0.966674,0.066667) cm at time: Tue Dec 13 17:19:29 2022
+ 
+< MOTOR X > reached position 0.966674 cm at time: Tue Dec 13 17:19:29 2022
+ 
+< MOTOR X > reached position 0.833341 cm at time: Tue Dec 13 17:19:30 2022
+ 
+< WORLD > updated (x,z) position (0.833341,0.066667) cm at time: Tue Dec 13 17:19:30 2022
+ 
+< WORLD > updated (x,z) position (0.700007,0.066667) cm at time: Tue Dec 13 17:19:31 2022
+ 
+< MOTOR X > reached position 0.700007 cm at time: Tue Dec 13 17:19:31 2022
+ 
+< WORLD > updated (x,z) position (0.566674,0.066667) cm at time: Tue Dec 13 17:19:32 2022
+ 
+< MOTOR X > reached position 0.566674 cm at time: Tue Dec 13 17:19:32 2022
+ 
+< MOTOR X > reached position 0.433341 cm at time: Tue Dec 13 17:19:33 2022
+ 
+< WORLD > updated (x,z) position (0.433341,0.066667) cm at time: Tue Dec 13 17:19:33 2022
+ 
+< WORLD > updated (x,z) position (0.300007,0.066667) cm at time: Tue Dec 13 17:19:34 2022
+ 
+< MOTOR X > reached position 0.300007 cm at time: Tue Dec 13 17:19:34 2022
+ 
+< MOTOR X > reached position 0.166674 cm at time: Tue Dec 13 17:19:35 2022
+ 
+< WORLD > updated (x,z) position (0.166674,0.066667) cm at time: Tue Dec 13 17:19:35 2022
+ 
+< WORLD > updated (x,z) position (0.033341,0.066667) cm at time: Tue Dec 13 17:19:36 2022
+ 
+< MOTOR X > reached position 0.033341 cm at time: Tue Dec 13 17:19:36 2022
+ 
+< WORLD > updated (x,z) position (0.000000,0.066667) cm at time: Tue Dec 13 17:19:37 2022
+ 
+< MOTOR X > reached position 0.000000 cm at time: Tue Dec 13 17:19:37 2022
+ 
+< INSP_CONSOLE > stop signal at time: Tue Dec 13 17:20:38 2022
+ 
+< INSP_CONSOLE > stop signal at time: Tue Dec 13 17:20:40 2022
+ 
+< WORLD > updated (x,z) position (0.033333,0.000000) cm at time: Tue Dec 13 17:32:22 2022
+ 
+< MOTOR X > reached position 0.033333 cm at time: Tue Dec 13 17:32:22 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:32:22 2022
+ 
+< MOTOR X > reached position 0.066667 cm at time: Tue Dec 13 17:32:23 2022
+ 
+< WORLD > updated (x,z) position (0.066667,0.000000) cm at time: Tue Dec 13 17:32:23 2022
+ 
+< WORLD > updated (x,z) position (0.100000,0.000000) cm at time: Tue Dec 13 17:32:24 2022
+ 
+< MOTOR X > reached position 0.100000 cm at time: Tue Dec 13 17:32:24 2022
+ 
+< MOTOR X > reached position 0.133333 cm at time: Tue Dec 13 17:32:25 2022
+ 
+< WORLD > updated (x,z) position (0.133333,0.000000) cm at time: Tue Dec 13 17:32:25 2022
+ 
+< MOTOR X > reached position 0.200000 cm at time: Tue Dec 13 17:32:26 2022
+ 
+< WORLD > updated (x,z) position (0.200000,0.000000) cm at time: Tue Dec 13 17:32:26 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:32:26 2022
+ 
+< MOTOR X > reached position 0.300000 cm at time: Tue Dec 13 17:32:27 2022
+ 
+< WORLD > updated (x,z) position (0.300000,0.000000) cm at time: Tue Dec 13 17:32:27 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:32:27 2022
+ 
+< MOTOR X > reached position 0.400000 cm at time: Tue Dec 13 17:32:28 2022
+ 
+< WORLD > updated (x,z) position (0.400000,0.000000) cm at time: Tue Dec 13 17:32:28 2022
+ 
+< MOTOR X > reached position 0.500000 cm at time: Tue Dec 13 17:32:29 2022
+ 
+< WORLD > updated (x,z) position (0.500000,0.000000) cm at time: Tue Dec 13 17:32:29 2022
+ 
+< WORLD > updated (x,z) position (0.633333,0.000000) cm at time: Tue Dec 13 17:32:30 2022
+ 
+< MOTOR X > reached position 0.633333 cm at time: Tue Dec 13 17:32:30 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:32:30 2022
+ 
+< MOTOR X > reached position 0.800000 cm at time: Tue Dec 13 17:32:31 2022
+ 
+< WORLD > updated (x,z) position (0.800000,0.000000) cm at time: Tue Dec 13 17:32:31 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:32:31 2022
+ 
+< MOTOR X > reached position 0.966667 cm at time: Tue Dec 13 17:32:32 2022
+ 
+< WORLD > updated (x,z) position (0.966667,0.000000) cm at time: Tue Dec 13 17:32:32 2022
+ 
+< MOTOR X > reached position 1.166667 cm at time: Tue Dec 13 17:32:33 2022
+ 
+< WORLD > updated (x,z) position (1.166667,0.000000) cm at time: Tue Dec 13 17:32:33 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:32:33 2022
+ 
+< WORLD > updated (x,z) position (1.400000,0.000000) cm at time: Tue Dec 13 17:32:34 2022
+ 
+< MOTOR X > reached position 1.400000 cm at time: Tue Dec 13 17:32:34 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:32:35 2022
+ 
+< WORLD > updated (x,z) position (1.666667,0.000000) cm at time: Tue Dec 13 17:32:35 2022
+ 
+< MOTOR X > reached position 1.666667 cm at time: Tue Dec 13 17:32:35 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:32:36 2022
+ 
+< MOTOR X > reached position 1.933333 cm at time: Tue Dec 13 17:32:36 2022
+ 
+< WORLD > updated (x,z) position (1.933333,0.000000) cm at time: Tue Dec 13 17:32:36 2022
+ 
+< MOTOR X > reached position 2.233333 cm at time: Tue Dec 13 17:32:37 2022
+ 
+< WORLD > updated (x,z) position (2.233333,0.000000) cm at time: Tue Dec 13 17:32:37 2022
+ 
+< COMM_CONSOLE > pressed Vx++ button at time: Tue Dec 13 17:32:37 2022
+ 
+< MOTOR X > reached position 2.533333 cm at time: Tue Dec 13 17:32:38 2022
+ 
+< WORLD > updated (x,z) position (2.533333,0.000000) cm at time: Tue Dec 13 17:32:38 2022
+ 
+< WORLD > updated (x,z) position (2.533333,0.033333) cm at time: Tue Dec 13 17:32:39 2022
+ 
+< MOTOR Z > reached position 0.033333 cm at time: Tue Dec 13 17:32:39 2022
+ 
+< MOTOR X > reached position 2.833333 cm at time: Tue Dec 13 17:32:39 2022
+ 
+< WORLD > updated (x,z) position (2.833333,0.033333) cm at time: Tue Dec 13 17:32:39 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:32:39 2022
+ 
+< WORLD > updated (x,z) position (2.833333,0.100000) cm at time: Tue Dec 13 17:32:40 2022
+ 
+< MOTOR Z > reached position 0.100000 cm at time: Tue Dec 13 17:32:40 2022
+ 
+< WORLD > updated (x,z) position (3.133333,0.100000) cm at time: Tue Dec 13 17:32:40 2022
+ 
+< MOTOR X > reached position 3.133333 cm at time: Tue Dec 13 17:32:40 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:32:41 2022
+ 
+< WORLD > updated (x,z) position (3.133333,0.166667) cm at time: Tue Dec 13 17:32:41 2022
+ 
+< MOTOR Z > reached position 0.166667 cm at time: Tue Dec 13 17:32:41 2022
+ 
+< WORLD > updated (x,z) position (3.433333,0.166667) cm at time: Tue Dec 13 17:32:41 2022
+ 
+< MOTOR X > reached position 3.433333 cm at time: Tue Dec 13 17:32:41 2022
+ 
+< MOTOR Z > reached position 0.266667 cm at time: Tue Dec 13 17:32:42 2022
+ 
+< WORLD > updated (x,z) position (3.433333,0.266667) cm at time: Tue Dec 13 17:32:42 2022
+ 
+< WORLD > updated (x,z) position (3.733333,0.266667) cm at time: Tue Dec 13 17:32:42 2022
+ 
+< MOTOR X > reached position 3.733333 cm at time: Tue Dec 13 17:32:42 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:32:42 2022
+ 
+< MOTOR Z > reached position 0.366667 cm at time: Tue Dec 13 17:32:43 2022
+ 
+< WORLD > updated (x,z) position (3.733333,0.366667) cm at time: Tue Dec 13 17:32:43 2022
+ 
+< MOTOR X > reached position 4.033333 cm at time: Tue Dec 13 17:32:43 2022
+ 
+< WORLD > updated (x,z) position (4.033333,0.366667) cm at time: Tue Dec 13 17:32:43 2022
+ 
+< MOTOR Z > reached position 0.500000 cm at time: Tue Dec 13 17:32:44 2022
+ 
+< WORLD > updated (x,z) position (4.033333,0.500000) cm at time: Tue Dec 13 17:32:44 2022
+ 
+< WORLD > updated (x,z) position (4.333333,0.500000) cm at time: Tue Dec 13 17:32:44 2022
+ 
+< MOTOR X > reached position 4.333333 cm at time: Tue Dec 13 17:32:44 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:32:44 2022
+ 
+< MOTOR Z > reached position 0.666667 cm at time: Tue Dec 13 17:32:45 2022
+ 
+< WORLD > updated (x,z) position (4.333333,0.666667) cm at time: Tue Dec 13 17:32:45 2022
+ 
+< WORLD > updated (x,z) position (4.633334,0.666667) cm at time: Tue Dec 13 17:32:45 2022
+ 
+< MOTOR X > reached position 4.633334 cm at time: Tue Dec 13 17:32:45 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:32:45 2022
+ 
+< MOTOR Z > reached position 0.833333 cm at time: Tue Dec 13 17:32:46 2022
+ 
+< WORLD > updated (x,z) position (4.633334,0.833333) cm at time: Tue Dec 13 17:32:46 2022
+ 
+< WORLD > updated (x,z) position (4.933334,0.833333) cm at time: Tue Dec 13 17:32:46 2022
+ 
+< MOTOR X > reached position 4.933334 cm at time: Tue Dec 13 17:32:46 2022
+ 
+< MOTOR Z > reached position 1.033333 cm at time: Tue Dec 13 17:32:47 2022
+ 
+< WORLD > updated (x,z) position (4.933334,1.033333) cm at time: Tue Dec 13 17:32:47 2022
+ 
+< WORLD > updated (x,z) position (5.233334,1.033333) cm at time: Tue Dec 13 17:32:47 2022
+ 
+< MOTOR X > reached position 5.233334 cm at time: Tue Dec 13 17:32:47 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:32:47 2022
+ 
+< MOTOR Z > reached position 0.966667 cm at time: Tue Dec 13 17:32:47 2022
+ 
+< WORLD > updated (x,z) position (5.233334,0.966667) cm at time: Tue Dec 13 17:32:47 2022
+ 
+< INSP_CONSOLE > reset signal at time: Tue Dec 13 17:32:48 2022
+ 
+< WORLD > updated (x,z) position (5.100001,0.966667) cm at time: Tue Dec 13 17:32:48 2022
+ 
+< MOTOR X > reached position 5.100001 cm at time: Tue Dec 13 17:32:48 2022
+ 
+< MOTOR Z > reached position 0.900000 cm at time: Tue Dec 13 17:32:48 2022
+ 
+< WORLD > updated (x,z) position (5.100001,0.900000) cm at time: Tue Dec 13 17:32:48 2022
+ 
+< MOTOR X > reached position 4.966668 cm at time: Tue Dec 13 17:32:49 2022
+ 
+< WORLD > updated (x,z) position (4.966668,0.900000) cm at time: Tue Dec 13 17:32:49 2022
+ 
+< MOTOR Z > reached position 0.833333 cm at time: Tue Dec 13 17:32:49 2022
+ 
+< WORLD > updated (x,z) position (4.966668,0.833333) cm at time: Tue Dec 13 17:32:49 2022
+ 
+< COMM_CONSOLE > pressed Vz++ button at time: Tue Dec 13 17:32:50 2022
+ 
+< WORLD > updated (x,z) position (4.966668,1.066667) cm at time: Tue Dec 13 17:32:50 2022
+ 
+< MOTOR Z > reached position 1.066667 cm at time: Tue Dec 13 17:32:50 2022
+ 
+< INSP_CONSOLE > stop signal at time: Tue Dec 13 17:32:51 2022
+ 
+< INSP_CONSOLE > stop signal at time: Tue Dec 13 17:32:52 2022
+ 
+< WATCHDOG > inactivity detected, resetting the system at: Tue Dec 13 17:57:05 2022
+ 
+< WATCHDOG > inactivity detected, resetting the system at: Tue Dec 13 17:58:08 2022
+ 
+< WATCHDOG > inactivity detected, resetting the system at: Tue Dec 13 17:59:11 2022
+ 
+< WATCHDOG > inactivity detected, resetting the system at: Tue Dec 13 18:00:14 2022
+ 
+< WATCHDOG > inactivity detected, resetting the system at: Tue Dec 13 18:02:36 2022
+ 
