@@ -13,18 +13,6 @@ char * fifoWI = "/tmp/fifoWI";
 char * fifoCX = "/tmp/fifoCX";
 char * fifoCZ = "/tmp/fifoCZ";
 
-// Retrieve current time procedure
-char* current_time(){
-    time_t rawtime;
-    struct tm * timeinfo;
-    char* timedate;
-
-    time ( &rawtime );
-    timeinfo = localtime ( &rawtime );
-
-    timedate = asctime(timeinfo);
-    return timedate;
-}
 
 void unlinkpipe(){
 if(unlink(fifoXW) != 0) {
@@ -140,51 +128,24 @@ int main() {
   sprintf(pid_mX_c, "%d", pid_motorX);
   sprintf(pid_mZ_c, "%d", pid_motorZ);
   //error in compiling when passing the pid 
-  fflush(stdout);
   char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", pid_mX_c, pid_mZ_c, NULL};
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
-  //change into watchdog
-  FILE *flog; //file pointer log file
-  long bytesWritten = 0;
-  long bytesWritten_old = 0;
-  time_t startTimer;
-
-  while(1) { //non so se ci vada
-  int status;
-  //waitpid(pid_cmd, &status, 0);
-  //waitpid(pid_insp, &status, 0);
-  flog = fopen("./logFile.log", "r"); //decidere posizione
-  fseek(flog, 0L, SEEK_END); //mi posizione alla fine del file (file pointer at 0 bytes from the end)
-  bytesWritten_old = ftell(flog); //numero di byte dall'inizio alla fine (alla posizione del file pointer)
-  fclose(flog);
-  startTimer = time(NULL);
-
-  bytesWritten = bytesWritten_old;
-  while((bytesWritten==bytesWritten_old) && (difftime(time(NULL), startTimer) < 60)) {
-    flog = fopen("./logFile.log", "r"); //decidere posizione
-    fseek(flog, 0L, SEEK_END); 
-    bytesWritten_old = ftell(flog); 
-    fclose(flog);
-    //sleep
-  }
-
-
-  if(difftime(time(NULL), startTimer) >= 60) {
-    // Write on the LOG.log
-    char * currTime = current_time();
-    flog = fopen("./logFile.log", "a+"); //decidere posizione (controlla a o a+, per me a+ meglio)
-    fprintf(flog, "< WATCHDOG > inactivity detected, resetting the system at: %s \n", currTime);
-    fclose(flog);
-
-    sleep(1);
-    if(kill(pid_motorX,SIGINT) == -1) { //controlla sia -1
+  //spawn watchdog
+  char * arg_list_inspection[] = { "./bin/watchdog", pid_mX_c, pid_mZ_c, NULL};
+  pid_t pid_insp = spawn("./bin/watchdog", arg_list_inspection);
+  //wait 
+  wait(NULL);
+  //kill motor X
+  if(kill(pid_motorX,SIGINT) == -1) { //controlla sia -1
       perror("MotorX: failed to kill motorX");
     }
+  //kill motor z
     sleep(1); //simone ha consigliato di fare le sleep se no non killa bene
     if(kill(pid_motorZ,SIGINT) == -1) { 
       perror("MotorZ: failed to kill motorZ");
     }
+  
     sleep(1);
     if(kill(pid_world,SIGINT) == -1) {
       perror("World: failed to kill world");
@@ -195,15 +156,12 @@ int main() {
     }
     sleep(1);
     if(kill(pid_insp,SIGINT) == -1) { //controlla sia -1
-      perror("Inspection: failed to kill motorX");
+      perror("nspection: failed to kill motorX");
     }
+    //kill watchdog
     sleep(1);
     unlinkpipe();
-    printf ("Main program exiting with status %d\n", status);
+    printf ("Main program exiting with status %d\n", -1);
     exit(0);
-  }
-  
-  }
-  return 0;
 }
 
