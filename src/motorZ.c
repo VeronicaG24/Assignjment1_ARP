@@ -11,7 +11,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define dt 1/30
+#define dt 0.03 //30 Hz
 #define nbytes sizeof(float)
 #define r "/tmp/fifoCZ"
 #define w "/tmp/fifoZW"
@@ -91,12 +91,12 @@ void sig_handler(int signo) {
         //stop
         reset=true;
         update_z(0);
-        sleep(0.5);
+        //usleep(dt*1000000);
         v=0;
         while(z!=0 && reset){
             //update Z
             update_z(-2);
-            sleep(1);
+            usleep(dt*1000000);
         }
         reset=false;
     }
@@ -111,6 +111,7 @@ void sig_handler(int signo) {
         update_z(0);
         v = 0;
         reset=false;
+        usleep(dt*1000000);
     }
 
    
@@ -169,7 +170,7 @@ int main() {
         update_z(v);
         
         //sleep
-        sleep(1);
+        usleep(dt*1000000);
     }
 
 }

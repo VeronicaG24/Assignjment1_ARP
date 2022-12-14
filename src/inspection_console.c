@@ -36,24 +36,19 @@ int main(int argc, char const *argv[]) {
     //char * pid_mX_c = argv[4];
     //char * pid_mZ_c = argv[5];
 
-    pid_t pid_cmd, pid_motorX, pid_motorZ;
-    pid_cmd = atoi(argv[1]);
-    pid_motorX = atoi(argv[2]);
-    pid_motorZ = atoi(argv[3]);
+    pid_t pid_motorX, pid_motorZ;
+    pid_motorX = atoi(argv[1]);
+    pid_motorZ = atoi(argv[2]);
 
     //get command window pid
-    sleep(2);
+    sleep(1);
     //file descriptor
-    int fd=open("/tmp/fifoIC", O_WRONLY);
-    if(fd){
-        perror("open pipe IC:");
-        fflush(stdout);
-    }
     int fd2=open("/tmp/fifoCI", O_RDONLY|O_NONBLOCK);
     if(fd2){
         perror("open pipe CI:");
         fflush(stdout);
     }
+
     pid_t pid_c=0;
     pid_t p1;
     while(pid_c == 0){
@@ -65,11 +60,6 @@ int main(int argc, char const *argv[]) {
             pid_c=p1;
         }
     }
-    int res=1;
-    if(write(fd,&res, sizeof(int))){
-        perror("write:");
-    }
-    close(fd);
     close(fd2);
 
     // Utility variable to avoid trigger resize event on launch
@@ -146,7 +136,7 @@ int main(int argc, char const *argv[]) {
                     kill(pid_motorZ, SIGUSR1);
                     kill(pid_c, SIGUSR1);
                     reset=TRUE;
-                    sleep(1);
+                    //sleep(1);
                     
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
@@ -186,26 +176,6 @@ int main(int argc, char const *argv[]) {
                 reset=FALSE;
             }
         }
-
-        // To be commented in final version...
-        /*switch (cmd)
-        {
-            case KEY_LEFT:
-                ee_x--;
-                break;
-            case KEY_RIGHT:
-                ee_x++;
-                break;
-            case KEY_UP:
-                ee_z--;
-                break;
-            case KEY_DOWN:
-                ee_z++;
-                break;
-            default:
-                break;
-        }
-        */
 
 	}
 

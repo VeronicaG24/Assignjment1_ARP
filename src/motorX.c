@@ -11,7 +11,7 @@
 #include <string.h>
 #include <stdbool.h>
 
-#define dt 1/30
+#define dt 0.03 //30Hz
 #define r "/tmp/fifoCX"
 #define w "/tmp/fifoXW"
 #define X_MAX 40
@@ -95,12 +95,12 @@ void sig_handler(int signo) {
         //stop 
         update_X(0);
         reset = true;
-        sleep(1);
+        //usleep(dt*1000000);
         v=0;
         while(X!=0 && reset){
             //update X
             update_X(-4);
-            sleep(1);
+            usleep(dt*1000000);
         }
         reset=false;
     }
@@ -115,6 +115,7 @@ void sig_handler(int signo) {
         update_X(0);
         v=0;
         reset=false;
+        usleep(dt*1000000);
 
     }
     
@@ -173,7 +174,7 @@ int main(){
         update_X(v);
         
         //sleep
-        sleep(1);
+        usleep(dt*1000000);
     }
 
     close(fd_read);

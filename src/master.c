@@ -114,6 +114,10 @@ int main() {
   if (mkfifo(fifoCZ, 0666) != 0)
     perror("Cannot create fifo. Already existing?");
 
+  //crea log file
+  if(remove("./logFile.log")!=0){
+    perror("Log file not deleted:");
+  }
   
   //generate two motor process
   char * arg_motorX[]={"./bin/motorX", NULL};
@@ -128,17 +132,13 @@ int main() {
   //spawn command window and inspection window 
   char * arg_list_command[] = { "/usr/bin/konsole", "-e", "./bin/command", NULL };
   pid_t pid_cmd = spawn("/usr/bin/konsole", arg_list_command);
-  char * pid_cmd_c = malloc(sizeof(pid_t));
   char * pid_mX_c = malloc(6);
   char * pid_mZ_c = malloc(6);
-  sprintf(pid_cmd_c, "%d", pid_cmd);
   sprintf(pid_mX_c, "%d", pid_motorX);
   sprintf(pid_mZ_c, "%d", pid_motorZ);
-  //error in compiling when passing the pid
-  printf("master: pid_cmd:%d", pid_cmd);
-  printf("converted-pid_cmd:%s", pid_cmd_c);
+  //error in compiling when passing the pid 
   fflush(stdout);
-  char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", pid_cmd_c, pid_mX_c, pid_mZ_c, NULL};
+  char * arg_list_inspection[] = { "/usr/bin/konsole", "-e", "./bin/inspection", pid_mX_c, pid_mZ_c, NULL};
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
   //change into watchdog

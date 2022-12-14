@@ -99,13 +99,13 @@ void sig_handler(int signo) {
     }
     
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
-        printf("MotorX:Can't set the signal handler for SIGINT\n");
+        perror("Command:Can't set the signal handler for SIGINT\n");
     }
     if(signal(SIGUSR1, sig_handler)==SIG_ERR) {
-        printf("MotorX:Can't set the signal handler for SIGUSR1(RESET)\n");
+        perror("Command:Can't set the signal handler for SIGUSR1(RESET)\n");
     }
     if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
-        printf("MotorX:Can't set the signal handler for SIGUSR2(STOP)\n");
+        perror("Command:Can't set the signal handler for SIGUSR2(STOP)\n");
     }
 } 
 
@@ -131,20 +131,10 @@ int main(int argc, char const *argv[]) {
     }
     else
         printf("create CI!");
-    //fifo from inspection to command to say receive pid
-    if(mkfifo("/tmp/fifoIC", 0666)){
-        perror("create IC: ");
-        fflush(stdout);
-    }
     //file descriptor
     int fw=open("/tmp/fifoCI", O_RDWR);
     if(fw){
         perror("open pipe CI:");
-        fflush(stdout);
-    }
-    int fr=open("/tmp/fifoIC", O_RDONLY|O_NONBLOCK);
-    if(fr){
-        perror("open pipe IC:");
         fflush(stdout);
     }
     pid_t mypid= getpid();
@@ -157,34 +147,17 @@ int main(int argc, char const *argv[]) {
         perror("write:");
         fflush(stdout);
     }
+    sleep(2);
 
-    /*while(res == 0){
-        if(read(fr, &res2, sizeof(int))){
-            perror("read:");
-            fflush(stdout);
-        }
-        if(res2==1){
-            res ==1;
-        }
-    }*/
-    sleep(3);
     if(close(fw)){
         perror("close CI:");
         fflush(stdout);
     }
-    if(close(fr)){
-         perror("close IC:");
-         fflush(stdout);
-    }
+
     if(unlink("/tmp/fifoCI")){
         perror("unlink CI");
         fflush(stdout);
     }
-    if(unlink("/tmp/fifoIC")){
-        perror("unlink IC:");
-        fflush(stdout);
-    }
-
     // Initialize User Interface 
     init_console_ui();
 
