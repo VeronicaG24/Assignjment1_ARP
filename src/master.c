@@ -138,27 +138,30 @@ int main() {
   wait(NULL);
   //kill motor X
   if(kill(pid_motorX,SIGINT) == -1) { //controlla sia -1
-      perror("MotorX: failed to kill motorX");
+      perror("Master: failed to kill motorX");
     }
   //kill motor z
     sleep(1); //simone ha consigliato di fare le sleep se no non killa bene
     if(kill(pid_motorZ,SIGINT) == -1) { 
-      perror("MotorZ: failed to kill motorZ");
+      perror("Master: failed to kill motorZ");
     }
   
     sleep(1);
     if(kill(pid_world,SIGINT) == -1) {
-      perror("World: failed to kill world");
+      perror("Master: failed to kill world");
     }
     sleep(1);
     if(kill(pid_cmd,SIGINT) == -1) { //controlla sia -1
-      perror("Command: failed to kill motorX");
+      perror("Master: failed to kill motorX");
     }
     sleep(1);
     if(kill(pid_insp,SIGINT) == -1) { //controlla sia -1
-      perror("nspection: failed to kill motorX");
+      perror("Master: failed to kill motorX");
     }
-    //kill watchdog
+    sleep(1);
+    if(kill(pid_watchdog,SIGINT) == -1) { //controlla sia -1
+      perror("Master: failed to kill watchdog");
+    }
     sleep(1);
     unlinkpipe();
     printf ("Main program exiting with status %d\n", -1);
