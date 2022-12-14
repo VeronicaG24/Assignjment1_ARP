@@ -57,27 +57,29 @@ int main(int argc, char const *argv[])
 
     sleep(1);
     if(kill(pid_motorX,SIGINT) == -1) { //controlla sia -1
-      perror("MotorX: failed to kill motorX");
+      perror("Watchdog: failed to kill motorX");
     }
     sleep(1); //simone ha consigliato di fare le sleep se no non killa bene
     if(kill(pid_motorZ,SIGINT) == -1) { 
-      perror("MotorZ: failed to kill motorZ");
+      perror("Watchdog: failed to kill motorZ");
     }
     sleep(1);
     if(kill(pid_world,SIGINT) == -1) {
-      perror("World: failed to kill world");
+      perror("Watchdog: failed to kill world");
     }
     sleep(1);
     if(kill(pid_cmd,SIGINT) == -1) { //controlla sia -1
-      perror("Command: failed to kill motorX");
+      perror("Watchdog: failed to kill motorX");
     }
     sleep(1);
     if(kill(pid_insp,SIGINT) == -1) { //controlla sia -1
-      perror("nspection: failed to kill motorX");
+      perror("Watchdog: failed to kill motorX");
     }
     sleep(1);
-    //uccidere master
-    //unlinkpipe();
+    if(kill(pid_master,SIGINT) == -1) { //controlla sia -1
+      perror("Watchdog: failed to kill master");
+    }
+    sleep(1);
     printf ("Main program exiting with status %d\n", status);
     exit(0);
   }
