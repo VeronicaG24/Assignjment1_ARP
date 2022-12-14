@@ -114,10 +114,13 @@ int main() {
   if (mkfifo(fifoCZ, 0666) != 0)
     perror("Cannot create fifo. Already existing?");
 
-  //crea log file
+  //log file
   if(remove("./logFile.log")!=0){
     perror("Log file not deleted:");
   }
+  
+  fclose(fopen("./logFile.log", "w"));
+  
   
   //generate two motor process
   char * arg_motorX[]={"./bin/motorX", NULL};

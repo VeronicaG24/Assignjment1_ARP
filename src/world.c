@@ -57,7 +57,6 @@ void sig_handler(int signo){
 }
 
 int main() {
-        printf("world \n");
         if(signal(SIGINT, sig_handler)==SIG_ERR) {
         printf("World:Can't set the signal handler for SIGINT\n");
         }
