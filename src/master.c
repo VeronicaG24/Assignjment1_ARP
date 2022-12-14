@@ -132,7 +132,17 @@ int main() {
   pid_t pid_insp = spawn("/usr/bin/konsole", arg_list_inspection);
 
   //spawn watchdog
-  char * arg_list_inspection[] = { "./bin/watchdog", pid_mX_c, pid_mZ_c, NULL};
+  char * pid_cmd_c = malloc(6);
+  char * pid_insp_c = malloc(6);
+  char * pid_world_c = malloc(6);
+  char * pid_master_c = malloc(6);
+
+  sprintf(pid_insp_c, "%d", pid_cmd);
+  sprintf(pid_cmd_c, "%d", pid_insp);
+  sprintf(pid_world_c, "%d", pid_world);
+  pid_t pid_master=getpid();
+  sprintf(pid_master_c, "%d", pid_master);
+  char * arg_list_inspection[] = { "./bin/watchdog", pid_mX_c, pid_mZ_c, pid_cmd_c, pid_insp_c, pid_world_c, pid_master_c, NULL};
   pid_t pid_watchdog = spawn("./bin/watchdog", arg_list_inspection);
   //wait 
   wait(NULL);

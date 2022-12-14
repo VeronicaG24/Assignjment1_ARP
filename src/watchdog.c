@@ -22,9 +22,14 @@ char* current_time(){
 
 int main(int argc, char const *argv[])
 {
-    pid_t pid_motorX, pid_motorZ;
+    pid_t pid_motorX, pid_motorZ,pid_cmd, pid_insp, pid_world, pid_master;
     pid_motorX = atoi(argv[1]);
     pid_motorZ = atoi(argv[2]);
+    pid_cmd=atoi(argv[3]);
+    pid_insp=atoi(argv[4]);
+    pid_world=atoi(argv[5]);
+    pid_master=atoi(argv[6]);
+
     //change into watchdog
     FILE *flog; //file pointer log file
     long bytesWritten = 0;
@@ -83,6 +88,13 @@ int main(int argc, char const *argv[])
       perror("Watchdog: failed to kill master");
     }
     sleep(1);
+
+    //uccidere master
+    if(kill(pid_master,SIGINT) == -1) { //controlla sia -1
+      perror("nspection: failed to kill motorX");
+    }
+    sleep(1);
+    //unlinkpipe();
     printf ("Main program exiting with status %d\n", status);
     exit(0);
   }
