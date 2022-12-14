@@ -22,26 +22,29 @@ char* current_time(){
 
 int main(int argc, char const *argv[])
 {
+    pid_t pid_motorX, pid_motorZ;
+    pid_motorX = atoi(argv[1]);
+    pid_motorZ = atoi(argv[2]);
     //change into watchdog
-  FILE *flog; //file pointer log file
-  long bytesWritten = 0;
-  long bytesWritten_old = 0;
-  time_t startTimer;
+    FILE *flog; //file pointer log file
+    long bytesWritten = 0;
+    long bytesWritten_old = 0;
+    time_t startTimer;
 
-  while(1) { //non so se ci vada
-  int status;
-  //waitpid(pid_cmd, &status, 0);
-  //waitpid(pid_insp, &status, 0);
-  flog = fopen("./logFile.log", "r"); //decidere posizione
-  fseek(flog, 0L, SEEK_END); //mi posizione alla fine del file (file pointer at 0 bytes from the end)
-  bytesWritten_old = ftell(flog); //numero di byte dall'inizio alla fine (alla posizione del file pointer)
-  fclose(flog);
-  startTimer = time(NULL);
-
-  bytesWritten = bytesWritten_old;
-  while((bytesWritten==bytesWritten_old) && (difftime(time(NULL), startTimer) < 60)) {
+    while(1) { //non so se ci vada
+    int status;
+    //waitpid(pid_cmd, &status, 0);
+    //waitpid(pid_insp, &status, 0);
     flog = fopen("./logFile.log", "r"); //decidere posizione
-    fseek(flog, 0L, SEEK_END); 
+    fseek(flog, 0L, SEEK_END); //mi posizione alla fine del file (file pointer at 0 bytes from the end)
+    bytesWritten_old = ftell(flog); //numero di byte dall'inizio alla fine (alla posizione del file pointer)
+    fclose(flog);
+    startTimer = time(NULL);
+
+    bytesWritten = bytesWritten_old;
+    while((bytesWritten==bytesWritten_old) && (difftime(time(NULL), startTimer) < 60)) {
+        flog = fopen("./logFile.log", "r"); //decidere posizione
+        fseek(flog, 0L, SEEK_END); 
     bytesWritten_old = ftell(flog); 
     fclose(flog);
     //sleep
@@ -84,4 +87,5 @@ int main(int argc, char const *argv[])
     exit(0);
   }
     
+}
 }

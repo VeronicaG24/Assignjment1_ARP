@@ -133,7 +133,7 @@ int main() {
 
   //spawn watchdog
   char * arg_list_inspection[] = { "./bin/watchdog", pid_mX_c, pid_mZ_c, NULL};
-  pid_t pid_insp = spawn("./bin/watchdog", arg_list_inspection);
+  pid_t pid_watchdog = spawn("./bin/watchdog", arg_list_inspection);
   //wait 
   wait(NULL);
   //kill motor X
