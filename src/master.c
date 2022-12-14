@@ -195,7 +195,7 @@ int main() {
     }
     sleep(1);
     if(kill(pid_insp,SIGINT) == -1) { //controlla sia -1
-      perror("nspection: failed to kill motorX");
+      perror("Inspection: failed to kill motorX");
     }
     sleep(1);
     unlinkpipe();

@@ -106,9 +106,16 @@ int main(int argc, char const *argv[]) {
                 if(check_button_pressed(stp_button, &event)) {
                     mvprintw(LINES - 1, 1, "STP button pressed");
                     refresh();
-                    kill(pid_motorX, SIGUSR2);
-                    kill(pid_motorZ, SIGUSR2);
-                    kill(pid_c, SIGUSR2);
+                    if(kill(pid_motorX, SIGUSR2) == -1) {
+                        perror("Inspection: failed to stop motorX");
+                    }
+                    if(kill(pid_motorZ, SIGUSR2) == -1)  {
+                        perror("Inspection: failed to stop motorZ");
+                    }
+                    if(kill(pid_c, SIGUSR2) == -1)  {
+                        perror("Inspection: failed to stop command");
+                    }
+
                     reset=FALSE;
                     sleep(1);
                     for(int j = 0; j < COLS; j++) {
@@ -132,9 +139,15 @@ int main(int argc, char const *argv[]) {
                 else if(check_button_pressed(rst_button, &event)) {
                     mvprintw(LINES - 1, 1, "RST button pressed");
                     refresh();
-                    kill(pid_motorX, SIGUSR1);
-                    kill(pid_motorZ, SIGUSR1);
-                    kill(pid_c, SIGUSR1);
+                    if(kill(pid_motorX, SIGUSR1) == -1)  {
+                        perror("Inspection: failed to reset motorX");
+                    }
+                    if(kill(pid_motorZ, SIGUSR1) == -1)  {
+                        perror("Inspection: failed to reset motorZ");
+                    }
+                    if(kill(pid_c, SIGUSR1) == -1)  {
+                        perror("Inspection: failed to reset command");
+                    }
                     reset=TRUE;
                     //sleep(1);
                     
@@ -172,7 +185,9 @@ int main(int argc, char const *argv[]) {
             // Update UI
             update_console_ui(&ee_x, &ee_z);
             if(ee_x<=0.05 && ee_z<=0.05 && reset ){
-                kill(pid_c, SIGUSR2);
+                if(kill(pid_c, SIGUSR2) == -1)  {
+                    perror("Inspection: failed to resume command");
+                }
                 reset=FALSE;
             }
         }
