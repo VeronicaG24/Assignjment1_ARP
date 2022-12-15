@@ -91,7 +91,7 @@ int main(int argc, char const *argv[])
     sleep(1);
 
     //unlinkpipe();
-    printf ("Main program exiting with status %d\n", status);
+    printf ("Watchdog: exiting with status %d\n", status);
     exit(0);
   }
     

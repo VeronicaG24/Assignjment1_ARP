@@ -147,6 +147,7 @@ int main() {
   //wait 
   wait(NULL);
   //kill motor X
+  sleep(1);
   if(kill(pid_motorX,SIGINT) == -1) { //controlla sia -1
       perror("Master: failed to kill motorX");
     }
