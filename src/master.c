@@ -142,8 +142,8 @@ int main() {
   sprintf(pid_world_c, "%d", pid_world);
   pid_t pid_master=getpid();
   sprintf(pid_master_c, "%d", pid_master);
-  char * arg_list_inspection[] = { "./bin/watchdog", pid_mX_c, pid_mZ_c, pid_cmd_c, pid_insp_c, pid_world_c, pid_master_c, NULL};
-  pid_t pid_watchdog = spawn("./bin/watchdog", arg_list_inspection);
+  char * arg_list_watchdog[] = { "./bin/watchdog", pid_mX_c, pid_mZ_c, pid_cmd_c, pid_insp_c, pid_world_c, pid_master_c, NULL};
+  pid_t pid_watchdog = spawn("./bin/watchdog", arg_list_watchdog);
   //wait 
   wait(NULL);
   //kill motor X

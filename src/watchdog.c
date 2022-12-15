@@ -35,8 +35,9 @@ int main(int argc, char const *argv[])
     long bytesWritten = 0;
     long bytesWritten_old = 0;
     time_t startTimer;
+    sleep(2);
 
-    while(1) { //non so se ci vada
+    while(1) { 
     int status;
     //waitpid(pid_cmd, &status, 0);
     //waitpid(pid_insp, &status, 0);
@@ -50,8 +51,8 @@ int main(int argc, char const *argv[])
     while((bytesWritten==bytesWritten_old) && (difftime(time(NULL), startTimer) < 60)) {
         flog = fopen("./logFile.log", "r"); //decidere posizione
         fseek(flog, 0L, SEEK_END); 
-    bytesWritten_old = ftell(flog); 
-    fclose(flog);
+        bytesWritten_old = ftell(flog); 
+        fclose(flog);
     //sleep
   }
 
@@ -88,12 +89,7 @@ int main(int argc, char const *argv[])
       perror("Watchdog: failed to kill master");
     }
     sleep(1);
-
-    //uccidere master
-    if(kill(pid_master,SIGINT) == -1) { //controlla sia -1
-      perror("nspection: failed to kill motorX");
-    }
-    sleep(1);
+    
     //unlinkpipe();
     printf ("Main program exiting with status %d\n", status);
     exit(0);
