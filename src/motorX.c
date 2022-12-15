@@ -99,7 +99,7 @@ void sig_handler(int signo) {
         v=0;
         while(X!=0 && reset){
             //update X
-            update_X(-4);
+            update_X(-1);
             usleep(dt*1000000);
         }
         reset=false;

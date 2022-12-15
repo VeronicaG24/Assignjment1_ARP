@@ -95,7 +95,7 @@ void sig_handler(int signo) {
         v=0;
         while(z!=0 && reset){
             //update Z
-            update_z(-2);
+            update_z(-1);
             usleep(dt*1000000);
         }
         reset=false;
