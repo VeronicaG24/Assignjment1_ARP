@@ -35,7 +35,7 @@ int main(int argc, char const *argv[])
     long bytesWritten = 0;
     long bytesWritten_old = 0;
     time_t startTimer;
-    sleep(2);
+    sleep(1);
 
     while(1) { 
     int status;
@@ -89,7 +89,7 @@ int main(int argc, char const *argv[])
       perror("Watchdog: failed to kill master");
     }
     sleep(1);
-    
+
     //unlinkpipe();
     printf ("Main program exiting with status %d\n", status);
     exit(0);
