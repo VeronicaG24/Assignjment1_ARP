@@ -59,7 +59,7 @@ void unlinkpipe() {
 
 
 /*=====================================
-  Manage the signal received
+  Manage signals received
   RETURN:
     null
 =====================================*/

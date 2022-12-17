@@ -25,6 +25,7 @@ DESCRIPTION
 #include <string.h>
 #include <time.h>
 
+//fifos
 #define rwX "/tmp/fifoCX"
 #define rwZ "/tmp/fifoCZ"
 
@@ -33,6 +34,11 @@ float v[] = {0.0, 0.0};
 char * fd[2]= {"/tmp/fifoCX","/tmp/fifoCZ"};
 bool reset=FALSE;
 
+/*=====================================
+  Get current time
+  RETURN:
+    time and date
+=====================================*/
 char* current_time(){
     time_t rawtime;
     struct tm * timeinfo;
@@ -45,16 +51,21 @@ char* current_time(){
     return timedate;
 }
 
-int write_vel(int act, int index) {
-    /*give the file descriptor fd and a integer to say how velocity need to change act
-    write on the pipe associated with fd the new velocity
-    act will be:
+/*=====================================
+  Write new velocity on the pipe
+  to comunicate to the motor.
+  INPUT:
+  act
     -(+1) to increment
-    -0 to stop 
+    -0 to stop
     -(-1)to decrement
-    */
-
-    //decide the new 
+  index
+    -0 motorX
+    -1 motorZ
+  RETURN:
+    null
+=====================================*/
+int write_vel(int act, int index) {
     if(act == 0) {
         v[index] = 0.0;
     }
@@ -68,52 +79,56 @@ int write_vel(int act, int index) {
         perror("Command: error in write");
     }
     close(fd2);
-
 }
 
+/*=====================================
+  Manage signals received
+  INPUT:
+  SIGINT
+    -close pipes
+  SIGUSR1
+    -reset routine
+  SIGUSR2
+    -stop routine
+  RETURN:
+    null
+=====================================*/
 void sig_handler(int signo) {
-    //code to execute when arrive SIGINT
-    if(signo==SIGINT){
+    //signal SIGINT
+    if(signo==SIGINT) {
         printf("Command: received SIGINT, closing the pipes and exit\n");
-        //chiusura pipe
-        if(close(fd_X)!=0){
+        if(close(fd_X)!=0) {
             perror("Command: Can't close the read pipe");
             exit(-1);
         }
-        if(close(fd_Z)!= 0){
+        if(close(fd_Z)!= 0) {
             perror("Command Can't close the write pipe");
             exit(-1);
         }             
         exit(0);
     }
-    //code to execute when receive SIGUSR1(RESET)
-    
+
+    //signal SIGUSR1 (RESET)
     else if(signo==SIGUSR1){
-        //RESET INSTRUCTION ROUTINE
-        //printf("Command: received SIGUSR1- Reset routine starting\n");
-        //vel motorZ 0
+        //set motors velocity to 0
         write_vel(0, 1);
-        //vel motorX 0
         write_vel(0, 0);
+        
         reset=TRUE;
-        //disattivare fino a quando non arriva a 0
         while(reset){
-            //resta bloccato fino all'arrivo di segnale esterno
+            //blocked until hoist reach (0,0) position
         }   
     }
     
-    //code to execute when receive SIGUSR2(STOP)
-    
+    //signal SIGUSR2 (STOP)
     else if(signo ==SIGUSR2){
-        //STOP INSTRUCTION ROUTINE
-        //printf("Command: received SIGUSR2- STOP routine starting\n");
-        //vel motorZ 0
+        //set motors velocity to 0
         write_vel(0, 1);
-        //vel motorX 0
         write_vel(0, 0);
         reset=FALSE;
     }
     
+    //manage errors in handling signals
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
         perror("Command:Can't set the signal handler for SIGINT\n");
     }
@@ -123,31 +138,28 @@ void sig_handler(int signo) {
     if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
         perror("Command:Can't set the signal handler for SIGUSR2(STOP)\n");
     }
-} 
+}
 
+/*=====================================
+  Manage the interface for the 
+  velocities, generate buttons
+  RETURN:
+    null
+=====================================*/
 int main(int argc, char const *argv[]) {
     // Utility variable to avoid trigger resize event on launch
     int first_resize = TRUE;
     //send pid to inspection console
     printf("synchonization command-inspection\n");
-     
-    //fifo from command to inspection to send pid
-    /*if(unlink("/tmp/fifoCI")){
-        perror("unlink CI");
-        fflush(stdout);
-    }
-    if(unlink("/tmp/fifoIC")){
-        perror("unlink IC:");
-        fflush(stdout);
-    }*/
 
-    if(mkfifo("/tmp/fifoCI", 0666)<0){
+
+    if(mkfifo("/tmp/fifoCI", 0666) < 0){
         perror("create CI: ");
         fflush(stdout);
     }
     else
         printf("create CI!");
-    //file descriptor
+
     int fw=open("/tmp/fifoCI", O_RDWR);
     if(fw){
         perror("open pipe CI:");
@@ -158,7 +170,7 @@ int main(int argc, char const *argv[]) {
     int res2;
     printf("%d", mypid);
     fflush(stdout);
-    //write pid
+    
     if(write(fw, &mypid, sizeof(pid_t))){
         perror("write:");
         fflush(stdout);
@@ -174,6 +186,7 @@ int main(int argc, char const *argv[]) {
         perror("unlink CI");
         fflush(stdout);
     }
+
     // Initialize User Interface 
     init_console_ui();
 
@@ -187,19 +200,18 @@ int main(int argc, char const *argv[]) {
     if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
         printf("Command:Can't set the signal handler for SIGUSR2(STOP)\n");
     }
-    //Open pipe CX in srittura
+    //open pipe command-MotorX in writting mode
      if(fd_X = open(rwX, O_WRONLY) == 0 ) {
         perror("Command: Can't open /tmp/fifoCX");
         exit(-1);
     }
     
-    //aprire pipe in scritture(CZ)
+    //open pipe command-MotorZ in writting mode
     if(fd_Z= open(rwZ, O_WRONLY) == 0 ) {
         perror("Command: can't open  tmp/ffoCZ");
         exit(-1);
     }
 
-    // Infinite loop
     while(TRUE) {	
         // Get mouse/resize commands in non-blocking mode...
         int cmd = getch();
@@ -223,7 +235,7 @@ int main(int argc, char const *argv[]) {
                 if(check_button_pressed(vx_decr_btn, &event)) {
                     mvprintw(LINES - 1, 1, "Horizontal Speed Decreased");
                     //update Vx+ on motor X
-                    //inviare messaggio nella pipe
+                    //send message to the pipe
                     write_vel(-1, 0);
                     refresh();
                     sleep(1);
@@ -231,6 +243,7 @@ int main(int argc, char const *argv[]) {
                         mvaddch(LINES - 1, j, ' ');
                     }
 
+                    //update log file
                     FILE *flog;
                     flog = fopen("logFile.log", "a+"); //a+ fa append 
                     if (flog == NULL) {
@@ -247,7 +260,7 @@ int main(int argc, char const *argv[]) {
                 else if(check_button_pressed(vx_incr_btn, &event)) {
                     mvprintw(LINES - 1, 1, "Horizontal Speed Increased");
                     //update Vx- on motor X 
-                    //inviare messaggio nella pipe
+                    //send message to the pipe
                     write_vel( 1, 0);
                     refresh();
                     sleep(1);
@@ -255,6 +268,7 @@ int main(int argc, char const *argv[]) {
                         mvaddch(LINES - 1, j, ' ');
                     }
 
+                    //update log file
                     FILE *flog;
                     flog = fopen("logFile.log", "a+"); //a+ fa append 
                     if (flog == NULL) {
@@ -270,8 +284,8 @@ int main(int argc, char const *argv[]) {
                 // Vx stop button pressed
                 else if(check_button_pressed(vx_stp_button, &event)) {
                     mvprintw(LINES - 1, 1, "Horizontal Motor Stopped");
-                    ////update Vx=0 on motor X 
-                    //inviare messaggio nella pipe
+                    //update Vx=0 on motor X 
+                    //send message to the pipe
                     write_vel(0, 0);
                     refresh();
                     sleep(1);
@@ -279,6 +293,7 @@ int main(int argc, char const *argv[]) {
                         mvaddch(LINES - 1, j, ' ');
                     }
 
+                    //update log file
                     FILE *flog;
                     flog = fopen("logFile.log", "a+"); //a+ fa append 
                     if (flog == NULL) {
@@ -294,17 +309,18 @@ int main(int argc, char const *argv[]) {
                 // Vz-- button pressed
                 else if(check_button_pressed(vz_decr_btn, &event)) {
                     mvprintw(LINES - 1, 1, "Vertical Speed Decreased");
-                    //inviare messaggio nella pipe
+                    //update Vz- on motor X 
+                    //send message to the pipe
                     write_vel(-1, 1);
                     refresh();
                     sleep(1);
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
-                    //update Vz+ on motor z
 
+                    //update log file
                     FILE *flog;
-                    flog = fopen("logFile.log", "a+"); //a+ fa append 
+                    flog = fopen("logFile.log", "a+");
                     if (flog == NULL) {
                             perror("Command Console: cannot open log file");
                     }
@@ -319,7 +335,7 @@ int main(int argc, char const *argv[]) {
                 else if(check_button_pressed(vz_incr_btn, &event)) {
                     mvprintw(LINES - 1, 1, "Vertical Speed Increased");
                     //update Vz- on motor z
-                    //inviare messaggio nella pipe
+                    //send message to the pipe
                     write_vel(1, 1);
                     refresh();
                     sleep(1);
@@ -327,8 +343,9 @@ int main(int argc, char const *argv[]) {
                         mvaddch(LINES - 1, j, ' ');
                     }
 
+                    //update log file
                     FILE *flog;
-                    flog = fopen("logFile.log", "a+"); //a+ fa append 
+                    flog = fopen("logFile.log", "a+");
                     if (flog == NULL) {
                             perror("Command Console: cannot open log file");
                     }
@@ -339,11 +356,12 @@ int main(int argc, char const *argv[]) {
                     fclose(flog);
 
                 }
+
                 // Vz stop button pressed
                 else if(check_button_pressed(vz_stp_button, &event)) {
                     mvprintw(LINES - 1, 1, "Vertical Motor Stopped");
                     //update Vz=0 on motor z
-                    //inviare messaggio nella pipe
+                    //send message to the pipe
                     write_vel(0, 1);
                     refresh();
                     sleep(1);
@@ -351,6 +369,7 @@ int main(int argc, char const *argv[]) {
                         mvaddch(LINES - 1, j, ' ');
                     }
 
+                    //update log file
                     FILE *flog;
                     flog = fopen("logFile.log", "a+"); //a+ fa append 
                     if (flog == NULL) {
