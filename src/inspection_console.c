@@ -24,15 +24,22 @@ DESCRIPTION
 #include <errno.h>
 #include <time.h>
 
+//fifo
 #define r "/tmp/fifoWI"
-
+//position structure (x,z)
 struct position {
         float x;
         float z;
 };
 int fd_read;
+//boolean to define if reset mode is on
 bool reset=FALSE;
 
+/*=====================================
+  Get current time
+  RETURN:
+    time and date
+=====================================*/
 char* current_time(){
     time_t rawtime;
     struct tm * timeinfo;
@@ -45,19 +52,22 @@ char* current_time(){
     return timedate;
 }
 
+/*=====================================
+  Manage the interface of the hoist,
+  and the stop and reset buttons
+  RETURN:
+    null
+=====================================*/
 int main(int argc, char const *argv[]) {
     
-    //const char * pid_cmd_c = argv[3];
-    //char * pid_mX_c = argv[4];
-    //char * pid_mZ_c = argv[5];
-
+    //motors' pid
     pid_t pid_motorX, pid_motorZ;
     pid_motorX = atoi(argv[1]);
     pid_motorZ = atoi(argv[2]);
 
     //get command window pid
     sleep(1);
-    //file descriptor
+    //file descriptor for command-inspection consoles
     int fd2=open("/tmp/fifoCI", O_RDONLY|O_NONBLOCK);
     if(fd2){
         perror("open pipe CI:");
@@ -91,7 +101,7 @@ int main(int argc, char const *argv[]) {
 
     int read_byte;
 
-    //aprire pipe WI in lettura
+    //open pipe World-inspection in writing mode
     if((fd_read = open(r, O_RDONLY | O_NONBLOCK)) == 0) {
             perror("Inspection: Can't open /tmp/fifoWI");
             exit(-1);
@@ -121,30 +131,34 @@ int main(int argc, char const *argv[]) {
                 if(check_button_pressed(stp_button, &event)) {
                     mvprintw(LINES - 1, 1, "STP button pressed");
                     refresh();
+                    //send SIGUSR2 to motorX
                     if(kill(pid_motorX, SIGUSR2) == -1) {
                         perror("Inspection: failed to stop motorX");
                     }
+                    //send SIGUSR2 to motorZ
                     if(kill(pid_motorZ, SIGUSR2) == -1)  {
                         perror("Inspection: failed to stop motorZ");
                     }
+                    //send SIGUSR2 to commando console
                     if(kill(pid_c, SIGUSR2) == -1)  {
                         perror("Inspection: failed to stop command");
                     }
-
+                    //set boolean reset to false
                     reset=FALSE;
                     sleep(1);
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
-                    //signal to STOP everything send to every proccess
+                    
+                    //update log file
                     FILE *flog;
-                    flog = fopen("logFile.log", "a+"); //a+ fa append 
+                    flog = fopen("logFile.log", "a+");
                     if (flog == NULL) {
-                            perror("Inspection Console: cannot open log file");
+                        perror("Inspection Console: cannot open log file");
                     }
                     else {
-                            char * curr_time = current_time();
-                            fprintf(flog, "< INSP_CONSOLE > stop signal at time: %s \n", curr_time);
+                        char * curr_time = current_time();
+                        fprintf(flog, "< INSP_CONSOLE > stop signal at time: %s \n", curr_time);
                     }
                     fclose(flog);
 
@@ -154,24 +168,29 @@ int main(int argc, char const *argv[]) {
                 else if(check_button_pressed(rst_button, &event)) {
                     mvprintw(LINES - 1, 1, "RST button pressed");
                     refresh();
+                    //send SIGUSR1 to motorX
                     if(kill(pid_motorX, SIGUSR1) == -1)  {
                         perror("Inspection: failed to reset motorX");
                     }
+                    //send SIGUSR1 to motorZ
                     if(kill(pid_motorZ, SIGUSR1) == -1)  {
                         perror("Inspection: failed to reset motorZ");
                     }
+                    //send SIGUSR1 to command console
                     if(kill(pid_c, SIGUSR1) == -1)  {
                         perror("Inspection: failed to reset command");
                     }
+
+                    //set boolean reset to true
                     reset=TRUE;
-                    //sleep(1);
                     
                     for(int j = 0; j < COLS; j++) {
                         mvaddch(LINES - 1, j, ' ');
                     }
 
+                    //update log file
                     FILE *flog;
-                    flog = fopen("logFile.log", "a+"); //a+ fa append 
+                    flog = fopen("logFile.log", "a+");
                     if (flog == NULL) {
                             perror("Inspection Console: cannot open log file");
                     }
@@ -180,20 +199,20 @@ int main(int argc, char const *argv[]) {
                             fprintf(flog, "< INSP_CONSOLE > reset signal at time: %s \n", curr_time);
                     }
                     fclose(flog);
-                    //comand console unable to use untill reached the original position
-                    //motor X and motor Z V=0 then Vx Vz negative untill reach 0,0
                 }
             }
         }
         
+        //read new position on the pipe
         read_byte = read(fd_read, &p, sizeof(struct position));
         
         if(read_byte == -1 && errno != EAGAIN) {
             perror("can't read position");
         }
         else if(read_byte < sizeof(struct position)) {
-            //printf("nothing to read");
+            
         }
+        //update values for the interface
         else {
             ee_x = p.x;
             ee_z = p.z;
