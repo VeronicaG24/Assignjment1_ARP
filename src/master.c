@@ -60,6 +60,9 @@ void unlinkpipe() {
 
 /*=====================================
   Manage signals received
+  INPUT:
+  SIGINT
+    -close pipes
   RETURN:
     null
 =====================================*/
