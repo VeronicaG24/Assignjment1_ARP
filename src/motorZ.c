@@ -36,7 +36,11 @@ int fd_read, fd_write;
 float z =zMin, v = 0, zOld =0;
 bool reset = false;
 
-
+/*=====================================
+  Get current time
+  RETURN:
+    time and date
+=====================================*/
 char* current_time(){
     time_t rawtime;
     struct tm * timeinfo;
@@ -49,6 +53,13 @@ char* current_time(){
     return timedate;
 }
 
+/*=====================================
+  Update Z position
+  INPUT:
+    velocity
+  RETURN:
+    null
+=====================================*/
 void update_z(float v){
     if((z + v*dt) > zMax) {
             z = zMax;
@@ -64,8 +75,9 @@ void update_z(float v){
             if(write(fd_write, &z, nbytes) == -1)
                 perror("MotorZ: error in writing");
             
+            //update log file
             FILE *flog;
-            flog = fopen("logFile.log", "a+"); //a+ fa append 
+            flog = fopen("logFile.log", "a+");
             if (flog == NULL) {
                 perror("MotorZ: cannot open log file");
             }
@@ -75,16 +87,29 @@ void update_z(float v){
             }
             fclose(flog);
             
+            //set Zold to the new value
             zOld = z;
         }
 }
 
+/*=====================================
+  Manage signals received
+  INPUT:
+  SIGINT
+    -close pipes
+  SIGUSR1
+    -reset routine
+  SIGUSR2
+    -stop routine
+  RETURN:
+    null
+=====================================*/
 void sig_handler(int signo) {
     
+    //signal SIGINT
     if(signo == SIGINT) {
         printf("MotorZ:received SIGINT, closing pipes and exit\n");
         
-        //chiudere le pipe
         if(close(fd_read) != 0){
             perror("MotorZ:can't close tmp/fifoCZ");
             exit(-1);
@@ -97,38 +122,36 @@ void sig_handler(int signo) {
         
         exit(0);
     }
-    //code to execute when receive SIGUSR1(RESET)
-    
-    else if(signo==SIGUSR1){
+
+    //signal SIGUSR1 (RESET)
+    else if(signo==SIGUSR1) {
         printf("MotorZ:received SIGUSR1, reset routine starting\n");
-        //RESET INSTRUCTION ROUTINE
-        //stop
+        //set boolean reset to true
         reset=true;
+        //set z velocity to 0 (stop)
         update_z(0);
-        //usleep(dt*1000000);
         v=0;
+        //set velocity to -1 until z position is at 0
         while(z!=0 && reset){
-            //update Z
             update_z(-1);
             usleep(dt*1000000);
         }
+        //set boolean reset to false when z is at 0
         reset=false;
     }
     
-    //code to execute when receive SIGUSR2(STOP)
-    
+    //signal SIGUSR2 (STOP)
     else if(signo ==SIGUSR2){
         printf("MotorZ: received SIGUSR2- STOP routine starting\n");
-        //STOP INSTRUCTION ROUTINE
-        //set v=0
-        //update X
+        //set z velocity to 0 (stop)
         update_z(0);
         v = 0;
+        //set boolean reset to false
         reset=false;
         usleep(dt*1000000);
     }
 
-   
+    //manage errors in handling signals
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
         printf("MotorZ:Can't set the signal handler for SIGINT\n");
     }
@@ -140,9 +163,14 @@ void sig_handler(int signo) {
     }
 }
 
+/*=====================================
+  Manage the motion along z-axis
+  RETURN:
+    null
+=====================================*/
 int main() {
 
-    //gestione segnale SIGINT
+    //manage signals
     if(signal(SIGINT, sig_handler) == SIG_ERR)
         printf("MotorZ: can't set the signal hendler for SIGINT\n");
     if(signal(SIGUSR1, sig_handler)==SIG_ERR) {
@@ -152,13 +180,13 @@ int main() {
         printf("MotorZ:Can't set the signal handler for SIGUSR2(STOP)\n");
     }
 
-    //aprire la pipe in letteura(CZ) e contrallare non dia errore
+    //open pipe with the command in reading non-blocking mode
     if((fd_read = open(r, O_RDONLY|O_NONBLOCK)) == 0 ) {
         perror("MotorZ: Can't open /tmp/fifoCZ");
         exit(-1);
     }
     
-    //aprire pipe in scritture(ZW)
+    //open pipe with the world in writing mode
     if((fd_write = open(w, O_WRONLY)) == 0 ) {
         perror("MotorZ: can't open  tmp/fifoZW");
         exit(-1);
@@ -168,22 +196,23 @@ int main() {
     float zOld = 0;
     int read_byteV;
 
+    //infinite loop
     while(1) {
-        //leggere ZX e controllare che non dia errore
+        //read z velocity
         read_byteV = read(fd_read, &v_read, nbytes);
         
         if(read_byteV == -1 && errno != EAGAIN) 
             perror("MotorZ: error in reading");
         else if(read_byteV < nbytes) {
-            //printf("nothing to read");
+            
         }
         else {
             v = v_read;
         }
 
+        //update z position
         update_z(v);
         
-        //sleep
         usleep(dt*1000000);
     }
 
