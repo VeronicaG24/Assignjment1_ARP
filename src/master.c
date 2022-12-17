@@ -23,7 +23,7 @@ DESCRIPTION
 #include <signal.h>
 #include <time.h>
 
-//fifo for pipes
+//file descriptors
 char * fifoXW = "/tmp/fifoXW";
 char * fifoZW = "/tmp/fifoZW";
 char * fifoWI = "/tmp/fifoWI";
