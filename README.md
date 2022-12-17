@@ -54,7 +54,7 @@ The Inspection Console manage the interface of the hoist, showing how it moves, 
 If the stop or reset button is pressed, different signals are sent to MotorX, MotorZ and Command console.
 
 ### Watchdog 
-The Warchdog process checks the inactivity of the program though the log file. It continuosly check the number of byte written on the log file and if it does not chenge for more than 60 second, it kills all the processes including itself.
+The Warchdog process checks the inactivity of the program through the log file. It continuosly check the number of byte written on the log file and if it does not chenge for more than 60 second, it kills all the processes including itself.
 
 The log file is updated each time occurs one of the following event:
 - from MotorX and MotorZ: its position changes
