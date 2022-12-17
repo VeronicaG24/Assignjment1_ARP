@@ -133,6 +133,7 @@ void sig_handler(int signo) {
         v=0;
         //set velocity to -1 until z position is at 0
         while(z!=0 && reset){
+            //update Z position
             update_z(-1);
             usleep(dt*1000000);
         }
@@ -193,7 +194,6 @@ int main() {
     }
 
     float v_read = 0;
-    float zOld = 0;
     int read_byteV;
 
     //infinite loop

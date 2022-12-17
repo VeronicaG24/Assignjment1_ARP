@@ -34,12 +34,15 @@ DESCRIPTION
 int fd_read;
 int fd_write;
 int nbytes = sizeof(float);
-//need to declare v and X outside the main otherwise can't update when RESET or STOP
 float X=X_MIN,xOld=0;
 float v = 0;
 bool reset = false;
 
-// Retrieve current time procedure
+/*=====================================
+  Get current time
+  RETURN:
+    time and date
+=====================================*/
 char* current_time(){
     time_t rawtime;
     struct tm * timeinfo;
@@ -52,7 +55,13 @@ char* current_time(){
     return timedate;
 }
 
-//function to update X
+/*=====================================
+  Update X position
+  INPUT:
+    velocity
+  RETURN:
+    null
+=====================================*/
 void update_X(float v){
     float dx = (v*dt);    
     if((X + dx) > X_MAX) {
@@ -65,12 +74,14 @@ void update_X(float v){
         X+=dx;
     }
 
+    //write the new value on the pipe if it is different
     if (X != xOld) {
             if(write(fd_write, &X, nbytes) == -1)
                 perror("MotorX: error in writing");
 
+            //update log file
             FILE *flog;
-            flog = fopen("logFile.log", "a+"); //a+ fa append 
+            flog = fopen("logFile.log", "a+");
             if (flog == NULL) {
                 perror("MotorX: cannot open log file");
             }
@@ -80,12 +91,25 @@ void update_X(float v){
             }
             fclose(flog);
 
+            //set Zold to the new value
             xOld = X;
         }
 }
 
+/*=====================================
+  Manage signals received
+  INPUT:
+  SIGINT
+    -close pipes
+  SIGUSR1
+    -reset routine
+  SIGUSR2
+    -stop routine
+  RETURN:
+    null
+=====================================*/
 void sig_handler(int signo) {
-    //code to execute when arrive SIGINT
+    //signal SIGINT
     if(signo==SIGINT){
         printf("MotorX: received SIGINT, closing the pipes and exit\n");
         
@@ -101,38 +125,38 @@ void sig_handler(int signo) {
         
         exit(0);
     }
-    //code to execute when receive SIGUSR1(RESET)
     
+    //signal SIGUSR1 (RESET)
     else if(signo==SIGUSR1){
-         printf("MotorX: received SIGUSR1- Reset routine starting\n");
-        //RESET INSTRUCTION ROUTINE
-        //stop 
-        update_X(0);
+        printf("MotorX: received SIGUSR1- Reset routine starting\n");
+        //set boolean reset to true
         reset = true;
-        //usleep(dt*1000000);
+        //set z velocity to 0 (stop)
+        update_X(0);
         v=0;
+        //set velocity to -1 until x position is at 0
         while(X!=0 && reset){
-            //update X
+            //update X position
             update_X(-1);
             usleep(dt*1000000);
         }
+        //set boolean reset to false when x is at 0
         reset=false;
     }
     
-
-    //code to execute when receive SIGUSR2(STOP)
-    
+    //signal SIGUSR2 (STOP)
     else if(signo ==SIGUSR2){
         printf("MotorX: received SIGUSR2- STOP routine starting\n");
-        //STOP INSTRUCTION ROUTINE
-        //update X
+        //set x velocity to 0 (stop)
         update_X(0);
         v=0;
+        //set boolean reset to false
         reset=false;
         usleep(dt*1000000);
 
     }
     
+    //manage errors in handling signals
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
         printf("MotorX:Can't set the signal handler for SIGINT\n");
     }
@@ -144,8 +168,13 @@ void sig_handler(int signo) {
     }
 } 
 
+/*=====================================
+  Manage the motion along z-axis
+  RETURN:
+    null
+=====================================*/
 int main(){
-    //definire gestione SIGNIT
+    //manage signals
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
         printf("MotorX:Can't set the signal handler for SIGINT\n");
     }
@@ -156,41 +185,39 @@ int main(){
         printf("MotorX:Can't set the signal handler for SIGUSR2(STOP)\n");
     }
     
-    //aprire la pipe in letteura(CX) e contrallare non dia errore
+    //open pipe with the command in reading non-blocking mode
     if((fd_read=open(r, O_RDONLY| O_NONBLOCK)) == 0 ) {
         perror("MotorX:Can't open /tmp/fifoCX");
         exit(-1);
     }
     
-    //aprire pipe in scritture(XW)
+    //open pipe with the world in writing mode
     if((fd_write=open(w, O_WRONLY))== 0) {
         perror("MotorX:can't open  tmp/fifoXW");
         exit(-1);
     }
 
     float v_read = 0;
-    //float xOld = 0;
     int read_byteV;
     
+    //infinite loop
     while(1) {
-        //leggere CX e controllare che non dia errore
+        //read x velocity
         read_byteV = read(fd_read, &v_read, nbytes);
         
         if(read_byteV == -1 && errno != EAGAIN) 
             perror("Motorx: error in reading");
         else if(read_byteV < nbytes) {
-            //printf("MotorX: nothing to read");
+            
         }
         else {
             v = v_read;
         } 
 
+        //update x position
         update_X(v);
         
-        //sleep
         usleep(dt*1000000);
     }
 
-    close(fd_read);
-    close(fd_write);
 }
