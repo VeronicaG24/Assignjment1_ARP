@@ -1,3 +1,18 @@
+/*===========================================================================
+-----------------------------------------------------------------------------
+  	inspection_console.c
+-----------------------------------------------------------------------------
+
+AUTHOR: Written by Francesca Corrao and Veronica Gavagna.
+
+-----------------------------------------------------------------------------
+
+DESCRIPTION
+  	The Inspection Console manage the interface of the hoist, 
+    showing how it moves, and the stop and reset buttons.
+
+=============================================================================*/
+
 #include "./../include/inspection_utilities.h"
 #include <fcntl.h>
 #include <stdio.h>

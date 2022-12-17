@@ -1,3 +1,19 @@
+/*===========================================================================
+-----------------------------------------------------------------------------
+  	master.c
+-----------------------------------------------------------------------------
+
+AUTHOR: Written by Francesca Corrao and Veronica Gavagna.
+
+-----------------------------------------------------------------------------
+
+DESCRIPTION
+  	The master program manages the pipes, spawns the other processes, 
+    create the Log File and waits until one of the process closes to kill 
+    all the other process and unlink the pipes.
+
+=============================================================================*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>

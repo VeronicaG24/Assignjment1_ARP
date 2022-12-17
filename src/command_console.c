@@ -1,3 +1,19 @@
+/*===========================================================================
+-----------------------------------------------------------------------------
+  	command_console.c
+-----------------------------------------------------------------------------
+
+AUTHOR: Written by Francesca Corrao and Veronica Gavagna.
+
+-----------------------------------------------------------------------------
+
+DESCRIPTION
+  	The Command Console manage the interface for the velocities 
+    of the two motors. It has 6 button to increase/decrease the velocities 
+    along x-axis and z-axis and two buttons to stop the two motors. 
+
+=============================================================================*/
+
 #include "./../include/command_utilities.h"
 #include <fcntl.h>
 #include <stdio.h>

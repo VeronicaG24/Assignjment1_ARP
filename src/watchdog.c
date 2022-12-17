@@ -1,3 +1,19 @@
+/*===========================================================================
+-----------------------------------------------------------------------------
+  	watchdog.c
+-----------------------------------------------------------------------------
+
+AUTHOR: Written by Francesca Corrao and Veronica Gavagna.
+
+-----------------------------------------------------------------------------
+
+DESCRIPTION
+  	The Warchdog process checks the inactivity of the program 
+    though the log file. If any process is inactive for more than 60 seconds
+    it kills all the process including itself.
+
+=============================================================================*/
+
 #include <stdio.h>
 #include <stdlib.h>
 #include <sys/types.h>
