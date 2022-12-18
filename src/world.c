@@ -94,18 +94,18 @@ int main() {
 
         if(signal(SIGINT, sig_handler)==SIG_ERR) {
                 printf("World:Can't set the signal handler for SIGINT\n");
-                }
-                if((fd_readX = open(rX, O_RDONLY|O_NONBLOCK)) == 0 ) {
+        }
+        if((fd_readX = open(rX, O_RDONLY|O_NONBLOCK)) == 0 ) {
                 perror("World: Can't open /tmp/fifoXW");
                 exit(-1);
-                }
+        }
         
-                if((fd_readZ = open(rZ, O_RDONLY|O_NONBLOCK)) == 0 ) {
+        if((fd_readZ = open(rZ, O_RDONLY|O_NONBLOCK)) == 0 ) {
                 perror("World: Can't open /tmp/fifoZW");
                 exit(-1);
-                }
+        }
 
-                if((fd_write = open(w, O_WRONLY)) == 0) {
+        if((fd_write = open(w, O_WRONLY)) == 0) {
                 perror("World: can't open  tmp/fifoWI");
                 exit(-1);
         }
