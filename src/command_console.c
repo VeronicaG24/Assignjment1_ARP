@@ -200,17 +200,6 @@ int main(int argc, char const *argv[]) {
     if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
         printf("Command:Can't set the signal handler for SIGUSR2(STOP)\n");
     }
-    //open pipe command-MotorX in writting mode
-     if(fd_X = open(rwX, O_WRONLY) == 0 ) {
-        perror("Command: Can't open /tmp/fifoCX");
-        exit(-1);
-    }
-    
-    //open pipe command-MotorZ in writting mode
-    if(fd_Z= open(rwZ, O_WRONLY) == 0 ) {
-        perror("Command: can't open  tmp/ffoCZ");
-        exit(-1);
-    }
 
     while(TRUE) {	
         // Get mouse/resize commands in non-blocking mode...
