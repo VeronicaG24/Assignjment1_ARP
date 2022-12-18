@@ -192,13 +192,13 @@ int main(int argc, char const *argv[]) {
 
     //initilize signal handling
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
-        printf("Command:Can't set the signal handler for SIGINT\n");
+        perror("Command:Can't set the signal handler for SIGINT\n");
     }
     if(signal(SIGUSR1, sig_handler)==SIG_ERR) {
-        printf("Command:Can't set the signal handler for SIGUSR1(RESET)\n");
+        perror("Command:Can't set the signal handler for SIGUSR1(RESET)\n");
     }
     if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
-        printf("Command:Can't set the signal handler for SIGUSR2(STOP)\n");
+        perror("Command:Can't set the signal handler for SIGUSR2(STOP)\n");
     }
 
     while(TRUE) {	

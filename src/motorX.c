@@ -158,13 +158,13 @@ void sig_handler(int signo) {
     
     //manage errors in handling signals
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
-        printf("MotorX:Can't set the signal handler for SIGINT\n");
+        perror("MotorX:Can't set the signal handler for SIGINT\n");
     }
     if(signal(SIGUSR1, sig_handler)==SIG_ERR) {
-        printf("MotorX:Can't set the signal handler for SIGUSR1(RESET)\n");
+        perror("MotorX:Can't set the signal handler for SIGUSR1(RESET)\n");
     }
     if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
-        printf("MotorX:Can't set the signal handler for SIGUSR2(STOP)\n");
+        perror("MotorX:Can't set the signal handler for SIGUSR2(STOP)\n");
     }
 } 
 
@@ -176,13 +176,13 @@ void sig_handler(int signo) {
 int main(){
     //manage signals
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
-        printf("MotorX:Can't set the signal handler for SIGINT\n");
+        perror("MotorX:Can't set the signal handler for SIGINT\n");
     }
     if(signal(SIGUSR1, sig_handler)==SIG_ERR) {
-        printf("MotorX:Can't set the signal handler for SIGUSR1(RESET)\n");
+        perror("MotorX:Can't set the signal handler for SIGUSR1(RESET)\n");
     }
     if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
-        printf("MotorX:Can't set the signal handler for SIGUSR2(STOP)\n");
+        perror("MotorX:Can't set the signal handler for SIGUSR2(STOP)\n");
     }
     
     //open pipe with the command in reading non-blocking mode
