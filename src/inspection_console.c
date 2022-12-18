@@ -97,8 +97,6 @@ int main(int argc, char const *argv[]) {
     // Initialize User Interface 
     init_console_ui();
 
-    //get pid command window from command window
-
     int read_byte;
 
     //open pipe World-inspection in writing mode
