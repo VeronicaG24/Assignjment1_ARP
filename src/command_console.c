@@ -30,7 +30,7 @@ DESCRIPTION
 #define rwZ "/tmp/fifoCZ"
 
 int fd_X, fd_Z;
-float v[] = {0.0, 0.0};
+int v[] = {0.0, 0.0};
 char * fd[2]= {"/tmp/fifoCX","/tmp/fifoCZ"};
 bool reset=FALSE;
 
@@ -75,7 +75,7 @@ int write_vel(int act, int index) {
 
     int fd2= open(fd[index], O_WRONLY); 
 
-    if(write(fd2, &v[index], sizeof(float))<sizeof(float)){
+    if(write(fd2, &v[index], sizeof(int))<sizeof(int)){
         perror("Command: error in write");
     }
     close(fd2);

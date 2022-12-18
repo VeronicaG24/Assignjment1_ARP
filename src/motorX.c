@@ -35,7 +35,7 @@ int fd_read;
 int fd_write;
 int nbytes = sizeof(float);
 float X=X_MIN,xOld=0;
-float v = 0;
+int v = 0;
 bool reset = false;
 
 /*=====================================
@@ -62,7 +62,7 @@ char* current_time(){
   RETURN:
     null
 =====================================*/
-void update_X(float v){
+void update_X(int v){
     float dx = (v*dt);    
     if((X + dx) > X_MAX) {
          X=X_MAX;
@@ -197,17 +197,17 @@ int main(){
         exit(-1);
     }
 
-    float v_read = 0;
+    int v_read = 0;
     int read_byteV;
     
     //infinite loop
     while(1) {
         //read x velocity
-        read_byteV = read(fd_read, &v_read, nbytes);
+        read_byteV = read(fd_read, &v_read, sizeof(int));
         
         if(read_byteV == -1 && errno != EAGAIN) 
             perror("Motorx: error in reading");
-        else if(read_byteV < nbytes) {
+        else if(read_byteV < sizeof(int)) {
             
         }
         else {

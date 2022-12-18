@@ -33,7 +33,8 @@ DESCRIPTION
 #define zMin 0
 
 int fd_read, fd_write;
-float z =zMin, v = 0, zOld =0;
+float z =zMin,  zOld =0;
+int v = 0;
 bool reset = false;
 
 /*=====================================
@@ -60,7 +61,7 @@ char* current_time(){
   RETURN:
     null
 =====================================*/
-void update_z(float v){
+void update_z(int v){
     if((z + v*dt) > zMax) {
             z = zMax;
         }
@@ -193,17 +194,17 @@ int main() {
         exit(-1);
     }
 
-    float v_read = 0;
+    int v_read = 0;
     int read_byteV;
 
     //infinite loop
     while(1) {
         //read z velocity
-        read_byteV = read(fd_read, &v_read, nbytes);
+        read_byteV = read(fd_read, &v_read, sizeof(int));
         
         if(read_byteV == -1 && errno != EAGAIN) 
             perror("MotorZ: error in reading");
-        else if(read_byteV < nbytes) {
+        else if(read_byteV < sizeof(int)) {
             
         }
         else {
