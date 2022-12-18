@@ -227,6 +227,7 @@ int main(int argc, char const *argv[]) {
 	}
 
     // Terminate
+    close(fd_read);
     endwin();
     return 0;
 }
