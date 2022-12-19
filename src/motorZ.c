@@ -110,18 +110,18 @@ void sig_handler(int signo) {
     //signal SIGINT
     if(signo == SIGINT) {
         printf("MotorZ:received SIGINT, closing pipes and exit\n");
-        
+        int ret = 0;
         if(close(fd_read) != 0){
             perror("MotorZ:can't close tmp/fifoCZ");
-            exit(-1);
+            ret = -1;
         }
 
         if(close(fd_write) != 0) {
             perror("MotorZ:an't close tmp/fifoZW");
-            exit(-1);
+            ret = -1;
         }
         
-        exit(0);
+        exit(ret);
     }
 
     //signal SIGUSR1 (RESET)
@@ -156,12 +156,15 @@ void sig_handler(int signo) {
     //manage errors in handling signals
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
         perror("MotorZ:Can't set the signal handler for SIGINT\n");
+        exit(-1);
     }
     if(signal(SIGUSR1, sig_handler)==SIG_ERR) {
         perror("MotorZ:Can't set the signal handler for SIGUSR1(RESET)\n");
+        exit(-1);
     }
     if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
         perror("MotorZ:Can't set the signal handler for SIGUSR2(STOP)\n");
+        exit(-1);
     }
 }
 
@@ -173,13 +176,17 @@ void sig_handler(int signo) {
 int main() {
 
     //manage signals
-    if(signal(SIGINT, sig_handler) == SIG_ERR)
+    if(signal(SIGINT, sig_handler) == SIG_ERR) {
         perror("MotorZ: can't set the signal hendler for SIGINT\n");
+        exit(-1);
+    }
     if(signal(SIGUSR1, sig_handler)==SIG_ERR) {
         perror("MotorZ:Can't set the signal handler for SIGUSR1(RESET)\n");
+        exit(-1);
     }
     if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
         perror("MotorZ:Can't set the signal handler for SIGUSR2(STOP)\n");
+        exit(-1);
     }
 
     //open pipe with the command in reading non-blocking mode
@@ -216,14 +223,17 @@ int main() {
         
         usleep(dt*1000000);
     }
+
+    int ret = 0;
     if(close(fd_read)!=0){
         perror("MotorZ: Can't close the reading pipe");
-        exit(-1);
+        ret = -1;
     }
 
     if(close(fd_write)!=0){
         perror("MotorZ: Can't close the write pipe");
-        exit(-1);
+        ret = -1;
     }
+    exit(ret);
 
 }

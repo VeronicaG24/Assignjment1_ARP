@@ -51,6 +51,7 @@ char* current_time(){
     timedate = asctime(timeinfo);
     return timedate;
 }
+
 /*=====================================
   Manage signals received
   INPUT:
