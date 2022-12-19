@@ -118,7 +118,7 @@ int main(int argc, char const *argv[]) {
         }
         else{
           waitpid(pid_motorX, &status,0);
-          printf("MotorX exit with status %d", WEXITSTATUS(status));
+          printf("MotorX exit with status %d\n", WEXITSTATUS(status));
         }
         //kill motorZ process
         if(kill(pid_motorZ,SIGINT) == -1) { 
@@ -126,7 +126,7 @@ int main(int argc, char const *argv[]) {
         }
         else{
           waitpid(pid_motorZ, &status,0);
-          printf("MotorZ exit with status %d", WEXITSTATUS(status));
+          printf("MotorZ exit with status %d\n", WEXITSTATUS(status));
         }
         //kill world process
         
@@ -135,7 +135,7 @@ int main(int argc, char const *argv[]) {
         }
         else{
           waitpid(pid_world, &status,0);
-          printf("World exit with status %d", WEXITSTATUS(status));
+          printf("World exit with status %d\n", WEXITSTATUS(status));
         }
         //kill command console process
         
@@ -144,7 +144,7 @@ int main(int argc, char const *argv[]) {
         }
         else{
           waitpid(pid_cmd, &status,0);
-          printf("Command exit with status %d", WEXITSTATUS(status));
+          printf("Command exit with status %d\n", WEXITSTATUS(status));
         }
         //kill inspection console process
         
@@ -153,7 +153,7 @@ int main(int argc, char const *argv[]) {
         }
         else{
           waitpid(pid_insp, &status,0);
-          printf("Inspection exit with status %d", WEXITSTATUS(status));
+          printf("Inspection exit with status %d\n", WEXITSTATUS(status));
         }
         sleep(1);
 
@@ -163,7 +163,7 @@ int main(int argc, char const *argv[]) {
         }
         else{
           waitpid(pid_master, &status,0);
-          printf("Master exit with status %d", WEXITSTATUS(status));
+          printf("Master exit with status %d\n", WEXITSTATUS(status));
         }
         sleep(1);
 
