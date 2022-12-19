@@ -97,9 +97,10 @@ int main(int argc, char const *argv[]) {
     if(fd2<0){
         perror("open pipe CI:");
         fflush(stdout);
-        if(unlink("/tmp/fifoCI")){
-        perror("unlink CI");
-        fflush(stdout);
+        
+        if(unlink("/tmp/fifoCI")) {
+            perror("unlink CI");
+            fflush(stdout);
         }
         sleep(5);
         exit(-1);

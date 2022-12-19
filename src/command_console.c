@@ -168,9 +168,9 @@ int main(int argc, char const *argv[]) {
         perror("create CI: ");
         fflush(stdout);
          
-        if(unlink("/tmp/fifoCI")){
-        perror("unlink CI");
-        fflush(stdout);
+        if(unlink("/tmp/fifoCI")) {
+            perror("unlink CI");
+            fflush(stdout);
         }
 
         exit(-1);
@@ -182,9 +182,10 @@ int main(int argc, char const *argv[]) {
     if(fw<0){
         perror("open pipe CI:");
         fflush(stdout);
-        if(unlink("/tmp/fifoCI")){
-        perror("unlink CI");
-        fflush(stdout);
+        
+        if(unlink("/tmp/fifoCI")) {
+            perror("unlink CI");
+            fflush(stdout);
         }
         
         exit(-1);
