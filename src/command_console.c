@@ -78,7 +78,10 @@ int write_vel(int act, int index) {
     if(write(fd2, &v[index], sizeof(int))<sizeof(int)){
         perror("Command: error in write");
     }
-    close(fd2);
+    
+    if(close(fd2)!=0){
+        perror("Command: error in closing pipe ");
+    }
 }
 
 /*=====================================
@@ -97,15 +100,16 @@ void sig_handler(int signo) {
     //signal SIGINT
     if(signo==SIGINT) {
         printf("Command: received SIGINT, closing the pipes and exit\n");
+        int ret=0;
         if(close(fd_X)!=0) {
             perror("Command: Can't close the read pipe");
-            exit(-1);
+            ret=-1;
         }
         if(close(fd_Z)!= 0) {
             perror("Command Can't close the write pipe");
-            exit(-1);
+            ret=-1;
         }             
-        exit(0);
+        exit(ret);
     }
 
     //signal SIGUSR1 (RESET)
@@ -131,12 +135,15 @@ void sig_handler(int signo) {
     //manage errors in handling signals
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
         perror("Command:Can't set the signal handler for SIGINT\n");
+        exit(-1);
     }
     if(signal(SIGUSR1, sig_handler)==SIG_ERR) {
         perror("Command:Can't set the signal handler for SIGUSR1(RESET)\n");
+        exit(-1);
     }
     if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
         perror("Command:Can't set the signal handler for SIGUSR2(STOP)\n");
+        exit(-1);
     }
 }
 
@@ -156,6 +163,8 @@ int main(int argc, char const *argv[]) {
     if(mkfifo("/tmp/fifoCI", 0666) < 0){
         perror("create CI: ");
         fflush(stdout);
+        sleep(1);
+        exit(-1);
     }
     else
         printf("create CI!");
@@ -164,6 +173,8 @@ int main(int argc, char const *argv[]) {
     if(fw){
         perror("open pipe CI:");
         fflush(stdout);
+        sleep(1);
+        exit(-1);
     }
     pid_t mypid= getpid();
     int res=0;
@@ -193,12 +204,15 @@ int main(int argc, char const *argv[]) {
     //initilize signal handling
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
         perror("Command:Can't set the signal handler for SIGINT\n");
+        exit(-1);
     }
     if(signal(SIGUSR1, sig_handler)==SIG_ERR) {
         perror("Command:Can't set the signal handler for SIGUSR1(RESET)\n");
+        exit(-1);
     }
     if(signal(SIGUSR2, sig_handler)==SIG_ERR) {
         perror("Command:Can't set the signal handler for SIGUSR2(STOP)\n");
+        exit(-1);
     }
 
     while(TRUE) {	

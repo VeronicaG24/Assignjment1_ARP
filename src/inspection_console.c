@@ -73,6 +73,7 @@ void sig_handler(int signo) {
 
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
         perror("Inspection:Can't set the signal handler for SIGINT\n");
+        exit(-1);
     }
 }
 
@@ -102,8 +103,8 @@ int main(int argc, char const *argv[]) {
     pid_t pid_c=0;
     pid_t p1;
     while(pid_c == 0){
-        if(read(fd2, &p1, sizeof(pid_t))){
-            perror("read:");
+        if(read(fd2, &p1, sizeof(pid_t))<sizeof(pid_t)){
+            perror("read error:");
         }
         if(p1!=0){
             printf("read %d", p1);
@@ -123,6 +124,7 @@ int main(int argc, char const *argv[]) {
     init_console_ui();
     if(signal(SIGINT, sig_handler)==SIG_ERR) {
         perror("Inspection:Can't set the signal handler for SIGINT\n");
+        exit(-1);
     }
 
     int read_byte;
@@ -247,6 +249,8 @@ int main(int argc, char const *argv[]) {
             if(ee_x<=0.05 && ee_z<=0.05 && reset ){
                 if(kill(pid_c, SIGUSR2) == -1)  {
                     perror("Inspection: failed to resume command");
+                    sleep(1);
+                    exit(-1);
                 }
                 reset=FALSE;
             }
@@ -255,7 +259,14 @@ int main(int argc, char const *argv[]) {
 	}
 
     // Terminate
-    close(fd_read);
-    endwin();
-    return 0;
+    if(close(fd_read)!=0) {
+        perror("Inspection: Can't close the read pipe");
+        endwin();
+        return -1;  
+    }
+    else{
+        endwin();
+        return 0;
+    }
+
 }

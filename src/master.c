@@ -30,6 +30,9 @@ char * fifoWI = "/tmp/fifoWI";
 char * fifoCX = "/tmp/fifoCX";
 char * fifoCZ = "/tmp/fifoCZ";
 
+//
+int ret=0;
+
 /*=====================================
   Unlink all the pipes
   RETURN:
@@ -38,22 +41,27 @@ char * fifoCZ = "/tmp/fifoCZ";
 void unlinkpipe() {
   if(unlink(fifoXW) != 0) {
     perror("Master: can't unlink tmp/fifoXW");
+    ret=-1;
   }
 
   if(unlink(fifoZW) != 0) {
       perror("Master: can't unlink tmp/fifoZW");
+      ret=-1;
   }
 
   if(unlink(fifoWI) != 0) {
       perror("Master: can't unlink tmp/fifoWI");
+      ret=-1;
   }
 
   if(unlink(fifoCX) != 0) {
       perror("Master: can't unlink tmp/fifoCX");
+      ret=-1;
   }
 
   if(unlink(fifoCZ) != 0) {
       perror("Master: can't unlink tmp/fifoCZ");
+      ret=-1;
   }
 }
 
@@ -72,9 +80,13 @@ void sig_handler(int signo) {
 
     unlinkpipe();  
 
-    exit(0);
+    exit(ret);
   }
-  signal(SIGINT, sig_handler);
+  
+  if(signal(SIGINT, sig_handler)==SIG_ERR) {
+      perror("Command:Can't set the signal handler for SIGINT\n");
+      exit(-1);
+  }
 }
 
 
@@ -112,32 +124,36 @@ int spawn(const char * program, char * arg_list[]) {
 =====================================*/
 int main() {
 
-  signal(SIGINT, sig_handler);
+  if(signal(SIGINT, sig_handler)==SIG_ERR) {
+      perror("Command:Can't set the signal handler for SIGINT\n");
+      exit(-1);
+  }
 
   //pipe MotorX-world 
   if (mkfifo(fifoXW, 0666) != 0)
-    perror("Cannot create fifo. Already existing?");
+    perror("Cannot create fifoXW. Already existing?");
   
   //pipe MotorZ-world
   if (mkfifo(fifoZW, 0666) != 0)
-    perror("Cannot create fifo. Already existing?");
+    perror("Cannot create fifoZW. Already existing?");
   
   //pipe world-inspection console
   if (mkfifo(fifoWI, 0666) != 0)
-    perror("Cannot create fifo. Already existing?");
+    perror("Cannot create fifoWI. Already existing?");
   
   //pipe command-MotorX
   if (mkfifo(fifoCX, 0666) != 0)
-    perror("Cannot create fifo. Already existing?");  
+    perror("Cannot create fifoCX. Already existing?");  
   
   //pipe command-MotorZ
   if (mkfifo(fifoCZ, 0666) != 0)
-    perror("Cannot create fifo. Already existing?");
+    perror("Cannot create fifoCZ. Already existing?");
 
   //reset log file if exists
   if(remove("./logFile.log")!=0){
     perror("Log file not deleted:");
   }
+  //create new logfile
   fclose(fopen("./logFile.log", "w"));
   
   //generate two motors processes
@@ -220,7 +236,7 @@ int main() {
   unlinkpipe();
 
   //exit program
-  printf ("Main program exiting with status %d\n", -1);
+  printf ("Main program exiting with status %d\n", 0);
   exit(0);
 }
 
