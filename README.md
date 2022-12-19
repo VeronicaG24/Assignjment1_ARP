@@ -15,6 +15,9 @@ To run the program it is necessary to download the repository:
 ```console
 git clone https://github.com/VeronicaG24/Assignment1_ARP.git
 ```
+
+If there is no `bin` folder in the local repository, create one.
+
 Then, move into the folder and compile the code using:
 ```console
 bash ./compile.sh
