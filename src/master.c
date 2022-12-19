@@ -225,7 +225,6 @@ int main() {
   }
 
   //kill command console
-
   if(kill(pid_cmd,SIGINT) == -1) {
     perror("Master: failed to kill command");
   }
@@ -244,7 +243,6 @@ int main() {
   }
 
   //kill watchdog
-
   if(kill(pid_watchdog,SIGINT) == -1) {
     perror("Master: failed to kill watchdog");
   }
