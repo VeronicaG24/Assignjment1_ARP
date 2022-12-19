@@ -67,20 +67,26 @@ void sig_handler(int signo) {
         if(signo==SIGINT) {
                 printf("World: received SIGINT, closing the pipes and exit\n");
                 //close pipes
+                int ret=0;
                 if(close(fd_readX)!=0){
                         perror("World: Can't close the reading pipe X");
-                        
+                        ret=-1;
                 }
                 if(close(fd_readZ)!=0){
                         perror("World: Can't close the reading pipe Z");
-                       
+                        ret=-1;
                 }
                 if(close(fd_write)!=0){
                         perror("World: Can't close the write pipe");
+                        ret=-1;
                         
                 }
 
-                exit(0);
+                exit(ret);
+        }
+        if(signal(SIGINT, sig_handler)==SIG_ERR) {
+                perror("World:Can't set the signal handler for SIGINT\n");
+                exit(-1);
         }
 }
 
@@ -93,6 +99,7 @@ int main() {
 
         if(signal(SIGINT, sig_handler)==SIG_ERR) {
                 perror("World:Can't set the signal handler for SIGINT\n");
+                exit(-1);
         }
         if((fd_readX = open(rX, O_RDONLY|O_NONBLOCK)) == 0 ) {
                 perror("World: Can't open /tmp/fifoXW");
@@ -185,16 +192,20 @@ int main() {
 
 
         }
+        
+        int ret=0;
         if(close(fd_readX)!=0){
                 perror("World: Can't close the reading pipe X");
+                ret=-1;
                         
         }
         if(close(fd_readZ)!=0){
                 perror("World: Can't close the reading pipe Z");
-                       
+                ret=-1;
         }
         if(close(fd_write)!=0){
                 perror("World: Can't close the write pipe");
-                        
+                ret=-1;        
         }
+        exit(ret);
 }

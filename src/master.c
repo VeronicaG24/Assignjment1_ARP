@@ -84,7 +84,7 @@ void sig_handler(int signo) {
   }
   
   if(signal(SIGINT, sig_handler)==SIG_ERR) {
-      perror("Command:Can't set the signal handler for SIGINT\n");
+      perror("Master:Can't set the signal handler for SIGINT\n");
       exit(-1);
   }
 }

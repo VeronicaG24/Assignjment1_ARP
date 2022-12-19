@@ -65,7 +65,6 @@ int main(int argc, char const *argv[]) {
 
     //infinite loop
     while(1) { 
-      int status;
       
       //open log file
       flog = fopen("./logFile.log", "r");
@@ -84,10 +83,16 @@ int main(int argc, char const *argv[]) {
       while((bytesWritten==bytesWritten_old) && (difftime(time(NULL), startTimer) < 60)) {
         //open log fine
         flog = fopen("./logFile.log", "r");
-        //file pointer at 0 bytes from the end
-        fseek(flog, 0L, SEEK_END); 
-        //update old number of bytes
-        bytesWritten_old = ftell(flog);
+        if(flog==NULL){
+          perror("Watchdog: can not open log file");
+
+        }
+        else{
+          //file pointer at 0 bytes from the end
+          fseek(flog, 0L, SEEK_END); 
+          //update old number of bytes
+          bytesWritten_old = ftell(flog);
+        }
         //close the file
         fclose(flog);
       }
@@ -97,7 +102,12 @@ int main(int argc, char const *argv[]) {
         //write on the log file
         char * currTime = current_time();
         flog = fopen("./logFile.log", "a+");
-        fprintf(flog, "< WATCHDOG > inactivity detected, resetting the system at: %s \n", currTime);
+        if(flog==NULL){
+          perror("Watchdog: can not open log file");
+
+        }
+        else
+          fprintf(flog, "< WATCHDOG > inactivity detected, resetting the system at: %s \n", currTime);
         fclose(flog);
 
         //kill motorX process
@@ -133,7 +143,7 @@ int main(int argc, char const *argv[]) {
         sleep(1);
 
         //kill itself
-        printf ("Watchdog: exiting with status %d\n", status);
+        printf ("Watchdog: exiting with status %d\n", 0);
         exit(0);
       }
     }
