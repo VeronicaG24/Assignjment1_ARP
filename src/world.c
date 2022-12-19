@@ -185,4 +185,16 @@ int main() {
 
 
         }
+        if(close(fd_readX)!=0){
+                perror("World: Can't close the reading pipe X");
+                        
+        }
+        if(close(fd_readZ)!=0){
+                perror("World: Can't close the reading pipe Z");
+                       
+        }
+        if(close(fd_write)!=0){
+                perror("World: Can't close the write pipe");
+                        
+        }
 }

@@ -216,5 +216,14 @@ int main() {
         
         usleep(dt*1000000);
     }
+    if(close(fd_read)!=0){
+        perror("MotorZ: Can't close the reading pipe");
+        exit(-1);
+    }
+
+    if(close(fd_write)!=0){
+        perror("MotorZ: Can't close the write pipe");
+        exit(-1);
+    }
 
 }

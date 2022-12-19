@@ -51,6 +51,29 @@ char* current_time(){
     timedate = asctime(timeinfo);
     return timedate;
 }
+/*=====================================
+  Manage signals received
+  INPUT:
+  SIGINT
+    -close pipes
+  RETURN:
+    null
+=====================================*/
+void sig_handler(int signo) {
+    //signal SIGINT
+    if(signo==SIGINT) {
+        printf("Inspection: received SIGINT, closing the pipes and exit\n");
+        if(close(fd_read)!=0) {
+            perror("Inspection: Can't close the read pipe");
+            exit(-1);
+        }           
+        exit(0);
+    }
+
+    if(signal(SIGINT, sig_handler)==SIG_ERR) {
+        perror("Inspection:Can't set the signal handler for SIGINT\n");
+    }
+}
 
 /*=====================================
   Manage the interface of the hoist,
@@ -72,6 +95,7 @@ int main(int argc, char const *argv[]) {
     if(fd2){
         perror("open pipe CI:");
         fflush(stdout);
+        exit(-1);
     }
 
     pid_t pid_c=0;
@@ -96,6 +120,9 @@ int main(int argc, char const *argv[]) {
 
     // Initialize User Interface 
     init_console_ui();
+    if(signal(SIGINT, sig_handler)==SIG_ERR) {
+        perror("Inspection:Can't set the signal handler for SIGINT\n");
+    }
 
     int read_byte;
 
