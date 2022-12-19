@@ -112,33 +112,58 @@ int main(int argc, char const *argv[]) {
 
         //kill motorX process
         sleep(1);
+        int status;
         if(kill(pid_motorX,SIGINT) == -1) {
           perror("Watchdog: failed to kill motorX");
         }
+        else{
+          waitpid(pid_motorX, &status,0);
+          printf("MotorX exit with status %d", WEXITSTATUS(status));
+        }
         //kill motorZ process
-        sleep(1);
         if(kill(pid_motorZ,SIGINT) == -1) { 
           perror("Watchdog: failed to kill motorZ");
         }
+        else{
+          waitpid(pid_motorZ, &status,0);
+          printf("MotorZ exit with status %d", WEXITSTATUS(status));
+        }
         //kill world process
-        sleep(1);
+        
         if(kill(pid_world,SIGINT) == -1) {
           perror("Watchdog: failed to kill world");
         }
+        else{
+          waitpid(pid_world, &status,0);
+          printf("World exit with status %d", WEXITSTATUS(status));
+        }
         //kill command console process
-        sleep(1);
+        
         if(kill(pid_cmd,SIGINT) == -1) {
           perror("Watchdog: failed to kill motorX");
         }
+        else{
+          waitpid(pid_cmd, &status,0);
+          printf("Command exit with status %d", WEXITSTATUS(status));
+        }
         //kill inspection console process
-        sleep(1);
+        
         if(kill(pid_insp,SIGINT) == -1) {
           perror("Watchdog: failed to kill motorX");
         }
+        else{
+          waitpid(pid_insp, &status,0);
+          printf("Inspection exit with status %d", WEXITSTATUS(status));
+        }
         sleep(1);
+
         //kill master process
         if(kill(pid_master,SIGINT) == -1) {
           perror("Watchdog: failed to kill master");
+        }
+        else{
+          waitpid(pid_master, &status,0);
+          printf("Master exit with status %d", WEXITSTATUS(status));
         }
         sleep(1);
 

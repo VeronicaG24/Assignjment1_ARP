@@ -193,46 +193,67 @@ int main() {
   pid_t pid_watchdog = spawn("./bin/watchdog", arg_list_watchdog);
   
   //wait until one process ends
-  wait(NULL);
+  int status;
+  wait(&status);
   
   //kill motor X
   sleep(1);
   if(kill(pid_motorX,SIGINT) == -1) {
     perror("Master: failed to kill motorX");
   }
+  else{
+    waitpid(pid_motorX, &status,0);
+    printf("MotorX exit with status %d", WEXITSTATUS(status));
+  }
 
   //kill motor z
-  sleep(1);
   if(kill(pid_motorZ,SIGINT) == -1) { 
     perror("Master: failed to kill motorZ");
   }
+  else{
+    waitpid(pid_motorZ, &status,0);
+    printf("MotorZ exit with status %d", WEXITSTATUS(status));
+  }
   
   //kill world
-  sleep(1);
   if(kill(pid_world,SIGINT) == -1) {
     perror("Master: failed to kill world");
   }
+  else{
+    waitpid(pid_world, &status,0);
+    printf("World exit with status %d", WEXITSTATUS(status));
+  }
 
   //kill command console
-  sleep(1);
+
   if(kill(pid_cmd,SIGINT) == -1) {
     perror("Master: failed to kill command");
   }
+  else{
+    waitpid(pid_cmd, &status,0);
+    printf("Command exit with status %d", WEXITSTATUS(status));
+  }
 
   //kill inspection console
-  sleep(1);
   if(kill(pid_insp,SIGINT) == -1) {
     perror("Master: failed to kill inspection");
   }
+  else{
+    waitpid(pid_insp, &status,0);
+    printf("Inspection exit with status %d", WEXITSTATUS(status));
+  }
 
   //kill watchdog
-  sleep(1);
+
   if(kill(pid_watchdog,SIGINT) == -1) {
     perror("Master: failed to kill watchdog");
   }
+  else{
+    waitpid(pid_watchdog, &status,0);
+    printf("Watchdog exit with status %d", WEXITSTATUS(status));
+  }
 
   //unlink pipes
-  sleep(1);
   unlinkpipe();
 
   //exit program
