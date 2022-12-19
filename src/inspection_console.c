@@ -94,9 +94,14 @@ int main(int argc, char const *argv[]) {
     sleep(1);
     //file descriptor for command-inspection consoles
     int fd2=open("/tmp/fifoCI", O_RDONLY|O_NONBLOCK);
-    if(fd2){
+    if(fd2<0){
         perror("open pipe CI:");
         fflush(stdout);
+        if(unlink("/tmp/fifoCI")){
+        perror("unlink CI");
+        fflush(stdout);
+        }
+        sleep(5);
         exit(-1);
     }
 

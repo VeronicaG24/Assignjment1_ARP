@@ -159,21 +159,34 @@ int main(int argc, char const *argv[]) {
     //send pid to inspection console
     printf("synchonization command-inspection\n");
 
+     if(unlink("/tmp/fifoCI")){
+        perror("unlink CI");
+        fflush(stdout);
+    }
 
     if(mkfifo("/tmp/fifoCI", 0666) < 0){
         perror("create CI: ");
         fflush(stdout);
-        sleep(1);
+         
+        if(unlink("/tmp/fifoCI")){
+        perror("unlink CI");
+        fflush(stdout);
+        }
+
         exit(-1);
     }
     else
         printf("create CI!");
 
     int fw=open("/tmp/fifoCI", O_RDWR);
-    if(fw){
+    if(fw<0){
         perror("open pipe CI:");
         fflush(stdout);
-        sleep(1);
+        if(unlink("/tmp/fifoCI")){
+        perror("unlink CI");
+        fflush(stdout);
+        }
+        
         exit(-1);
     }
     pid_t mypid= getpid();
